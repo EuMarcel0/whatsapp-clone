@@ -1,6 +1,7 @@
-import React, { createContext, ReactNode, useCallback, useContext, useMemo, useState } from 'react';
+import React, { createContext, ReactNode, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { Box, ThemeProvider } from '@mui/material';
 import { DarkTheme, LightTheme } from '../themes';
+import { usePersistedState } from '../hooks/usePersistedState';
 
 interface ThemeContextProps {
 	themeName: 'light' | 'dark';
@@ -14,17 +15,18 @@ export const ThemeContext = createContext({} as ThemeContextProps);
 
 export const AppThemeProvider = ({ children }: ThemeProviderProps) => {
 	const [themeName, setThemeName] = useState<'light' | 'dark'>('light');
+	const { state, setState } = usePersistedState('themeName', themeName);
+
 
 	const toggleTheme = useCallback(() => {
-		setThemeName(oldThemeName => oldThemeName === 'dark' ? 'light' : 'dark');
-	}, []);
+		setState((themeName: string) => themeName === 'light' ? 'dark' : 'light');
+		localStorage.setItem('themeName', JSON.stringify(themeName));
+	}, [state]);
 
 	const theme = useMemo(() => {
-		if (themeName === 'light') return LightTheme;
+		if (state === 'light') return LightTheme;
 		return DarkTheme;
-	}, [themeName]);
-
-	console.log(themeName);
+	}, [state]);
 
 	return (
 		<ThemeContext.Provider value={{ toggleTheme, themeName }}>

@@ -6,7 +6,7 @@ export const Home = () => {
 
 	return (
 		<Box>
-			<Button onClick={toggleTheme}>Toggle Theme</Button>
+			<Button variant='contained' onClick={toggleTheme}>Toggle Theme</Button>
 		</Box>
 	);
 };
