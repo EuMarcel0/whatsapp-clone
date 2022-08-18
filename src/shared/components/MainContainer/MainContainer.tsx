@@ -1,11 +1,12 @@
 import { Avatar, Box, CardMedia, Icon, IconButton, Paper, Typography, useTheme } from '@mui/material';
 import AvatarProfile from '../../../assets/images/avatar.jpg';
 import { useAppThemeContext } from '../../contexts/ThemeContext';
+import { MenuOptions } from './components/MenuOptions';
 import { SvgLogo } from './components/SvgLogo';
 
 export const MainContainer = () => {
 	const theme = useTheme();
-	const { toggleTheme, themeName } = useAppThemeContext();
+	const { themeName } = useAppThemeContext();
 
 	return (
 		<Box
@@ -32,15 +33,13 @@ export const MainContainer = () => {
 							<CardMedia component='img' src={AvatarProfile} alt='foto_perfil' />
 						</Avatar>
 						<Box display='flex' alignItems='center' justifyContent='center' gap={1}>
-							<IconButton onClick={toggleTheme}>
+							<IconButton>
 								<Icon sx={{ fontSize: '24px' }}>data_saver_off</Icon>
 							</IconButton>
 							<IconButton>
 								<Icon sx={{ fontSize: '24px' }}>chat</Icon>
 							</IconButton>
-							<IconButton>
-								<Icon sx={{ fontSize: '24px' }}>more_vert_icon</Icon>
-							</IconButton>
+							<MenuOptions />
 						</Box>
 					</Box>
 				</Box>
