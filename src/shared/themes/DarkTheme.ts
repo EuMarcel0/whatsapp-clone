@@ -4,19 +4,19 @@ export const DarkTheme =  createTheme({
 	palette:{
 		mode: 'dark',
 		primary:{
-			main: '#202C33',
-			light: '#222E35',
-			contrastText: '#FFFFFF',
+			main: '#FF0',
+			light: '#FF0',
+			contrastText: '#FF0',
 		},
 		secondary:{
-			main: '#222E35',
-			dark: '#202C33',
-			light: '#202C33',
-			contrastText: '#FFFFFF',
+			main: '#FF0',
+			dark: '#FF0',
+			light: '#FF0',
+			contrastText: '#FF0',
 		},
 		background: {
-			default: '#202C33',
-			paper: '#222E35',
+			default: '#FF0',
+			paper: '#FF0',
 		}
 	},
 	typography:{

@@ -5,9 +5,9 @@ export const LightTheme =  createTheme({
 	palette:{
 		mode: 'dark',
 		primary:{
-			main: '#FFFFFF',
+			main: '#005c4b',
 			light: '#F8F8F8',
-			contrastText: '#333333',
+			contrastText: '#FFF',
 		},
 		secondary:{
 			main: '#FFFFFF',
@@ -22,7 +22,7 @@ export const LightTheme =  createTheme({
 	},
 	typography:{
 		allVariants: {
-			color: '#333333',
+			color: '#FFF',
 		}
 	}
 });

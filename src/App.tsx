@@ -1,10 +1,12 @@
+import { Home } from './pages';
+import { AppThemeProvider } from './shared/contexts/ThemeContext';
 
 export const App = () => {
-
 	return (
-		<div className="App">
-			Hello World
-		</div>
+
+		<AppThemeProvider>
+			<Home />
+		</AppThemeProvider>
 	);
 };
 
