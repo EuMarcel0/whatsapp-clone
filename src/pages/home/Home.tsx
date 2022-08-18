@@ -1,12 +1,12 @@
-import { Box, Button } from '@mui/material';
-import { useAppThemeContext } from '../../shared/contexts/ThemeContext';
+import { Box, useTheme } from '@mui/material';
+import { MainContainer } from '../../shared/components';
 
 export const Home = () => {
-	const { toggleTheme } = useAppThemeContext();
+	const theme = useTheme();
 
 	return (
-		<Box>
-			<Button variant='contained' onClick={toggleTheme}>Toggle Theme</Button>
+		<Box width='100vw' height='100vh' paddingY={theme.spacing(3)}>
+			<MainContainer />
 		</Box>
 	);
 };
