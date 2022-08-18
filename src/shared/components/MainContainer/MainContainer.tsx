@@ -1,9 +1,11 @@
 import { Avatar, Box, CardMedia, Icon, IconButton, Paper, Typography, useTheme } from '@mui/material';
 import AvatarProfile from '../../../assets/images/avatar.jpg';
-import { SvgLogo } from './SvgLogo';
+import { useAppThemeContext } from '../../contexts/ThemeContext';
+import { SvgLogo } from './components/SvgLogo';
 
 export const MainContainer = () => {
 	const theme = useTheme();
+	const { toggleTheme, themeName } = useAppThemeContext();
 
 	return (
 		<Box
@@ -11,12 +13,14 @@ export const MainContainer = () => {
 			height='100%'
 			maxWidth={1600}
 			marginX='auto'
+			zIndex={99}
 		>
 			<Box className='mainContentArea' width='100%' height='100%' display='flex'>
-				<Box className='sideLeft' width='100%' maxWidth={theme.spacing(60)} borderRight={'1px solid #80808083'} >
+				<Box className='sideLeft' width='100%' maxWidth={theme.spacing(60)} borderRight={themeName === 'light' ? '1px solid #f8f8f84' : '1px solid #cfcfcf83'} >
 					<Box
 						height={theme.spacing(7)}
 						component={Paper}
+						elevation={0}
 						display='flex'
 						justifyContent='space-between'
 						alignItems='center'
@@ -28,7 +32,7 @@ export const MainContainer = () => {
 							<CardMedia component='img' src={AvatarProfile} alt='foto_perfil' />
 						</Avatar>
 						<Box display='flex' alignItems='center' justifyContent='center' gap={1}>
-							<IconButton>
+							<IconButton onClick={toggleTheme}>
 								<Icon sx={{ fontSize: '24px' }}>data_saver_off</Icon>
 							</IconButton>
 							<IconButton>
@@ -64,7 +68,7 @@ export const MainContainer = () => {
 						</Typography>
 						<hr style={{ width: '100%', borderColor: 'rgba(134,150,160,0.15)', marginTop: '10px' }} />
 						<Box display='flex' alignItems='center' gap={2}>
-							<Icon sx={{ fontSize: '24px', color: '#ffffffb3' }}>computer</Icon>
+							<Icon sx={{ fontSize: '24px', }}>computer</Icon>
 							<Typography variant='caption' component='p' color='textSecondary'>
 								Make calls from desktop with WhatsApp for Windows. <a href='https://www.whatsapp.com/download' target='blank' style={{ textDecoration: 'none', color: '#53bdeb' }}>Get it here</a>
 							</Typography>

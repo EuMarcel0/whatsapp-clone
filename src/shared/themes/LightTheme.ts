@@ -3,17 +3,17 @@ import { createTheme } from '@mui/material';
 
 export const LightTheme =  createTheme({
 	palette:{
-		mode: 'dark',
+		mode: 'light',
 		primary:{
 			main: '#00A884',
 			light: '#F8F8F8',
-			contrastText: '#FFF',
+			contrastText: '#333',
 		},
 		secondary:{
-			main: '#FFFFFF',
-			dark: '#F8F8F8',
-			light: '#FFFFFF',
-			contrastText: '#FFFFFF',
+			main: '#333',
+			dark: '#333',
+			light: '#333',
+			contrastText: '#333',
 		},
 		background: {
 			default: '#E0E0DD',
@@ -22,7 +22,7 @@ export const LightTheme =  createTheme({
 	},
 	typography:{
 		allVariants: {
-			color: '#FFF',
+			color: '#333',
 		}
 	}
 });
