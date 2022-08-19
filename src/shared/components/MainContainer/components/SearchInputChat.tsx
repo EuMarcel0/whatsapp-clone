@@ -7,6 +7,8 @@ export const SearchInputChat = () => {
 	return (
 		<Box
 			component={Paper}
+			elevation={1}
+			variant='outlined'
 			display='flex'
 			alignItems='center'
 			gap={1}
@@ -16,13 +18,14 @@ export const SearchInputChat = () => {
 			borderRadius={theme.spacing(0)}
 			paddingY={theme.spacing(1)}
 			paddingX={theme.spacing(2)}
+			bgcolor={theme.palette.background.default}
 		>
 			<Box
 				flex='1'
 				display='flex'
 				alignItems='center'
 				justifyContent='start'
-				bgcolor={theme.palette.background.default}
+				bgcolor={theme.palette.background.paper}
 				height={theme.spacing(4)}
 				borderRadius={theme.spacing(1)}
 				paddingX={theme.spacing(1)}

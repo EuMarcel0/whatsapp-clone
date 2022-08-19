@@ -8,7 +8,7 @@ interface TootipProps {
 export const AppTooltip = ({ title, children }: TootipProps) => {
 	return (
 		<Box>
-			<Tooltip title={title} TransitionComponent={Fade} TransitionProps={{ timeout: 600 }}>
+			<Tooltip title={title} TransitionComponent={Fade} TransitionProps={{ timeout: 600 }} >
 				{children}
 			</Tooltip>
 		</Box>
