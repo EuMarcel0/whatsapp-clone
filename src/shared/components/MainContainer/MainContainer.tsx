@@ -5,6 +5,7 @@ import AvatarProfile from '../../../assets/images/avatar.jpg';
 import { MenuOptions } from './components/MenuOptions';
 import { ChatsList } from './components/ChatsList';
 import { SvgLogo } from './components/SvgLogo';
+import { AppTooltip } from '../AppTootip';
 
 export const MainContainer = () => {
 	const theme = useTheme();
@@ -43,12 +44,16 @@ export const MainContainer = () => {
 							<CardMedia component='img' src={AvatarProfile} alt='foto_perfil' />
 						</Avatar>
 						<Box display='flex' alignItems='center' justifyContent='center' gap={1}>
-							<IconButton>
-								<Icon sx={{ fontSize: '1.4rem' }}>data_saver_off</Icon>
-							</IconButton>
-							<IconButton>
-								<Icon sx={{ fontSize: '1.4rem' }}>chat</Icon>
-							</IconButton>
+							<AppTooltip title='Ver status'>
+								<IconButton>
+									<Icon sx={{ fontSize: '1.4rem' }}>data_saver_off</Icon>
+								</IconButton>
+							</AppTooltip>
+							<AppTooltip title='Novo chat'>
+								<IconButton>
+									<Icon sx={{ fontSize: '1.4rem' }}>chat</Icon>
+								</IconButton>
+							</AppTooltip>
 							<MenuOptions />
 						</Box>
 					</Box>
