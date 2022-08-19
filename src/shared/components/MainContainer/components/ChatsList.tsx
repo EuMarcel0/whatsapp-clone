@@ -1,50 +1,23 @@
-import { useState } from 'react';
-import { Box, CardMedia, Icon, Paper, Typography, useTheme } from '@mui/material';
-import ChatAvatarImage from '../../../../assets/images/the_rock.jpg';
-import { AppTooltip } from '../../AppTootip';
-import { SearchInputChat } from './SearchInputChat';
+import { useCallback, useState } from 'react';
 
-interface ChatListProps {
-	image: string;
-	name: string;
-	lastMessage: string;
-	date: string;
-}
+import { Box, CardMedia, Icon, Paper, Typography, useTheme } from '@mui/material';
+import { useChatListItem } from '../../../contexts/ChatListItem';
+import { SearchInputChat } from './SearchInputChat';
+import { AppTooltip } from '../../AppTootip';
+import { ChatListProps } from '../../../contexts/ChatListTypes';
 
 export const ChatsList = () => {
 	const theme = useTheme();
-	const [chat, setChat] = useState<ChatListProps[]>([
-		{
-			image: ChatAvatarImage,
-			name: 'The Rock',
-			lastMessage: 'Oi, tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Com',
-			date: 'Há 1 hora',
-		},
-		{
-			image: ChatAvatarImage,
-			name: 'The Rock',
-			lastMessage: 'Oi, tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Com',
-			date: 'Há 1 hora',
-		},
-		{
-			image: ChatAvatarImage,
-			name: 'The Rock',
-			lastMessage: 'Oi, tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Com',
-			date: 'Há 1 hora',
-		},
-		{
-			image: ChatAvatarImage,
-			name: 'The Rock',
-			lastMessage: 'Oi, tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Com',
-			date: 'Há 1 hora',
-		},
-		{
-			image: ChatAvatarImage,
-			name: 'The Rock',
-			lastMessage: 'Oi, tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Com',
-			date: 'Há 1 hora',
-		},
-	]);
+	const { chatListItem } = useChatListItem();
+	const [newChatListItem, setNewChatListItem] = useState<ChatListProps[]>(chatListItem);
+
+	const handleOrderChatByName = useCallback(() => {
+		let newChatListItem = [...chatListItem];
+		newChatListItem = newChatListItem.sort((a, b) => (a.name > b.name ? 1 : -1));
+		console.log(newChatListItem);
+		setNewChatListItem(newChatListItem);
+		return newChatListItem;
+	}, []);
 
 	return (
 		<Box
@@ -53,8 +26,8 @@ export const ChatsList = () => {
 			borderRadius={theme.spacing(0)}
 			bgcolor={theme.palette.background.default}
 		>
-			<SearchInputChat />
-			{chat.map((item, index) => (
+			<SearchInputChat onClick={handleOrderChatByName} />
+			{newChatListItem.map((item, index) => (
 				<Box
 					display='flex'
 					alignItems='center'

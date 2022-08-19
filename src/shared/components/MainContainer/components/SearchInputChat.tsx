@@ -1,13 +1,17 @@
 import { Box, Icon, IconButton, Input, Paper, useTheme } from '@mui/material';
 import { AppTooltip } from '../../AppTootip';
 
-export const SearchInputChat = () => {
+interface SearchInputChatProps {
+	onClick: () => void;
+}
+
+export const SearchInputChat = ({ onClick }: SearchInputChatProps) => {
 	const theme = useTheme();
 
 	return (
 		<Box
 			component={Paper}
-			elevation={1}
+			elevation={0}
 			variant='outlined'
 			display='flex'
 			alignItems='center'
@@ -45,7 +49,7 @@ export const SearchInputChat = () => {
 			</Box>
 			<AppTooltip title='Ordernar chats'>
 				<Box width={theme.spacing(4)}>
-					<IconButton size='small'>
+					<IconButton size='small' onClick={onClick}>
 						<Icon sx={{ fontSize: '1.3rem' }}>reorder_icon</Icon>
 					</IconButton>
 				</Box>

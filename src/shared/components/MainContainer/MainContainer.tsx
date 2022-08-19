@@ -1,6 +1,4 @@
 import { Avatar, Box, CardMedia, Icon, IconButton, Paper, Typography, useTheme } from '@mui/material';
-import { useAppThemeContext } from '../../contexts/ThemeContext';
-import { SearchInputChat } from './components/SearchInputChat';
 import AvatarProfile from '../../../assets/images/avatar.jpg';
 import { MenuOptions } from './components/MenuOptions';
 import { ChatsList } from './components/ChatsList';
@@ -9,7 +7,6 @@ import { AppTooltip } from '../AppTootip';
 
 export const MainContainer = () => {
 	const theme = useTheme();
-	const { themeName } = useAppThemeContext();
 
 	return (
 		<Box
