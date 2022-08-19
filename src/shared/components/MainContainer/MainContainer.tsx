@@ -1,7 +1,9 @@
 import { Avatar, Box, CardMedia, Icon, IconButton, Paper, Typography, useTheme } from '@mui/material';
-import AvatarProfile from '../../../assets/images/avatar.jpg';
 import { useAppThemeContext } from '../../contexts/ThemeContext';
+import { SearchInputChat } from './components/SearchInputChat';
+import AvatarProfile from '../../../assets/images/avatar.jpg';
 import { MenuOptions } from './components/MenuOptions';
+import { ChatsList } from './components/ChatsList';
 import { SvgLogo } from './components/SvgLogo';
 
 export const MainContainer = () => {
@@ -17,11 +19,19 @@ export const MainContainer = () => {
 			zIndex={99}
 		>
 			<Box className='mainContentArea' width='100%' height='100%' display='flex'>
-				<Box className='sideLeft' width='100%' maxWidth={theme.spacing(60)} borderRight={themeName === 'light' ? '1px solid #f8f8f84' : '1px solid #cfcfcf83'} >
+				<Box
+					className='sideLeft'
+					display='flex'
+					flexDirection='column'
+					width='100%'
+					height='100%'
+					maxWidth={theme.spacing(60)}
+					borderRight={themeName === 'light' ? '1px solid #f8f8f84' : '1px solid #cfcfcf83'}
+				>
 					<Box
 						height={theme.spacing(7)}
 						component={Paper}
-						elevation={0}
+						elevation={5}
 						display='flex'
 						justifyContent='space-between'
 						alignItems='center'
@@ -34,14 +44,16 @@ export const MainContainer = () => {
 						</Avatar>
 						<Box display='flex' alignItems='center' justifyContent='center' gap={1}>
 							<IconButton>
-								<Icon sx={{ fontSize: '24px' }}>data_saver_off</Icon>
+								<Icon sx={{ fontSize: '1.4rem' }}>data_saver_off</Icon>
 							</IconButton>
 							<IconButton>
-								<Icon sx={{ fontSize: '24px' }}>chat</Icon>
+								<Icon sx={{ fontSize: '1.4rem' }}>chat</Icon>
 							</IconButton>
 							<MenuOptions />
 						</Box>
 					</Box>
+					<SearchInputChat />
+					<ChatsList />
 				</Box>
 				<Box
 					className='sideRight'
@@ -52,6 +64,7 @@ export const MainContainer = () => {
 					justifyContent='center'
 					height='100%'
 					component={Paper}
+					elevation={5}
 					borderRadius={theme.spacing(0)}
 					position='relative'
 					borderBottom={'5px solid #00A884'}
@@ -65,15 +78,15 @@ export const MainContainer = () => {
 						<Typography variant='caption' component='p' color='textSecondary' align='center'>
 							Now send and receive messages without keeping your phone online.<br />Use WhatsApp on up to 4 linked devices and 1 phone at the same time.
 						</Typography>
-						<hr style={{ width: '100%', borderColor: 'rgba(134,150,160,0.15)', marginTop: '10px' }} />
+						<hr style={{ width: '100%', borderColor: 'rgba(134,150,160,0.15)', marginTop: '.7rem' }} />
 						<Box display='flex' alignItems='center' gap={2}>
 							<Icon sx={{ fontSize: '24px', }}>computer</Icon>
 							<Typography variant='caption' component='p' color='textSecondary'>
 								Make calls from desktop with WhatsApp for Windows. <a href='https://www.whatsapp.com/download' target='blank' style={{ textDecoration: 'none', color: '#53bdeb' }}>Get it here</a>
 							</Typography>
 						</Box>
-						<Typography sx={{ fontSize: '12px', display: 'flex', alignItems: 'center', gap: '4px', position: 'absolute', bottom: '2rem' }} color='textSecondary'>
-							<Icon sx={{ fontSize: '14px' }}>lock</Icon>
+						<Typography sx={{ fontSize: '.8rem', display: 'flex', alignItems: 'center', gap: '.4rem', position: 'absolute', bottom: '2rem' }} color='textSecondary'>
+							<Icon sx={{ fontSize: '1rem' }}>lock</Icon>
 							<span>End-to-end encrypted</span>
 						</Typography>
 					</Box>

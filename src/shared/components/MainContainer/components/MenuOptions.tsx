@@ -28,7 +28,7 @@ export const MenuOptions = () => {
 				aria-expanded={open ? 'true' : undefined}
 				onClick={handleClick}
 			>
-				<Icon>more_vert_icon</Icon>
+				<Icon sx={{ fontSize: '1.4rem' }}>more_vert_icon</Icon>
 			</IconButton>
 			<Menu
 				aria-labelledby="demo-positioned-button"
@@ -47,11 +47,11 @@ export const MenuOptions = () => {
 					mt: '2.6rem'
 				}}
 			>
-				<MenuItem onClick={handleClose}>Novo grupo</MenuItem>
-				<MenuItem onClick={handleClose}>Mensagens com estrela</MenuItem>
-				<MenuItem onClick={handleClose}>Configurações</MenuItem>
-				<MenuItem onClick={handleToggleTheme}>Mudar tema</MenuItem>
-				<MenuItem onClick={handleClose}>Sair</MenuItem>
+				<MenuItem onClick={handleClose} sx={{ fontSize: '.8rem' }}>Novo grupo</MenuItem>
+				<MenuItem onClick={handleClose} sx={{ fontSize: '.8rem' }}>Mensagens com estrela</MenuItem>
+				<MenuItem onClick={handleClose} sx={{ fontSize: '.8rem' }}>Configurações</MenuItem>
+				<MenuItem onClick={handleToggleTheme} sx={{ fontSize: '.8rem' }}>Mudar tema</MenuItem>
+				<MenuItem onClick={handleClose} sx={{ fontSize: '.8rem' }}>Sair</MenuItem>
 			</Menu>
 		</Box>
 	);
