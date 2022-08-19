@@ -3,4 +3,17 @@
 	padding: 0;
 	box-sizing: border-box;
 	font-family: 'Roboto', sans-serif;
+	font-size: 1rem;
 }
+
+/* Reset props for material input */
+.MuiInput-underline::before{
+	border-bottom: 0 !important;
+}
+.MuiInput-underline::after{
+	border-bottom: 0 !important;
+}
+.css-1lveplb-MuiInputBase-input-MuiInput-input{
+	padding: 0 !important;
+}
+/* Reset props for material input */
