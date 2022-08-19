@@ -21,18 +21,18 @@ export const MainContainer = () => {
 		>
 			<Box className='mainContentArea' width='100%' height='100%' display='flex'>
 				<Box
+					component={Paper}
 					className='sideLeft'
 					display='flex'
 					flexDirection='column'
 					width='100%'
 					height='100%'
 					maxWidth={theme.spacing(60)}
-					borderRight={themeName === 'light' ? '1px solid #f8f8f84' : '1px solid #cfcfcf83'}
 				>
 					<Box
 						height={theme.spacing(7)}
 						component={Paper}
-						elevation={5}
+						elevation={2}
 						display='flex'
 						justifyContent='space-between'
 						alignItems='center'
@@ -69,11 +69,12 @@ export const MainContainer = () => {
 					justifyContent='center'
 					height='100%'
 					component={Paper}
-					elevation={5}
+					elevation={1}
 					borderRadius={theme.spacing(0)}
 					position='relative'
 					borderBottom={'5px solid #00A884'}
 					padding={theme.spacing(2)}
+					borderLeft={`1px solid ${theme.palette.divider}`}
 				>
 					<SvgLogo />
 					<Box display='flex' flexDirection='column' alignItems='center' justifyContent='center' gap={3}>

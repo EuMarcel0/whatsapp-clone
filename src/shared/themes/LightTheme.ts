@@ -9,6 +9,7 @@ export const LightTheme =  createTheme({
 			light: '#F8F8F8',
 			contrastText: '#333',
 		},
+		divider: '#E0E0E0',
 		background: {
 			default: '#e0e0dd',
 		}
