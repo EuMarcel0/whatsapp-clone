@@ -9,31 +9,31 @@ export const ChatListItemProvider = ({ children }: ChatListItemProviderProps) =>
 		{
 			image: ChatAvatarImage,
 			name: 'Marcelo Silva',
-			lastMessage: 'Oi, tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Com',
+			lastMessage: 'A s Oi, tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Com',
 			date: 'Há 1 hora',
 		},
 		{
 			image: ChatAvatarImage,
 			name: 'José Souza',
-			lastMessage: 'Oi, tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Com',
+			lastMessage: 'X Oi, tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Com',
 			date: 'Há 1 hora',
 		},
 		{
 			image: ChatAvatarImage,
 			name: 'Roberto Souza',
-			lastMessage: 'Oi, tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Com',
+			lastMessage: 'C Oi, tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Com',
 			date: 'Há 1 hora',
 		},
 		{
 			image: ChatAvatarImage,
 			name: 'Ze Souza',
-			lastMessage: 'Oi, tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Com',
+			lastMessage: 'A Oi, tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Com',
 			date: 'Há 1 hora',
 		},
 		{
 			image: ChatAvatarImage,
 			name: 'Abrão Souz',
-			lastMessage: 'Oi, tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Com',
+			lastMessage: 'Ui Oi, tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Com',
 			date: 'Há 1 hora',
 		},
 	]);

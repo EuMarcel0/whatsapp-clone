@@ -3,9 +3,11 @@ import { AppTooltip } from '../../AppTootip';
 
 interface SearchInputChatProps {
 	onClick: () => void;
+	value: string;
+	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const SearchInputChat = ({ onClick }: SearchInputChatProps) => {
+export const SearchInputChat = ({ onClick, value, onChange }: SearchInputChatProps) => {
 	const theme = useTheme();
 
 	return (
@@ -45,6 +47,8 @@ export const SearchInputChat = ({ onClick }: SearchInputChatProps) => {
 					fullWidth
 					placeholder='Procure ou inicie uma conversa'
 					sx={{ fontSize: '.8rem' }}
+					value={value.normalize('NFD')}
+					onChange={onChange}
 				/>
 			</Box>
 			<AppTooltip title='Ordernar chats'>
