@@ -6,8 +6,12 @@ import { ChatListProps } from '../../../contexts/ChatListTypes';
 import { SearchInputChat } from './SearchInputChat';
 import { AppTooltip } from '../../AppTootip';
 
+interface PropsChatList {
+	onClick: () => void;
+	showMessage?: boolean;
+}
 
-export const ChatsList = () => {
+export const ChatsList = ({ onClick, showMessage }: PropsChatList) => {
 	const theme = useTheme();
 	const { chatListItem } = useChatListItem();
 	const [newChatListItem, setNewChatListItem] = useState<ChatListProps[]>(chatListItem);
@@ -33,6 +37,7 @@ export const ChatsList = () => {
 			borderRadius={theme.spacing(0)}
 			bgcolor={theme.palette.background.default}
 			paddingTop='3rem'
+			onClick={onClick}
 			sx={{
 				overflowY: 'auto',
 				'&::-webkit-scrollbar': {
