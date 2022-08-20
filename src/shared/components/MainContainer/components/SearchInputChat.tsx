@@ -5,9 +5,10 @@ interface SearchInputChatProps {
 	onClick: () => void;
 	value: string;
 	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	handleClearSearch: () => void;
 }
 
-export const SearchInputChat = ({ onClick, value, onChange }: SearchInputChatProps) => {
+export const SearchInputChat = ({ onClick, value, onChange, handleClearSearch }: SearchInputChatProps) => {
 	const theme = useTheme();
 
 	return (
@@ -38,16 +39,16 @@ export const SearchInputChat = ({ onClick, value, onChange }: SearchInputChatPro
 				paddingY={theme.spacing(1)}
 			>
 				<AppTooltip title='Pesquisar conversa'>
-					<IconButton sx={{ mr: '1rem' }}>
-						<Icon sx={{ fontSize: '1rem' }}>search</Icon>
+					<IconButton sx={{ mr: '1rem', transition: 'all ease 0.3s' }} onClick={handleClearSearch}>
+						<Icon sx={{ fontSize: '1rem' }}>{value.length > 0 ? 'clear' : 'search'}</Icon>
 					</IconButton>
 				</AppTooltip>
 				<Input
 					size='small'
 					fullWidth
-					placeholder='Procure ou inicie uma conversa'
+					placeholder='Procure uma conversa'
 					sx={{ fontSize: '.8rem' }}
-					value={value.normalize('NFD')}
+					value={value.normalize()}
 					onChange={onChange}
 				/>
 			</Box>

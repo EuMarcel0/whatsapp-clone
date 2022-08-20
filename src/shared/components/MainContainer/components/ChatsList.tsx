@@ -19,7 +19,9 @@ export const ChatsList = () => {
 		return newChatListItem;
 	}, [newChatListItem]);
 
-	const filteredChatListItem = searchValue.length > 0 ? chatListItem.filter(item => item.name.includes(searchValue)) : [];
+	const filteredChatListItem = searchValue.length > 0
+		? chatListItem.filter(item => item.name.toLowerCase().includes(searchValue))
+		: [];
 
 	return (
 		<Box
@@ -32,6 +34,7 @@ export const ChatsList = () => {
 				onClick={handleOrderChatByName}
 				value={searchValue}
 				onChange={(e) => setSearchValue(e.target.value)}
+				handleClearSearch={() => setSearchValue('')}
 			/>
 			{searchValue.length > 0 ? (
 				filteredChatListItem.map((item, index) => (
