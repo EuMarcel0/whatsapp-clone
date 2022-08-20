@@ -19,9 +19,11 @@ export const ChatsList = () => {
 		return newChatListItem;
 	}, [newChatListItem]);
 
+
 	const filteredChatListItem = searchValue.length > 0
 		? chatListItem.filter(item => item.name.toLowerCase().includes(searchValue))
 		: [];
+
 
 	return (
 		<Box
@@ -29,6 +31,16 @@ export const ChatsList = () => {
 			component={Paper}
 			borderRadius={theme.spacing(0)}
 			bgcolor={theme.palette.background.default}
+			sx={{
+				overflowY: 'auto',
+				'&::-webkit-scrollbar': {
+					width: '.4rem',
+					height: '.4rem',
+				},
+				'&::-webkit-scrollbar-thumb': {
+					backgroundColor: theme.palette.background.paper,
+				}
+			}}
 		>
 			<SearchInputChat
 				onClick={handleOrderChatByName}

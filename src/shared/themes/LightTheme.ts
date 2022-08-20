@@ -11,7 +11,8 @@ export const LightTheme =  createTheme({
 		},
 		divider: '#E0E0E0',
 		background: {
-			default: '#F8F8F8',
+			default: '#f9f9f9',
+			paper: '#EEEE',
 		}
 	},
 	typography:{

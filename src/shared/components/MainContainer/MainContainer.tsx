@@ -15,6 +15,9 @@ export const MainContainer = () => {
 			maxWidth={1600}
 			marginX='auto'
 			zIndex={99}
+			sx={{
+				overflowY: 'hidden',
+			}}
 		>
 			<Box className='mainContentArea' width='100%' height='100%' display='flex'>
 				<Box
@@ -29,7 +32,7 @@ export const MainContainer = () => {
 					<Box
 						height={theme.spacing(7)}
 						component={Paper}
-						elevation={2}
+						elevation={0}
 						display='flex'
 						justifyContent='space-between'
 						alignItems='center'
@@ -65,7 +68,7 @@ export const MainContainer = () => {
 					justifyContent='center'
 					height='100%'
 					component={Paper}
-					elevation={1}
+					elevation={0}
 					borderRadius={theme.spacing(0)}
 					position='relative'
 					borderBottom={'5px solid #00A884'}

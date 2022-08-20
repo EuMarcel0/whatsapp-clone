@@ -52,7 +52,7 @@ export const SearchInputChat = ({ onClick, value, onChange, handleClearSearch }:
 					onChange={onChange}
 				/>
 			</Box>
-			<AppTooltip title='Ordernar chats'>
+			<AppTooltip title='Ordernar chats A-Z'>
 				<Box width={theme.spacing(4)}>
 					<IconButton size='small' onClick={onClick}>
 						<Icon sx={{ fontSize: '1.3rem' }}>reorder_icon</Icon>
