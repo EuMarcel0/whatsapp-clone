@@ -28,6 +28,7 @@ export const MainContainer = () => {
 					width='100%'
 					height='100%'
 					maxWidth={theme.spacing(60)}
+					position='relative'
 				>
 					<Box
 						height={theme.spacing(7)}

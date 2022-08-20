@@ -1,10 +1,11 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 
 import { Box, CardMedia, Icon, Paper, Typography, useTheme } from '@mui/material';
 import { useChatListItem } from '../../../contexts/ChatListItem';
 import { ChatListProps } from '../../../contexts/ChatListTypes';
 import { SearchInputChat } from './SearchInputChat';
 import { AppTooltip } from '../../AppTootip';
+
 
 export const ChatsList = () => {
 	const theme = useTheme();
@@ -21,7 +22,7 @@ export const ChatsList = () => {
 
 
 	const filteredChatListItem = searchValue.length > 0
-		? chatListItem.filter(item => item.name.toLowerCase().includes(searchValue))
+		? chatListItem.filter(item => item.name.toLocaleLowerCase().includes(searchValue))
 		: [];
 
 
@@ -31,6 +32,7 @@ export const ChatsList = () => {
 			component={Paper}
 			borderRadius={theme.spacing(0)}
 			bgcolor={theme.palette.background.default}
+			paddingTop='3rem'
 			sx={{
 				overflowY: 'auto',
 				'&::-webkit-scrollbar': {
@@ -69,6 +71,7 @@ export const ChatsList = () => {
 							gap={theme.spacing(2)}
 							height='100%'
 							maxHeight={theme.spacing(9)}
+							marginBottom={theme.spacing(4)}
 						>
 							<AppTooltip title={item.name}>
 								<CardMedia

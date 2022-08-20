@@ -26,6 +26,10 @@ export const SearchInputChat = ({ onClick, value, onChange, handleClearSearch }:
 			paddingY={theme.spacing(1)}
 			paddingX={theme.spacing(2)}
 			bgcolor={theme.palette.background.default}
+			position='absolute'
+			top={'3.1rem'}
+			left={0}
+			right={0}
 		>
 			<Box
 				flex='1'
