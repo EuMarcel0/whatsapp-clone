@@ -1,17 +1,18 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useState } from 'react';
 
-import { Box, CardMedia, Icon, Paper, Typography, useTheme } from '@mui/material';
+import { Box, Paper, useTheme } from '@mui/material';
 import { useChatListItem } from '../../../contexts/ChatListItem';
 import { ChatListProps } from '../../../contexts/ChatListTypes';
 import { SearchInputChat } from './SearchInputChat';
-import { AppTooltip } from '../../AppTootip';
+
+import { ChatListItem } from './ChatListItem';
 
 interface PropsChatList {
 	onClick: () => void;
 	showMessage?: boolean;
 }
 
-export const ChatsList = ({ onClick, showMessage }: PropsChatList) => {
+export const ChatsList = ({ onClick }: PropsChatList) => {
 	const theme = useTheme();
 	const { chatListItem } = useChatListItem();
 	const [newChatListItem, setNewChatListItem] = useState<ChatListProps[]>(chatListItem);
@@ -37,7 +38,6 @@ export const ChatsList = ({ onClick, showMessage }: PropsChatList) => {
 			borderRadius={theme.spacing(0)}
 			bgcolor={theme.palette.background.default}
 			paddingTop='3rem'
-			onClick={onClick}
 			sx={{
 				overflowY: 'auto',
 				'&::-webkit-scrollbar': {
@@ -56,148 +56,10 @@ export const ChatsList = ({ onClick, showMessage }: PropsChatList) => {
 				handleClearSearch={() => setSearchValue('')}
 			/>
 			{searchValue.length > 0 ? (
-				filteredChatListItem.map((item, index) => (
-					<Box
-						display='flex'
-						alignItems='center'
-						gap={theme.spacing(2)}
-						key={index}
-						paddingX={theme.spacing(2)}
-						sx={{
-							cursor: 'pointer',
-							':hover': {
-								backgroundColor: theme.palette.action.hover,
-							}
-						}}
-					>
-						<Box
-							display='flex'
-							alignItems='center'
-							gap={theme.spacing(2)}
-							height='100%'
-							maxHeight={theme.spacing(9)}
-							marginBottom={theme.spacing(4)}
-						>
-							<AppTooltip title={item.name}>
-								<CardMedia
-									component='img'
-									src={item.image}
-									alt='foto_perfil'
-									sx={{
-										width: theme.spacing(6),
-										borderRadius: theme.spacing(3),
-										cursor: 'pointer',
-									}}
-								/>
-							</AppTooltip>
-						</Box>
-						<Box
-							display='flex'
-							flexDirection='column'
-							width='100%'
-							height='100%'
-							overflow='hidden'
-							textOverflow='ellipsis'
-							whiteSpace='nowrap'
-							paddingY={theme.spacing(1.5)}
-							borderBottom={'.01rem solid ' + theme.palette.action.hover}
-						>
-							<Box display='flex' alignItems='center' justifyContent='space-between'>
-								<Typography variant='subtitle1' color='textPrimary' fontWeight={'400'}>{item.name}</Typography>
-								<Typography variant='body2' color='textSecondary' sx={{ fontSize: '.8rem' }}>{item.date}</Typography>
-							</Box>
-							<Box
-								display='flex'
-								alignItems='center'
-							>
-								<Icon sx={{ fontSize: '.9rem' }}>done</Icon>
-								<AppTooltip title={item.lastMessage} >
-									<Typography
-										variant='body2'
-										color='textSecondary'
-										overflow='hidden'
-										whiteSpace='nowrap'
-										textOverflow='ellipsis'
-										sx={{ fontSize: '.7rem' }}
-									>
-										{item.lastMessage}
-									</Typography>
-								</AppTooltip>
-							</Box>
-						</Box>
-					</Box>
-				))
+				<ChatListItem data={filteredChatListItem} onClick={onClick} />
+
 			) : (
-				newChatListItem.map((item, index) => (
-					<Box
-						display='flex'
-						alignItems='center'
-						gap={theme.spacing(2)}
-						key={index}
-						paddingX={theme.spacing(2)}
-						sx={{
-							cursor: 'pointer',
-							':hover': {
-								backgroundColor: theme.palette.action.hover,
-							}
-						}}
-					>
-						<Box
-							display='flex'
-							alignItems='center'
-							gap={theme.spacing(2)}
-							height='100%'
-							maxHeight={theme.spacing(9)}
-						>
-							<AppTooltip title={item.name}>
-								<CardMedia
-									component='img'
-									src={item.image}
-									alt='foto_perfil'
-									sx={{
-										width: theme.spacing(6),
-										borderRadius: theme.spacing(3),
-										cursor: 'pointer',
-									}}
-								/>
-							</AppTooltip>
-						</Box>
-						<Box
-							display='flex'
-							flexDirection='column'
-							width='100%'
-							height='100%'
-							overflow='hidden'
-							textOverflow='ellipsis'
-							whiteSpace='nowrap'
-							paddingY={theme.spacing(1.5)}
-							borderBottom={'.01rem solid ' + theme.palette.action.hover}
-						>
-							<Box display='flex' alignItems='center' justifyContent='space-between'>
-								<Typography variant='subtitle1' color='textPrimary' fontWeight={'400'}>{item.name}</Typography>
-								<Typography variant='body2' color='textSecondary' sx={{ fontSize: '.8rem' }}>{item.date}</Typography>
-							</Box>
-							<Box
-								display='flex'
-								alignItems='center'
-							>
-								<Icon sx={{ fontSize: '.9rem' }}>done</Icon>
-								<AppTooltip title={item.lastMessage} >
-									<Typography
-										variant='body2'
-										color='textSecondary'
-										overflow='hidden'
-										whiteSpace='nowrap'
-										textOverflow='ellipsis'
-										sx={{ fontSize: '.7rem' }}
-									>
-										{item.lastMessage}
-									</Typography>
-								</AppTooltip>
-							</Box>
-						</Box>
-					</Box>
-				))
+				<ChatListItem data={newChatListItem} onClick={onClick} />
 			)
 			}
 		</Box>

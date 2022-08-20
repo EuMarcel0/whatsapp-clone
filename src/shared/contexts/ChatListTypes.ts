@@ -1,5 +1,6 @@
 
 export interface ChatListProps {
+	id: number;
 	image: string;
 	name: string;
 	lastMessage: string;
