@@ -42,7 +42,7 @@ export const SearchInputChat = ({ onClick, value, onChange, handleClearSearch }:
 				paddingX={theme.spacing(1)}
 				paddingY={theme.spacing(1)}
 			>
-				<AppTooltip title='Pesquisar conversa'>
+				<AppTooltip title={value.length > 0 ? 'Limpar' : 'Pesquisar conversa'}>
 					<IconButton sx={{ mr: '1rem', transition: 'all ease 0.3s' }} onClick={handleClearSearch}>
 						<Icon sx={{ fontSize: '1rem' }}>{value.length > 0 ? 'clear' : 'search'}</Icon>
 					</IconButton>

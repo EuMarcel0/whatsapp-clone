@@ -1,20 +1,33 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import { Avatar, Box, CardMedia, Icon, IconButton, Paper, Typography, useTheme } from '@mui/material';
 import { ChatMessagesZone } from './components/ChatMessagesZone';
+import { SearchInputChat } from './components/SearchInputChat';
 import AvatarProfile from '../../../assets/images/avatar.jpg';
+import { useChatListItem } from '../../contexts/ChatlistContext';
+import { ChatListProps } from '../../contexts/ChatListTypes';
+import { ChatListItem } from './components/ChatListItem';
 import { MenuOptions } from './components/MenuOptions';
-import { ChatsList } from './components/ChatsList';
 import { SvgLogo } from './components/SvgLogo';
 import { AppTooltip } from '../AppTootip';
 
+
 export const MainContainer = () => {
 	const theme = useTheme();
-	const [showMessageZone, setShowMessageZone] = useState(false);
+	const { showChatArea, chatListItem } = useChatListItem();
+	const [newChatListItem, setNewChatListItem] = useState<ChatListProps[]>(chatListItem);
+	const [activeChat, setActiveChat] = useState<ChatListProps[]>(newChatListItem);
+	const [searchValue, setSearchValue] = useState('');
 
-	const handleSelectMessage = () => {
-		setShowMessageZone(true);
-	};
+	const handleOrderChatByName = useCallback(() => {
+		const newChatListItem = [...chatListItem];
+		newChatListItem.sort((a, b) => (a.name > b.name ? 1 : -1));
+		setNewChatListItem(newChatListItem);
+		setActiveChat(newChatListItem);
+		return newChatListItem;
+	}, [newChatListItem]);
+
+	const filteredChatListItem = searchValue.length > 0 ? chatListItem.filter(item => item.name.toLocaleLowerCase().includes(searchValue)) : [];
 
 	return (
 		<Box
@@ -26,6 +39,7 @@ export const MainContainer = () => {
 			sx={{
 				overflowY: 'hidden',
 			}}
+			position='relative'
 		>
 			<Box className='mainContentArea' width='100%' height='100%' display='flex'>
 				<Box
@@ -66,12 +80,40 @@ export const MainContainer = () => {
 							<MenuOptions />
 						</Box>
 					</Box>
-					<ChatsList onClick={handleSelectMessage} />
+
+					<Box
+						className='chatListArea'
+						flex='1'
+						component={Paper}
+						borderRadius={theme.spacing(0)}
+						bgcolor={theme.palette.background.default}
+						paddingTop='3rem'
+						sx={{
+							overflowY: 'auto',
+							'&::-webkit-scrollbar': {
+								width: '.4rem',
+								height: '.4rem',
+							},
+							'&::-webkit-scrollbar-thumb': {
+								backgroundColor: theme.palette.background.paper,
+							}
+						}}
+					>
+						<SearchInputChat
+							onClick={handleOrderChatByName}
+							value={searchValue}
+							onChange={(e) => setSearchValue(e.target.value)}
+							handleClearSearch={() => setSearchValue('')}
+						/>
+						{searchValue.length > 0 ? filteredChatListItem.map((item) => (
+							<ChatListItem key={item.id} data={item} />
+						)) : newChatListItem.map((item) => (
+							<ChatListItem key={item.id} data={item} />
+						))}
+					</Box>
 				</Box>
-				{(
-					showMessageZone && <ChatMessagesZone />
-				)}
-				{(!showMessageZone &&
+				{showChatArea && <ChatMessagesZone />}
+				{(!showChatArea &&
 					<Box
 						className='sideRight'
 						flex='1'

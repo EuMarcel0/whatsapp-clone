@@ -11,7 +11,7 @@ export const ChatMessagesZone = () => {
 			display='flex'
 			flexDirection='column'
 			height='100%'
-			position='relative'
+
 			borderBottom={'5px solid #00A884'}
 		>
 			<Box
@@ -25,7 +25,7 @@ export const ChatMessagesZone = () => {
 				paddingX={theme.spacing(2)}
 				borderRadius={theme.spacing(0)}
 			>
-				<Typography variant='h5'>Header</Typography>
+				<Typography variant='h5'>João</Typography>
 			</Box>
 		</Box >
 	);
