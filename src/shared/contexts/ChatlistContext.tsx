@@ -25,8 +25,8 @@ export const ChatListItemProvider = ({ children }: ChatListItemProviderProps) =>
 	const [activeChat, setActiveChat] = useState<ChatListProps | undefined>();
 
 
-	const handleSetActiveChat = useCallback((id: number) => {
-		setActiveChat(chatListItem[id]);
+	const handleSetActiveChat = useCallback((data: ChatListProps[], id: number) => {
+		setActiveChat(data[id]);
 		handleShowChatArea();
 	}, [chatListItem]);
 

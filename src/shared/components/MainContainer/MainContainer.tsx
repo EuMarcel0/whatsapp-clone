@@ -104,9 +104,9 @@ export const MainContainer = () => {
 							handleClearSearch={() => setSearchValue('')}
 						/>
 						{searchValue.length > 0 ? filteredChatListItem.map((item, index) => (
-							<ChatListItem key={item.id} data={item} onClick={() => handleSetActiveChat(index)} />
+							<ChatListItem key={item.id} data={item} onClick={() => handleSetActiveChat(filteredChatListItem, index)} />
 						)) : newChatListItem.map((item, index) => (
-							<ChatListItem key={item.id} data={item} onClick={() => handleSetActiveChat(index)} />
+							<ChatListItem key={item.id} data={item} onClick={() => handleSetActiveChat(newChatListItem, index)} />
 						))}
 					</Box>
 				</Box>
