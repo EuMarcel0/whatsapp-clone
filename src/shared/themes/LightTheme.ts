@@ -7,9 +7,16 @@ export const LightTheme =  createTheme({
 		primary:{
 			main: '#00A884',
 			light: '#F8F8F8',
+			dark: '#202C33',
 			contrastText: '#333',
 		},
 		divider: '#E0E0E0',
+		info: {
+			main: '#E0E0E0'
+		},
+		common: {
+			black: '#DEDFDD',
+		},
 		background: {
 			default: '#f9f9f9',
 			paper: '#EEEE',

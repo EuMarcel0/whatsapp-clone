@@ -14,7 +14,7 @@ import { AppTooltip } from '../AppTootip';
 
 export const MainContainer = () => {
 	const theme = useTheme();
-	const { showChatArea, chatListItem, handleSetActiveChat } = useChatListContext();
+	const { showChatArea, chatListItem, activeChat, handleSetActiveChat } = useChatListContext();
 	const [newChatListItem, setNewChatListItem] = useState<ChatListProps[]>(chatListItem);
 	const [searchValue, setSearchValue] = useState('');
 
@@ -41,7 +41,6 @@ export const MainContainer = () => {
 		>
 			<Box className='mainContentArea' width='100%' height='100%' display='flex'>
 				<Box
-					component={Paper}
 					className='sideLeft'
 					display='flex'
 					flexDirection='column'
@@ -78,11 +77,11 @@ export const MainContainer = () => {
 							<MenuOptions />
 						</Box>
 					</Box>
-
 					<Box
 						className='chatListArea'
 						flex='1'
 						component={Paper}
+						elevation={1}
 						borderRadius={theme.spacing(0)}
 						bgcolor={theme.palette.background.default}
 						paddingTop='3rem'
@@ -103,10 +102,10 @@ export const MainContainer = () => {
 							onChange={(e) => setSearchValue(e.target.value)}
 							handleClearSearch={() => setSearchValue('')}
 						/>
-						{searchValue.length > 0 ? filteredChatListItem.map((item, index) => (
-							<ChatListItem key={item.id} data={item} onClick={() => handleSetActiveChat(filteredChatListItem, index)} />
-						)) : newChatListItem.map((item, index) => (
-							<ChatListItem key={item.id} data={item} onClick={() => handleSetActiveChat(newChatListItem, index)} />
+						{searchValue.length > 0 ? filteredChatListItem.map((item: ChatListProps, index: number) => (
+							<ChatListItem key={item.id} data={item} active={item.id === activeChat?.id} onClick={() => handleSetActiveChat(filteredChatListItem, index)} />
+						)) : newChatListItem.map((item: ChatListProps, index: number) => (
+							<ChatListItem key={item.id} data={item} active={item.id === activeChat?.id} onClick={() => handleSetActiveChat(newChatListItem, index)} />
 						))}
 					</Box>
 				</Box>

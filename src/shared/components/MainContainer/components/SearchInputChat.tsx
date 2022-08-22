@@ -30,6 +30,9 @@ export const SearchInputChat = ({ onClick, value, onChange, handleClearSearch }:
 			top={'3.1rem'}
 			left={0}
 			right={0}
+			sx={{
+				borderRight: '0',
+			}}
 		>
 			<Box
 				flex='1'

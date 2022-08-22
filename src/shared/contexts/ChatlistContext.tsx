@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useState } from 'react';
-import { ChatListItemContextProps, ChatListProps, ChatListItemProviderProps, ActiveChatProps } from './ChatListTypes';
+import { ChatListItemContextProps, ChatListProps, ChatListItemProviderProps } from './ChatListTypes';
 import ChatAvatarImage from '../../assets/images/the_rock.jpg';
 
 export const ChatListItemContext = createContext({} as ChatListItemContextProps);
@@ -22,8 +22,7 @@ export const ChatListItemProvider = ({ children }: ChatListItemProviderProps) =>
 			date: 'Há 1 hora',
 		},
 	]);
-	const [activeChat, setActiveChat] = useState<ChatListProps | undefined>();
-
+	const [activeChat, setActiveChat] = useState<ChatListProps>();
 
 	const handleSetActiveChat = useCallback((data: ChatListProps[], id: number) => {
 		setActiveChat(data[id]);

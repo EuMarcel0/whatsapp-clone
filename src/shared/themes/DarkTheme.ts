@@ -10,6 +10,9 @@ export const DarkTheme =  createTheme({
 			contrastText: '#FFF',
 		},
 		divider: 'rgba(233,237,239,0.12)',
+		info: {
+			main: '#202C33',
+		},
 		background: {
 			default: '#0A1014',
 			paper: '#202C33',
