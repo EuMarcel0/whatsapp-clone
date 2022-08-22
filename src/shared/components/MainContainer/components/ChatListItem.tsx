@@ -52,7 +52,7 @@ export const ChatListItem = ({ data, onClick, active }: ChatListItemProps) => {
 				textOverflow='ellipsis'
 				whiteSpace='nowrap'
 				paddingY={theme.spacing(1.5)}
-				borderBottom={'.01rem solid ' + theme.palette.action.hover}
+				borderBottom={'1px solid ' + theme.palette.action.hover}
 			>
 				<Box display='flex' alignItems='center' justifyContent='space-between'>
 					<Typography variant='subtitle1' color='textPrimary' fontWeight={'400'}>{data.name}</Typography>

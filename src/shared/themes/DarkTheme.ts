@@ -9,6 +9,9 @@ export const DarkTheme =  createTheme({
 			dark: '#202C33',
 			contrastText: '#FFF',
 		},
+		action:{
+			hover: '#202C33',
+		},
 		divider: 'rgba(233,237,239,0.12)',
 		info: {
 			main: '#202C33',
