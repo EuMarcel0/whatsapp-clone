@@ -5,6 +5,7 @@ import ChatAvatarImage from '../../assets/images/the_rock.jpg';
 export const ChatListItemContext = createContext({} as ChatListItemContextProps);
 
 export const ChatListItemProvider = ({ children }: ChatListItemProviderProps) => {
+	const [showChatArea, setShowChatArea] = useState(false);
 	const [chatListItem, setChatListItem] = useState<ChatListProps[]>([
 		{
 			id: 1,
@@ -20,40 +21,24 @@ export const ChatListItemProvider = ({ children }: ChatListItemProviderProps) =>
 			lastMessage: 'X Oi, tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Com',
 			date: 'Há 1 hora',
 		},
-		{
-			id: 3,
-			image: ChatAvatarImage,
-			name: 'Roberto Souza',
-			lastMessage: 'C Oi, tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Com',
-			date: 'Há 1 hora',
-		},
-		{
-			id: 4,
-			image: ChatAvatarImage,
-			name: 'Ze Souza',
-			lastMessage: 'A Oi, tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Com',
-			date: 'Há 1 hora',
-		},
-		{
-			id: 5,
-			image: ChatAvatarImage,
-			name: 'Abrão Souz',
-			lastMessage: 'Ui Oi, tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Com',
-			date: 'Há 1 hora',
-		},
 	]);
-	const [activeChat, setActiveChat] = useState<ActiveChatProps[]>([]);
-	const [showChatArea, setShowChatArea] = useState(false);
+	const [activeChat, setActiveChat] = useState<ChatListProps | undefined>();
+
+
+	const handleSetActiveChat = useCallback((id: number) => {
+		setActiveChat(chatListItem[id]);
+		handleShowChatArea();
+	}, [chatListItem]);
 
 	const handleShowChatArea = useCallback(() => {
 		setShowChatArea(true);
-	}, []);
+	}, [chatListItem, activeChat]);
 
 	return (
-		<ChatListItemContext.Provider value={{ chatListItem, activeChat, showChatArea, handleShowChatArea }}>
+		<ChatListItemContext.Provider value={{ chatListItem, activeChat, showChatArea, handleSetActiveChat }}>
 			{children}
 		</ChatListItemContext.Provider>
 	);
 };
 
-export const useChatListItem = () => useContext(ChatListItemContext);
+export const useChatListContext = () => useContext(ChatListItemContext);

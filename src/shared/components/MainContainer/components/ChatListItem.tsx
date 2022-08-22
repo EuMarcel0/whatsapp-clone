@@ -1,12 +1,13 @@
 import { Box, CardMedia, Icon, Typography, useTheme } from '@mui/material';
-import { useChatListItem } from '../../../contexts/ChatlistContext';
+import { useChatListContext } from '../../../contexts/ChatlistContext';
+import { ChatListProps } from '../../../contexts/ChatListTypes';
 import { AppTooltip } from '../../AppTootip';
 interface ChatListItemProps {
-	data: any;
+	data: ChatListProps;
+	onClick: () => void;
 }
-export const ChatListItem = ({ data }: ChatListItemProps) => {
+export const ChatListItem = ({ data, onClick }: ChatListItemProps) => {
 	const theme = useTheme();
-	const { handleShowChatArea, showChatArea } = useChatListItem();
 
 	return (
 		<Box>
@@ -21,7 +22,7 @@ export const ChatListItem = ({ data }: ChatListItemProps) => {
 						backgroundColor: theme.palette.action.hover,
 					}
 				}}
-				onClick={handleShowChatArea}
+				onClick={onClick}
 			>
 				<Box
 					height='100%'

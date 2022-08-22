@@ -2,9 +2,9 @@ import { useCallback, useState } from 'react';
 
 import { Avatar, Box, CardMedia, Icon, IconButton, Paper, Typography, useTheme } from '@mui/material';
 import { ChatMessagesZone } from './components/ChatMessagesZone';
+import { useChatListContext } from '../../contexts/ChatlistContext';
 import { SearchInputChat } from './components/SearchInputChat';
 import AvatarProfile from '../../../assets/images/avatar.jpg';
-import { useChatListItem } from '../../contexts/ChatlistContext';
 import { ChatListProps } from '../../contexts/ChatListTypes';
 import { ChatListItem } from './components/ChatListItem';
 import { MenuOptions } from './components/MenuOptions';
@@ -14,16 +14,14 @@ import { AppTooltip } from '../AppTootip';
 
 export const MainContainer = () => {
 	const theme = useTheme();
-	const { showChatArea, chatListItem } = useChatListItem();
+	const { showChatArea, chatListItem, handleSetActiveChat } = useChatListContext();
 	const [newChatListItem, setNewChatListItem] = useState<ChatListProps[]>(chatListItem);
-	const [activeChat, setActiveChat] = useState<ChatListProps[]>(newChatListItem);
 	const [searchValue, setSearchValue] = useState('');
 
 	const handleOrderChatByName = useCallback(() => {
 		const newChatListItem = [...chatListItem];
 		newChatListItem.sort((a, b) => (a.name > b.name ? 1 : -1));
 		setNewChatListItem(newChatListItem);
-		setActiveChat(newChatListItem);
 		return newChatListItem;
 	}, [newChatListItem]);
 
@@ -105,10 +103,10 @@ export const MainContainer = () => {
 							onChange={(e) => setSearchValue(e.target.value)}
 							handleClearSearch={() => setSearchValue('')}
 						/>
-						{searchValue.length > 0 ? filteredChatListItem.map((item) => (
-							<ChatListItem key={item.id} data={item} />
-						)) : newChatListItem.map((item) => (
-							<ChatListItem key={item.id} data={item} />
+						{searchValue.length > 0 ? filteredChatListItem.map((item, index) => (
+							<ChatListItem key={item.id} data={item} onClick={() => handleSetActiveChat(index)} />
+						)) : newChatListItem.map((item, index) => (
+							<ChatListItem key={item.id} data={item} onClick={() => handleSetActiveChat(index)} />
 						))}
 					</Box>
 				</Box>

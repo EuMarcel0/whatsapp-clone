@@ -1,7 +1,9 @@
 import { Box, Paper, Typography, useTheme } from '@mui/material';
+import { useChatListContext } from '../../../contexts/ChatlistContext';
 
 export const ChatMessagesZone = () => {
 	const theme = useTheme();
+	const { activeChat } = useChatListContext();
 
 	return (
 		<Box
@@ -25,7 +27,7 @@ export const ChatMessagesZone = () => {
 				paddingX={theme.spacing(2)}
 				borderRadius={theme.spacing(0)}
 			>
-				<Typography variant='h5'>João</Typography>
+				<Typography variant='body2' color='textPrimary' fontWeight={'400'}>{activeChat?.name}</Typography>
 			</Box>
 		</Box >
 	);
