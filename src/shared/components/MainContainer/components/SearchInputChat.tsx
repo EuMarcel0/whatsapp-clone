@@ -32,6 +32,7 @@ export const SearchInputChat = ({ onClick, value, onChange, handleClearSearch }:
 			right={0}
 			sx={{
 				borderRight: '0',
+				borderLeft: '0',
 			}}
 		>
 			<Box

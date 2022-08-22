@@ -81,10 +81,10 @@ export const MainContainer = () => {
 						className='chatListArea'
 						flex='1'
 						component={Paper}
-						elevation={1}
+						elevation={0}
 						borderRadius={theme.spacing(0)}
 						bgcolor={theme.palette.background.default}
-						paddingTop='3rem'
+						paddingTop='2.6rem'
 						sx={{
 							overflowY: 'auto',
 							'&::-webkit-scrollbar': {
