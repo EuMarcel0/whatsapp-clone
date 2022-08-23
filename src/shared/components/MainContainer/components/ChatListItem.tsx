@@ -10,7 +10,6 @@ export const ChatListItem = ({ data, onClick, active }: ChatListItemProps) => {
 	const theme = useTheme();
 
 	return (
-
 		<Box
 			className={active ? 'active' : ''}
 			display='flex'

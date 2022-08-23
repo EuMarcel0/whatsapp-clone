@@ -1,6 +1,7 @@
 import { Box, CardMedia, Icon, IconButton, Paper, Typography, useTheme } from '@mui/material';
 import { useChatListContext } from '../../../contexts/ChatlistContext';
 import { AppTooltip } from '../../AppTootip';
+import { MenuChatOptions } from './MenuChatOptions';
 
 export const ChatMessagesZone = () => {
 	const theme = useTheme();
@@ -56,9 +57,7 @@ export const ChatMessagesZone = () => {
 						</IconButton>
 					</AppTooltip>
 					<AppTooltip title='Pesquisar conversa'>
-						<IconButton>
-							<Icon>more_vert_icon</Icon>
-						</IconButton>
+						<MenuChatOptions />
 					</AppTooltip>
 				</Box>
 			</Box>

@@ -1,12 +1,10 @@
 import { useState } from 'react';
 import { Box, Icon, IconButton, Menu, MenuItem } from '@mui/material';
-import { useAppThemeContext } from '../../../contexts/ThemeContext';
 import { AppTooltip } from '../../AppTootip';
 
-export const MenuOptions = () => {
+export const MenuChatOptions = () => {
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 	const open = Boolean(anchorEl);
-	const { toggleTheme } = useAppThemeContext();
 
 	const handleClick = (event: React.MouseEvent<HTMLElement>) => {
 		setAnchorEl(event.currentTarget);
@@ -14,11 +12,6 @@ export const MenuOptions = () => {
 
 	const handleClose = () => {
 		setAnchorEl(null);
-	};
-
-	const handleToggleTheme = () => {
-		toggleTheme();
-		handleClose();
 	};
 
 	return (
@@ -34,7 +27,6 @@ export const MenuOptions = () => {
 				</IconButton>
 			</AppTooltip>
 			<Menu
-				aria-labelledby="demo-positioned-button"
 				anchorEl={anchorEl}
 				open={open}
 				onClose={handleClose}
@@ -50,11 +42,15 @@ export const MenuOptions = () => {
 					mt: '2.6rem'
 				}}
 			>
-				<MenuItem onClick={handleClose} sx={{ fontSize: '.8rem' }}>Novo grupo</MenuItem>
-				<MenuItem onClick={handleClose} sx={{ fontSize: '.8rem' }}>Mensagens com estrela</MenuItem>
-				<MenuItem onClick={handleClose} sx={{ fontSize: '.8rem' }}>Configurações</MenuItem>
-				<MenuItem onClick={handleToggleTheme} sx={{ fontSize: '.8rem' }}>Mudar tema</MenuItem>
-				<MenuItem onClick={handleClose} sx={{ fontSize: '.8rem' }}>Sair</MenuItem>
+				<MenuItem onClick={handleClose} sx={{ fontSize: '.8rem' }}>Informações de contato</MenuItem>
+				<MenuItem onClick={handleClose} sx={{ fontSize: '.8rem' }}>Relatório de negócios</MenuItem>
+				<MenuItem onClick={handleClose} sx={{ fontSize: '.8rem' }}>Quadra</MenuItem>
+				<MenuItem onClick={handleClose} sx={{ fontSize: '.8rem' }}>Selecionar mensagens</MenuItem>
+				<MenuItem onClick={handleClose} sx={{ fontSize: '.8rem' }}>Fechar bate-papo</MenuItem>
+				<MenuItem onClick={handleClose} sx={{ fontSize: '.8rem' }}>Silenciar notificações</MenuItem>
+				<MenuItem onClick={handleClose} sx={{ fontSize: '.8rem' }}>Mensagens desaparecendo</MenuItem>
+				<MenuItem onClick={handleClose} sx={{ fontSize: '.8rem' }}>Limpar mensagens</MenuItem>
+				<MenuItem onClick={handleClose} sx={{ fontSize: '.8rem' }}>Excluir bate-papo</MenuItem>
 			</Menu>
 		</Box>
 	);
