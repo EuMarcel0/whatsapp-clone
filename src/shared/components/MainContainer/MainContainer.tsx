@@ -128,7 +128,6 @@ export const MainContainer = () => {
 						position='relative'
 						borderBottom={'5px solid #00A884'}
 						padding={theme.spacing(2)}
-						borderLeft={`1px solid ${theme.palette.divider}`}
 					>
 						<SvgLogo />
 						<Box display='flex' flexDirection='column' alignItems='center' justifyContent='center' gap={3}>
@@ -141,7 +140,7 @@ export const MainContainer = () => {
 							<hr style={{ width: '100%', borderColor: 'rgba(134,150,160,0.15)', marginTop: '.7rem' }} />
 							<Box display='flex' alignItems='center' gap={2}>
 								<Icon sx={{ fontSize: '1rem', }}>computer</Icon>
-								<Typography variant='caption' component='p' color='textSecondary'>
+								<Typography variant='caption' component='p' color='textSecondary' align='center'>
 									Faça chamadas da área de trabalho com o WhatsApp para Windows. <a href='https://www.whatsapp.com/download' target='blank' style={{ textDecoration: 'none', color: '#53bdeb', fontSize: 'inherit' }}>Clique aqui</a>
 								</Typography>
 							</Box>

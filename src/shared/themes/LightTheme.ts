@@ -12,7 +12,8 @@ export const LightTheme =  createTheme({
 		},
 		divider: '#E0E0E0',
 		info: {
-			main: '#E0E0E0'
+			main: '#E0E0E0',
+			light: '#FFF',
 		},
 		common: {
 			black: '#DEDFDD',
