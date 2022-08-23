@@ -1,6 +1,7 @@
 import { createContext, useCallback, useContext, useState } from 'react';
 import { ChatListItemContextProps, ChatListProps, ChatListItemProviderProps } from './ChatListTypes';
 import ChatAvatarImage from '../../assets/images/the_rock.jpg';
+import ChatAvatarImage2 from '../../assets/images/the_rock2.jpg';
 
 export const ChatListItemContext = createContext({} as ChatListItemContextProps);
 
@@ -9,7 +10,7 @@ export const ChatListItemProvider = ({ children }: ChatListItemProviderProps) =>
 	const [chatListItem, setChatListItem] = useState<ChatListProps[]>([
 		{
 			id: 1,
-			image: ChatAvatarImage,
+			image: ChatAvatarImage2,
 			name: 'Marcelo Silva',
 			lastMessage: 'A s Oi, tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Com',
 			date: 'Há 1 hora',
