@@ -1,9 +1,10 @@
 import { Box, CardMedia, Icon, IconButton, Paper, Typography, useTheme } from '@mui/material';
-import { useChatListContext } from '../../../contexts/ChatlistContext';
-import { AppTooltip } from '../../AppTootip';
-import { MenuChatOptions } from './MenuChatOptions';
-import DarkChatBackground from '../../../../assets/images/bg_dark.png';
+
 import LightChatBackground from '../../../../assets/images/bg_light.png';
+import { useChatListContext } from '../../../contexts/ChatlistContext';
+import DarkChatBackground from '../../../../assets/images/bg_dark.png';
+import { MenuChatOptions } from './MenuChatOptions';
+import { AppTooltip } from '../../AppTootip';
 
 export const ChatMessagesZone = () => {
 	const theme = useTheme();
@@ -20,7 +21,7 @@ export const ChatMessagesZone = () => {
 		>
 			<Box
 				className='chatMessagesZone--headerBar'
-				height={theme.spacing(7.1)}
+				height={theme.spacing(theme.palette.background.default === '#0A1014' ? 7.1 : 7)}
 				component={Paper}
 				elevation={0}
 				display='flex'
@@ -29,7 +30,6 @@ export const ChatMessagesZone = () => {
 				paddingY={theme.spacing(1.3)}
 				paddingX={theme.spacing(2)}
 				borderRadius={theme.spacing(0)}
-				borderLeft={`1px solid ${theme.palette.divider}`}
 			>
 				<Box
 					display='flex'
@@ -67,6 +67,13 @@ export const ChatMessagesZone = () => {
 				sx={{
 					overflowX: 'hidden',
 					overflowY: 'auto',
+					'&::-webkit-scrollbar': {
+						width: '.4rem',
+						height: '.4rem',
+					},
+					'&::-webkit-scrollbar-thumb': {
+						backgroundColor: theme.palette.background.paper,
+					}
 				}}
 			>
 				<img

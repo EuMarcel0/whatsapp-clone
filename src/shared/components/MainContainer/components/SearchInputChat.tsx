@@ -31,7 +31,7 @@ export const SearchInputChat = ({ onClick, value, onChange, handleClearSearch }:
 			left={0}
 			right={0}
 			sx={{
-				borderRight: '0',
+				borderRight: '1px solid' + theme.palette.divider,
 				borderLeft: '0',
 			}}
 		>

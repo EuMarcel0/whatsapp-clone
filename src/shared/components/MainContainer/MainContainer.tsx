@@ -59,6 +59,7 @@ export const MainContainer = () => {
 						paddingY={theme.spacing(1)}
 						paddingX={theme.spacing(2)}
 						borderRadius={theme.spacing(0)}
+						borderRight={`1px solid ${theme.palette.divider}`}
 					>
 						<Avatar sx={{ cursor: 'pointer' }}>
 							<CardMedia component='img' src={AvatarProfile} alt='foto_perfil' />
@@ -83,6 +84,7 @@ export const MainContainer = () => {
 						component={Paper}
 						elevation={0}
 						borderRadius={theme.spacing(0)}
+						borderRight={`1px solid ${theme.palette.divider}`}
 						bgcolor={theme.palette.background.default}
 						paddingTop='2.6rem'
 						sx={{
