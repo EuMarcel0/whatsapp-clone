@@ -92,16 +92,26 @@ export const ChatMessagesZone = () => {
 				display='flex'
 				alignItems='center'
 				justifyContent='center'
+				gap={theme.spacing(1)}
 				width='100%'
 				height={theme.spacing(7.7)}
 				component={Paper}
 				elevation={0}
 				borderRadius={theme.spacing(0)}
-				paddingY={theme.spacing(1.3)}
-				paddingX={theme.spacing(2)}
+				paddingY={theme.spacing(0.5)}
+				paddingX={theme.spacing(1)}
 			>
-				<Box width={theme.spacing(11.7)}>
-					Icons left
+				<Box display='flex' alignItems='center' justifyContent='center' width={theme.spacing(11.7)}>
+					<AppTooltip title='Emojis'>
+						<IconButton>
+							<Icon sx={{ fontSize: '1.4rem' }}>sentiment_satisfied_alt_icon </Icon>
+						</IconButton>
+					</AppTooltip>
+					<AppTooltip title='Anexar arquivo'>
+						<IconButton>
+							<Icon sx={{ fontSize: '1.4rem' }}>attach_file</Icon>
+						</IconButton>
+					</AppTooltip>
 				</Box>
 				<Box flex='1'>
 					<Box
@@ -113,18 +123,28 @@ export const ChatMessagesZone = () => {
 						height={theme.spacing(4)}
 						borderRadius={theme.spacing(1)}
 						paddingX={theme.spacing(1)}
-						paddingY={theme.spacing(1)}
+						paddingY={theme.spacing(2.6)}
 					>
 						<Input
 							size='small'
 							fullWidth
 							placeholder='Digite uma mensagem'
-							sx={{ fontSize: '.8rem' }}
+							sx={{
+								fontSize: '.9rem',
+								paddingTop: theme.spacing(1),
+								paddingBottom: theme.spacing(1),
+								paddingLeft: theme.spacing(1.5),
+								paddingRight: theme.spacing(1.5),
+							}}
 						/>
 					</Box>
 				</Box>
-				<Box width={theme.spacing(7)}>
-					Icons right
+				<Box display='flex' alignItems='center' justifyContent='center' width={theme.spacing(7)}>
+					<AppTooltip title='Toque para falar'>
+						<IconButton>
+							<Icon sx={{ fontSize: '1.4rem' }}>mic</Icon>
+						</IconButton>
+					</AppTooltip>
 				</Box>
 			</Box>
 		</Box >
