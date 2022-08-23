@@ -2,6 +2,8 @@ import { Box, CardMedia, Icon, IconButton, Paper, Typography, useTheme } from '@
 import { useChatListContext } from '../../../contexts/ChatlistContext';
 import { AppTooltip } from '../../AppTootip';
 import { MenuChatOptions } from './MenuChatOptions';
+import DarkChatBackground from '../../../../assets/images/bg_dark.png';
+import LightChatBackground from '../../../../assets/images/bg_light.png';
 
 export const ChatMessagesZone = () => {
 	const theme = useTheme();
@@ -11,7 +13,6 @@ export const ChatMessagesZone = () => {
 		<Box
 			className='sideRight'
 			flex='1'
-			gap={4}
 			display='flex'
 			flexDirection='column'
 			height='100%'
@@ -56,10 +57,28 @@ export const ChatMessagesZone = () => {
 							<Icon>search</Icon>
 						</IconButton>
 					</AppTooltip>
-					<AppTooltip title='Pesquisar conversa'>
-						<MenuChatOptions />
-					</AppTooltip>
+					<MenuChatOptions />
 				</Box>
+			</Box>
+			<Box
+				className='chatsArea'
+				flex='1'
+				position='relative'
+				sx={{
+					overflowX: 'hidden',
+					overflowY: 'auto',
+				}}
+			>
+				<img
+					src={theme.palette.background.default === '#0A1014' ? DarkChatBackground : LightChatBackground}
+					style={{
+						position: 'absolute',
+						top: '0',
+						left: '0',
+						right: '0',
+						height: '100%',
+					}}
+				/>
 			</Box>
 		</Box >
 	);
