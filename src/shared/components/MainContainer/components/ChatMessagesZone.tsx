@@ -15,14 +15,11 @@ export const ChatMessagesZone = () => {
 	const { activeChat } = useChatListContext();
 	const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 	const [inputMessageValue, setInputMessageValue] = useState<string>('');
-	const [autoFocus, setAutoFocus] = useState(false);
 
 	const handleEmojiClick = (_: any, emojiObject: any) => {
-		setAutoFocus(true);
 		if (emojiObject.emoji) {
 			setInputMessageValue(inputMessageValue + emojiObject.emoji);
 		}
-		setAutoFocus(true);
 	};
 
 	return (
@@ -98,6 +95,7 @@ export const ChatMessagesZone = () => {
 						left: '0',
 						right: '0',
 						height: '100%',
+						width: '100%',
 					}}
 				/>
 			</Box>
@@ -109,6 +107,10 @@ export const ChatMessagesZone = () => {
 					disableSearchBar
 					disableSkinTonePicker
 					onEmojiClick={handleEmojiClick}
+					pickerStyle={{
+						height: showEmojiPicker ? theme.spacing(40) : '0',
+						transition: 'height .3s ease-in-out',
+					}}
 				/>
 			</Box>
 			<Box
@@ -124,8 +126,16 @@ export const ChatMessagesZone = () => {
 				borderRadius={theme.spacing(0)}
 				paddingY={theme.spacing(0.5)}
 				paddingX={theme.spacing(1)}
+				sx={{ transition: 'ease-in-out .5s' }}
 			>
-				<Box display='flex' alignItems='center' justifyContent='center' width={theme.spacing(11.7)}>
+				<Box display='flex' alignItems='center' justifyContent='center' width={theme.spacing(showEmojiPicker ? 13.7 : 11)} sx={{ transition: 'linear .1s' }} >
+					{(showEmojiPicker &&
+						<AppTooltip title='Fechar emojis'>
+							<IconButton onClick={() => setShowEmojiPicker(!showEmojiPicker)} sx={{ transition: 'ease-in-out .5s' }}>
+								<Icon sx={{ fontSize: '1.4rem', transition: 'ease-in-out .5s' }}>close</Icon>
+							</IconButton>
+						</AppTooltip>
+					)}
 					<AppTooltip title='Emojis'>
 						<IconButton onClick={() => setShowEmojiPicker(!showEmojiPicker)}>
 							<Icon sx={{ fontSize: '1.4rem' }}>sentiment_satisfied_alt_icon </Icon>
@@ -162,7 +172,7 @@ export const ChatMessagesZone = () => {
 							}}
 							onChange={(e) => setInputMessageValue(e.target.value)}
 							value={inputMessageValue}
-							autoFocus={autoFocus}
+							autoFocus
 						/>
 						<AppTooltip title='Limpar'>
 							<IconButton size='small' onClick={() => setInputMessageValue('')}>
