@@ -114,7 +114,7 @@ export const MainContainer = () => {
 				{showChatArea && <ChatMessagesZone />}
 				{(!showChatArea &&
 					<Box
-						className='sideRight'
+						className='sideRight introArea'
 						flex='1'
 						gap={1}
 						display='flex'

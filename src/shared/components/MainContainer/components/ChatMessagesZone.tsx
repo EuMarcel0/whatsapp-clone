@@ -1,4 +1,7 @@
+import { useState } from 'react';
+
 import { Box, CardMedia, Icon, IconButton, Input, Paper, Typography, useTheme } from '@mui/material';
+import Picker from 'emoji-picker-react';
 
 import LightChatBackground from '../../../../assets/images/bg_light.png';
 import { useChatListContext } from '../../../contexts/ChatlistContext';
@@ -10,6 +13,8 @@ import { AppTooltip } from '../../AppTootip';
 export const ChatMessagesZone = () => {
 	const theme = useTheme();
 	const { activeChat } = useChatListContext();
+	const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+
 
 	return (
 		<Box
@@ -87,6 +92,9 @@ export const ChatMessagesZone = () => {
 					}}
 				/>
 			</Box>
+			<Box>
+				<Picker onEmojiClick={() => console.log('Clicou no emoji')} />
+			</Box>
 			<Box
 				className='chatMessagesZone--footerInputZone'
 				display='flex'
@@ -103,7 +111,7 @@ export const ChatMessagesZone = () => {
 			>
 				<Box display='flex' alignItems='center' justifyContent='center' width={theme.spacing(11.7)}>
 					<AppTooltip title='Emojis'>
-						<IconButton>
+						<IconButton onClick={() => setShowEmojiPicker(!showEmojiPicker)}>
 							<Icon sx={{ fontSize: '1.4rem' }}>sentiment_satisfied_alt_icon </Icon>
 						</IconButton>
 					</AppTooltip>
