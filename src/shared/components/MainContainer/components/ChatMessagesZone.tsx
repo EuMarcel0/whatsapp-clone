@@ -14,7 +14,16 @@ export const ChatMessagesZone = () => {
 	const theme = useTheme();
 	const { activeChat } = useChatListContext();
 	const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+	const [inputMessageValue, setInputMessageValue] = useState<string>('');
+	const [autoFocus, setAutoFocus] = useState(false);
 
+	const handleEmojiClick = (_: any, emojiObject: any) => {
+		setAutoFocus(true);
+		if (emojiObject.emoji) {
+			setInputMessageValue(inputMessageValue + emojiObject.emoji);
+		}
+		setAutoFocus(true);
+	};
 
 	return (
 		<Box
@@ -99,8 +108,7 @@ export const ChatMessagesZone = () => {
 				<Picker
 					disableSearchBar
 					disableSkinTonePicker
-
-					onEmojiClick={() => console.log('Clicou no emoji')}
+					onEmojiClick={handleEmojiClick}
 				/>
 			</Box>
 			<Box
@@ -152,13 +160,21 @@ export const ChatMessagesZone = () => {
 								paddingLeft: theme.spacing(1.5),
 								paddingRight: theme.spacing(1.5),
 							}}
+							onChange={(e) => setInputMessageValue(e.target.value)}
+							value={inputMessageValue}
+							autoFocus={autoFocus}
 						/>
+						<AppTooltip title='Limpar'>
+							<IconButton size='small' onClick={() => setInputMessageValue('')}>
+								{(inputMessageValue.length > 0 && <Icon sx={{ fontSize: '1.2rem' }}>clear</Icon>)}
+							</IconButton>
+						</AppTooltip>
 					</Box>
 				</Box>
 				<Box display='flex' alignItems='center' justifyContent='center' width={theme.spacing(7)}>
 					<AppTooltip title='Toque para falar'>
 						<IconButton>
-							<Icon sx={{ fontSize: '1.4rem' }}>mic</Icon>
+							<Icon sx={{ fontSize: '1.4rem' }}>{inputMessageValue.length > 0 ? 'send' : 'mic'}</Icon>
 						</IconButton>
 					</AppTooltip>
 				</Box>

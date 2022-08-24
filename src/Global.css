@@ -36,10 +36,16 @@
 	background-color: transparent !important;
 }
 .emoji-categories{
-	background-color: #EEEE !important;
+	background-color: rgba(238, 238, 238, 0.67) !important;
 }
 .emoji-picker-react .emoji-group:before, .emoji-picker-react .emoji-group:after{
 	position: relative !important;
 }
-
+.emoji-picker-react .active-category-indicator-wrapper .active-category-indicator{
+	background-color: #00A884 !important;
+}
+aside.emoji-picker-react button,
+aside.emoji-picker-react button:hover{
+	background-color: transparent !important;
+}
 /* Styles for Emoji picker */
