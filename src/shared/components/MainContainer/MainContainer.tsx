@@ -116,7 +116,7 @@ export const MainContainer = () => {
 					<Box
 						className='sideRight'
 						flex='1'
-						gap={4}
+						gap={1}
 						display='flex'
 						flexDirection='column'
 						alignItems='center'
@@ -130,14 +130,14 @@ export const MainContainer = () => {
 						padding={theme.spacing(2)}
 					>
 						<SvgLogo />
-						<Box display='flex' flexDirection='column' alignItems='center' justifyContent='center' gap={3}>
-							<Typography variant='h5' component='h1' color='textPrimary' fontWeight='400'>
+						<Box display='flex' flexDirection='column' alignItems='center' justifyContent='center' gap={2}>
+							<Typography variant='h5' component='h1' color='textPrimary' fontSize={'1.7rem'} fontWeight='200' marginTop={theme.spacing(3)}>
 								WhatsApp Web
 							</Typography>
 							<Typography variant='caption' component='p' color='textSecondary' align='center'>
 								Agora envie e receba mensagens sem manter seu telefone online.<br />Use o WhatsApp em até 4 dispositivos vinculados e 1 telefone ao mesmo tempo.
 							</Typography>
-							<hr style={{ width: '100%', borderColor: 'rgba(134,150,160,0.15)', marginTop: '.7rem' }} />
+							<hr style={{ width: '100%', borderColor: 'rgba(134,150,160,0.15)', marginTop: '.3rem' }} />
 							<Box display='flex' alignItems='center' gap={2}>
 								<Icon sx={{ fontSize: '1rem', }}>computer</Icon>
 								<Typography variant='caption' component='p' color='textSecondary' align='center'>

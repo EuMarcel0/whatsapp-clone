@@ -1,5 +1,5 @@
 import { Box, CardMedia, Icon, IconButton, Input, Paper, Typography, useTheme } from '@mui/material';
-import { shade } from 'polished';
+
 import LightChatBackground from '../../../../assets/images/bg_light.png';
 import { useChatListContext } from '../../../contexts/ChatlistContext';
 import DarkChatBackground from '../../../../assets/images/bg_dark.png';

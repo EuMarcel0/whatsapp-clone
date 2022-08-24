@@ -56,7 +56,7 @@ export const SearchInputChat = ({ onClick, value, onChange, handleClearSearch }:
 					fullWidth
 					placeholder='Procure uma conversa'
 					sx={{ fontSize: '.8rem' }}
-					value={value.normalize()}
+					value={value}
 					onChange={onChange}
 				/>
 			</Box>

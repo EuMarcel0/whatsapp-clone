@@ -1,7 +1,12 @@
 import { MenuOptions } from '../shared/components';
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
-it('Should have a chat item', () => {
-	render(<MenuOptions />);
-	expect(screen.getByText('Novo grupo')).toBeInTheDocument();
+it('Should have a exist', () => {
+	const { getByText } = render(<MenuOptions />);
+
+	expect(getByText('Novo grupo')).toBeInTheDocument();
+	expect(getByText('Mensagens com estrela')).toBeInTheDocument();
+	expect(getByText('Configurações')).toBeInTheDocument();
+	expect(getByText('Mudar tema')).toBeInTheDocument();
+	expect(getByText('Sair')).toBeInTheDocument();
 });
