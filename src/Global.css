@@ -1,3 +1,4 @@
+
 *{
 	margin: 0;
 	padding: 0;
@@ -17,3 +18,28 @@
 	padding: 0 !important;
 }
 /* Reset props for material input */
+
+
+/* Styles for Emoji picker */
+
+.emoji-picker-react{
+	box-shadow: 0 0 0 0 !important;
+	background-color: transparent !important;
+	border: 0 !important;
+	width: 100% !important;
+}
+.emoji-scroll-wrapper::-webkit-scrollbar{
+	width: 0 !important;
+}
+.emoji-picker-react .emoji-group:before,
+.emoji-picker-react .emoji-group:after{
+	background-color: transparent !important;
+}
+.emoji-categories{
+	background-color: #EEEE !important;
+}
+.emoji-picker-react .emoji-group:before, .emoji-picker-react .emoji-group:after{
+	position: relative !important;
+}
+
+/* Styles for Emoji picker */

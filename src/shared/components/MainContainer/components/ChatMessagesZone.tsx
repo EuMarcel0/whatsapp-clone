@@ -92,8 +92,16 @@ export const ChatMessagesZone = () => {
 					}}
 				/>
 			</Box>
-			<Box>
-				<Picker onEmojiClick={() => console.log('Clicou no emoji')} />
+			<Box
+				component={Paper}
+				elevation={0}
+			>
+				<Picker
+					disableSearchBar
+					disableSkinTonePicker
+
+					onEmojiClick={() => console.log('Clicou no emoji')}
+				/>
 			</Box>
 			<Box
 				className='chatMessagesZone--footerInputZone'
