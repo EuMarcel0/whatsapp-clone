@@ -5,6 +5,14 @@ export interface ChatListProps {
 	lastMessage: string;
 	date: string;
 }
+
+export interface UserProps {
+	id: number;
+	image: string;
+	name: string;
+	lastMessage: string;
+	date: string;
+}
 export interface ActiveChatProps {
 	id: number;
 	image: string;
@@ -13,6 +21,7 @@ export interface ActiveChatProps {
 	date: string;
 }
 export interface ChatListItemContextProps {
+	user: UserProps[];
 	chatListItem: ChatListProps[];
 	activeChat: ActiveChatProps | undefined;
 	showChatArea: boolean;

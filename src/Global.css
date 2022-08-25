@@ -36,7 +36,7 @@
 	background-color: transparent !important;
 }
 .emoji-categories{
-	background-color: rgba(238, 238, 238, 0.67) !important;
+	background-color: rgba(251, 251, 251, 0.67) !important;
 }
 .emoji-picker-react .emoji-group:before, .emoji-picker-react .emoji-group:after{
 	position: relative !important;

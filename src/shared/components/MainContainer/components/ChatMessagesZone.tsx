@@ -126,13 +126,12 @@ export const ChatMessagesZone = () => {
 				borderRadius={theme.spacing(0)}
 				paddingY={theme.spacing(0.5)}
 				paddingX={theme.spacing(1)}
-				sx={{ transition: 'ease-in-out .5s' }}
 			>
 				<Box display='flex' alignItems='center' justifyContent='center' width={theme.spacing(showEmojiPicker ? 13.7 : 11)} sx={{ transition: 'linear .1s' }} >
 					{(showEmojiPicker &&
 						<AppTooltip title='Fechar emojis'>
-							<IconButton onClick={() => setShowEmojiPicker(!showEmojiPicker)} sx={{ transition: 'ease-in-out .5s' }}>
-								<Icon sx={{ fontSize: '1.4rem', transition: 'ease-in-out .5s' }}>close</Icon>
+							<IconButton onClick={() => setShowEmojiPicker(!showEmojiPicker)} >
+								<Icon sx={{ fontSize: '1.4rem' }}>close</Icon>
 							</IconButton>
 						</AppTooltip>
 					)}

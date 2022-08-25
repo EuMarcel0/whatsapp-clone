@@ -14,7 +14,7 @@ import { AppTooltip } from '../AppTootip';
 
 export const MainContainer = () => {
 	const theme = useTheme();
-	const { showChatArea, chatListItem, activeChat, handleSetActiveChat } = useChatListContext();
+	const { user, showChatArea, chatListItem, activeChat, handleSetActiveChat } = useChatListContext();
 	const [newChatListItem, setNewChatListItem] = useState<ChatListProps[]>(chatListItem);
 	const [searchValue, setSearchValue] = useState('');
 
@@ -49,35 +49,41 @@ export const MainContainer = () => {
 					maxWidth={theme.spacing(60)}
 					position='relative'
 				>
-					<Box
-						height={theme.spacing(7)}
-						component={Paper}
-						elevation={0}
-						display='flex'
-						justifyContent='space-between'
-						alignItems='center'
-						paddingY={theme.spacing(1)}
-						paddingX={theme.spacing(2)}
-						borderRadius={theme.spacing(0)}
-						borderRight={`1px solid ${theme.palette.divider}`}
-					>
-						<Avatar sx={{ cursor: 'pointer' }}>
-							<CardMedia component='img' src={AvatarProfile} alt='foto_perfil' />
-						</Avatar>
-						<Box display='flex' alignItems='center' justifyContent='center' gap={1}>
-							<AppTooltip title='Ver status'>
-								<IconButton>
-									<Icon sx={{ fontSize: '1.4rem' }}>data_saver_off</Icon>
-								</IconButton>
+					{user.map((item, index) => (
+						<Box
+							className='userContentArea'
+							height={theme.spacing(7)}
+							component={Paper}
+							elevation={0}
+							display='flex'
+							justifyContent='space-between'
+							alignItems='center'
+							paddingY={theme.spacing(1)}
+							paddingX={theme.spacing(2)}
+							borderRadius={theme.spacing(0)}
+							borderRight={`1px solid ${theme.palette.divider}`}
+							key={index}
+						>
+							<AppTooltip title={item.name}>
+								<Avatar sx={{ cursor: 'pointer' }}>
+									<CardMedia component='img' src={item.image} alt={item.name} />
+								</Avatar>
 							</AppTooltip>
-							<AppTooltip title='Novo chat'>
-								<IconButton>
-									<Icon sx={{ fontSize: '1.4rem' }}>chat</Icon>
-								</IconButton>
-							</AppTooltip>
-							<MenuOptions />
+							<Box display='flex' alignItems='center' justifyContent='center' gap={1}>
+								<AppTooltip title='Ver status'>
+									<IconButton>
+										<Icon sx={{ fontSize: '1.4rem' }}>data_saver_off</Icon>
+									</IconButton>
+								</AppTooltip>
+								<AppTooltip title='Novo chat'>
+									<IconButton>
+										<Icon sx={{ fontSize: '1.4rem' }}>chat</Icon>
+									</IconButton>
+								</AppTooltip>
+								<MenuOptions />
+							</Box>
 						</Box>
-					</Box>
+					))}
 					<Box
 						className='chatListArea'
 						flex='1'
