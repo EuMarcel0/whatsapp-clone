@@ -12,7 +12,7 @@ import { AppTooltip } from '../../AppTootip';
 
 export const ChatMessagesZone = () => {
 	const theme = useTheme();
-	const { activeChat } = useChatListContext();
+	const { activeChat, handleShowChatArea } = useChatListContext();
 	const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 	const [inputMessageValue, setInputMessageValue] = useState<string>('');
 
@@ -68,7 +68,7 @@ export const ChatMessagesZone = () => {
 							<Icon>search</Icon>
 						</IconButton>
 					</AppTooltip>
-					<MenuChatOptions />
+					<MenuChatOptions closeChat={handleShowChatArea} />
 				</Box>
 			</Box>
 			<Box

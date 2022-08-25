@@ -1,7 +1,7 @@
 import { createContext, useCallback, useContext, useState } from 'react';
 import { ChatListItemContextProps, ChatListProps, ChatListItemProviderProps, UserProps } from './ChatListTypes';
-import ChatAvatarImage from '../../assets/images/the_rock.jpg';
 import ChatAvatarImage2 from '../../assets/images/the_rock2.jpg';
+import ChatAvatarImage from '../../assets/images/the_rock.jpg';
 
 export const ChatListItemContext = createContext({} as ChatListItemContextProps);
 
@@ -37,15 +37,15 @@ export const ChatListItemProvider = ({ children }: ChatListItemProviderProps) =>
 
 	const handleSetActiveChat = useCallback((data: ChatListProps[], id: number) => {
 		setActiveChat(data[id]);
-		handleShowChatArea();
+		setShowChatArea(true);
 	}, [chatListItem]);
 
 	const handleShowChatArea = useCallback(() => {
-		setShowChatArea(true);
-	}, [chatListItem, activeChat]);
+		setShowChatArea(false);
+	}, []);
 
 	return (
-		<ChatListItemContext.Provider value={{ user, chatListItem, activeChat, showChatArea, handleSetActiveChat }}>
+		<ChatListItemContext.Provider value={{ user, chatListItem, activeChat, showChatArea, handleSetActiveChat, handleShowChatArea }}>
 			{children}
 		</ChatListItemContext.Provider>
 	);

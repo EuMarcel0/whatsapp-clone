@@ -1,4 +1,5 @@
 import { Box, CardMedia, Icon, Typography, useTheme } from '@mui/material';
+import { useChatListContext } from '../../../contexts/ChatlistContext';
 import { ChatListProps } from '../../../contexts/ChatListTypes';
 import { AppTooltip } from '../../AppTootip';
 interface ChatListItemProps {
@@ -8,10 +9,11 @@ interface ChatListItemProps {
 }
 export const ChatListItem = ({ data, onClick, active }: ChatListItemProps) => {
 	const theme = useTheme();
+	const { showChatArea } = useChatListContext();
 
 	return (
 		<Box
-			className={active ? 'active' : ''}
+			className={active && showChatArea ? 'active' : ''}
 			display='flex'
 			alignItems='center'
 			gap={theme.spacing(2)}
@@ -23,6 +25,9 @@ export const ChatListItem = ({ data, onClick, active }: ChatListItemProps) => {
 				},
 				'&.active': {
 					backgroundColor: theme.palette.info.main,
+				},
+				'&.inactive': {
+					backgroundColor: 'transparent',
 				}
 			}}
 			onClick={onClick}

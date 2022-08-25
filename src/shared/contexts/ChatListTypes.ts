@@ -26,6 +26,7 @@ export interface ChatListItemContextProps {
 	activeChat: ActiveChatProps | undefined;
 	showChatArea: boolean;
 	handleSetActiveChat: (data: ChatListProps[], id: number) => void;
+	handleShowChatArea: () => void;
 }
 export interface ChatListItemProviderProps{
 	children: React.ReactNode;

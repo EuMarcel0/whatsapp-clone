@@ -2,7 +2,11 @@ import { useState } from 'react';
 import { Box, Icon, IconButton, Menu, MenuItem } from '@mui/material';
 import { AppTooltip } from '../../AppTootip';
 
-export const MenuChatOptions = () => {
+interface MenuChatOptionsProps {
+	closeChat: () => void;
+}
+
+export const MenuChatOptions = ({ closeChat }: MenuChatOptionsProps) => {
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 	const open = Boolean(anchorEl);
 
@@ -46,7 +50,7 @@ export const MenuChatOptions = () => {
 				<MenuItem onClick={handleClose} sx={{ fontSize: '.8rem' }}>Relatório de negócios</MenuItem>
 				<MenuItem onClick={handleClose} sx={{ fontSize: '.8rem' }}>Quadra</MenuItem>
 				<MenuItem onClick={handleClose} sx={{ fontSize: '.8rem' }}>Selecionar mensagens</MenuItem>
-				<MenuItem onClick={handleClose} sx={{ fontSize: '.8rem' }}>Fechar bate-papo</MenuItem>
+				<MenuItem onClick={closeChat} sx={{ fontSize: '.8rem' }}>Fechar bate-papo</MenuItem>
 				<MenuItem onClick={handleClose} sx={{ fontSize: '.8rem' }}>Silenciar notificações</MenuItem>
 				<MenuItem onClick={handleClose} sx={{ fontSize: '.8rem' }}>Mensagens desaparecendo</MenuItem>
 				<MenuItem onClick={handleClose} sx={{ fontSize: '.8rem' }}>Limpar mensagens</MenuItem>

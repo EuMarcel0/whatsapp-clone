@@ -4,7 +4,6 @@ import { Avatar, Box, CardMedia, Icon, IconButton, Paper, Typography, useTheme }
 import { ChatMessagesZone } from './components/ChatMessagesZone';
 import { useChatListContext } from '../../contexts/ChatlistContext';
 import { SearchInputChat } from './components/SearchInputChat';
-import AvatarProfile from '../../../assets/images/avatar.jpg';
 import { ChatListProps } from '../../contexts/ChatListTypes';
 import { ChatListItem } from './components/ChatListItem';
 import { MenuOptions } from './components/MenuOptions';
