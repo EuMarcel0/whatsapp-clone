@@ -75,6 +75,7 @@ export const ChatMessagesZone = () => {
 				className='chatMessagesZone--messagesZone'
 				flex='1'
 				position='relative'
+				padding={theme.spacing(2)}
 				sx={{
 					overflowX: 'hidden',
 					overflowY: 'auto',
@@ -96,8 +97,19 @@ export const ChatMessagesZone = () => {
 						right: '0',
 						height: '100%',
 						width: '100%',
+						zIndex: -1,
 					}}
 				/>
+				<Box paddingX={theme.spacing(11)}>
+					<Box
+						width='70%'
+						component={Paper}
+						elevation={0}
+						padding={theme.spacing(1)}
+					>
+						Messages here
+					</Box>
+				</Box>
 			</Box>
 			<Box
 				component={Paper}
@@ -136,8 +148,8 @@ export const ChatMessagesZone = () => {
 						</AppTooltip>
 					)}
 					<AppTooltip title='Emojis'>
-						<IconButton onClick={() => setShowEmojiPicker(!showEmojiPicker)}>
-							<Icon sx={{ fontSize: '1.4rem' }}>sentiment_satisfied_alt_icon </Icon>
+						<IconButton onClick={() => setShowEmojiPicker(true)}>
+							<Icon sx={{ fontSize: '1.4rem', color: showEmojiPicker ? theme.palette.primary.main : '' }}>sentiment_satisfied_alt_icon</Icon>
 						</IconButton>
 					</AppTooltip>
 					<AppTooltip title='Anexar arquivo'>
