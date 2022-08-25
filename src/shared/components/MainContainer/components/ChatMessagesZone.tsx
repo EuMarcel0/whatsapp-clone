@@ -15,6 +15,29 @@ export const ChatMessagesZone = () => {
 	const { activeChat, handleShowChatArea } = useChatListContext();
 	const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 	const [inputMessageValue, setInputMessageValue] = useState<string>('');
+	const [isRecording, setIsRecording] = useState(false);
+
+
+	const handleSpeechRecognition = () => {
+		const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+		const recognition = SpeechRecognition ? new SpeechRecognition() : null;
+
+		if (!recognition) return;
+
+		recognition.lang = 'pt_br';
+		recognition.onstart = () => {
+			setIsRecording(true);
+		};
+		recognition.onend = () => {
+			setIsRecording(false);
+		};
+		recognition.onresult = (e: any) => {
+			const current = e.resultIndex;
+			const transcript = e.results[current][0].transcript;
+			setInputMessageValue(transcript);
+		};
+		recognition.start();
+	};
 
 	const handleEmojiClick = (_: any, emojiObject: any) => {
 		if (emojiObject.emoji) {
@@ -194,7 +217,7 @@ export const ChatMessagesZone = () => {
 				</Box>
 				<Box display='flex' alignItems='center' justifyContent='center' width={theme.spacing(7)}>
 					<AppTooltip title='Toque para falar'>
-						<IconButton>
+						<IconButton onClick={handleSpeechRecognition}>
 							<Icon sx={{ fontSize: '1.4rem' }}>{inputMessageValue.length > 0 ? 'send' : 'mic'}</Icon>
 						</IconButton>
 					</AppTooltip>
