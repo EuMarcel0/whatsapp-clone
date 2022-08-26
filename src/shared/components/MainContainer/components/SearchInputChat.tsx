@@ -1,5 +1,5 @@
 import { Box, Icon, IconButton, Input, Paper, useTheme } from '@mui/material';
-import { AppTooltip } from '../../AppTootip';
+import { AppTooltip } from '../../AppTootip/AppTootip';
 
 interface SearchInputChatProps {
 	onClick: () => void;

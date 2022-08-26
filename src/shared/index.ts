@@ -1,1 +1,1 @@
-export * from './components/AppTootip';
+export * from './components/AppTootip/AppTootip';

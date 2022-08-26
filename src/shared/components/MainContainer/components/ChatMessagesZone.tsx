@@ -4,10 +4,10 @@ import { Box, CardMedia, Icon, IconButton, Input, Paper, Typography, useTheme } 
 import Picker from 'emoji-picker-react';
 
 import LightChatBackground from '../../../../assets/images/bg_light.png';
-import { useChatListContext } from '../../../contexts/ChatsContext';
 import DarkChatBackground from '../../../../assets/images/bg_dark.png';
+import { useChatListContext } from '../../../contexts/ChatsContext';
 import { MenuChatZoneOptions } from './MenuChatZoneOptions';
-import { AppTooltip } from '../../AppTootip';
+import { AppTooltip } from '../../AppTootip/AppTootip';
 
 
 export const ChatMessagesZone = () => {
@@ -216,11 +216,20 @@ export const ChatMessagesZone = () => {
 					</Box>
 				</Box>
 				<Box display='flex' alignItems='center' justifyContent='center' width={theme.spacing(7)}>
-					<AppTooltip title='Toque para falar'>
-						<IconButton onClick={handleSpeechRecognition}>
-							<Icon sx={{ fontSize: '1.4rem', color: isRecording ? '#FF4E44' : '' }}>{inputMessageValue.length > 0 ? 'send' : 'mic'}</Icon>
-						</IconButton>
-					</AppTooltip>
+					{(inputMessageValue.length === 0 &&
+						<AppTooltip title='Toque para falar'>
+							<IconButton onClick={handleSpeechRecognition}>
+								<Icon sx={{ fontSize: '1.4rem', color: isRecording ? '#FF4E44' : '' }}>mic</Icon>
+							</IconButton>
+						</AppTooltip>
+					)}
+					{(inputMessageValue.length > 0 &&
+						<AppTooltip title='Enviar'>
+							<IconButton onClick={() => console.log('Send message')}>
+								<Icon sx={{ fontSize: '1.4rem' }}>send</Icon>
+							</IconButton>
+						</AppTooltip>
+					)}
 				</Box>
 			</Box>
 		</Box >

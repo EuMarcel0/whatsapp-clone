@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Box, Icon, IconButton, Menu, MenuItem } from '@mui/material';
 import { useAppThemeContext } from '../../../contexts/ThemeContext';
-import { AppTooltip } from '../../AppTootip';
+import { AppTooltip } from '../../AppTootip/AppTootip';
 
 export const MenuUserOptions = () => {
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);

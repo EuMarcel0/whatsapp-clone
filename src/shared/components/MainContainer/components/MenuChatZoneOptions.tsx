@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Box, Icon, IconButton, Menu, MenuItem } from '@mui/material';
-import { AppTooltip } from '../../AppTootip';
+import { AppTooltip } from '../../AppTootip/AppTootip';
 
 interface MenuChatOptionsProps {
 	closeChat: () => void;

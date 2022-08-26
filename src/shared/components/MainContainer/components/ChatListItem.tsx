@@ -1,7 +1,7 @@
 import { Box, CardMedia, Icon, Typography, useTheme } from '@mui/material';
 import { useChatListContext } from '../../../contexts/ChatsContext';
 import { ChatListProps } from '../../../contexts/ChatsTypes';
-import { AppTooltip } from '../../AppTootip';
+import { AppTooltip } from '../../AppTootip/AppTootip';
 interface ChatListItemProps {
 	data: ChatListProps;
 	onClick: () => void;

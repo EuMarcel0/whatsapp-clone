@@ -8,7 +8,7 @@ import { ChatListProps } from '../../contexts/ChatsTypes';
 import { ChatListItem } from './components/ChatListItem';
 import { MenuUserOptions } from './components/MenuUserOptions';
 import { SvgIntroLogo } from './components/SvgIntroLogo';
-import { AppTooltip } from '../AppTootip';
+import { AppTooltip } from '../AppTootip/AppTootip';
 
 
 export const MainContainer = () => {
