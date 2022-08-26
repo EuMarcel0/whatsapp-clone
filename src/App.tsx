@@ -1,13 +1,13 @@
 import { Home } from './pages';
-import { ChatListItemProvider } from './shared/contexts/ChatlistContext';
+import { ChatsProvider } from './shared/contexts/ChatsContext';
 import { AppThemeProvider } from './shared/contexts/ThemeContext';
 
 export const App = () => {
 	return (
 		<AppThemeProvider>
-			<ChatListItemProvider>
+			<ChatsProvider>
 				<Home />
-			</ChatListItemProvider>
+			</ChatsProvider>
 		</AppThemeProvider>
 	);
 };

@@ -5,7 +5,6 @@ export interface ChatListProps {
 	lastMessage: string;
 	date: string;
 }
-
 export interface UserProps {
 	id: number;
 	image: string;

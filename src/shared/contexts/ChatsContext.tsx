@@ -1,11 +1,11 @@
 import { createContext, useCallback, useContext, useState } from 'react';
-import { ChatListItemContextProps, ChatListProps, ChatListItemProviderProps, UserProps } from './ChatListTypes';
+import { ChatListItemContextProps, ChatListProps, ChatListItemProviderProps, UserProps } from './ChatsTypes';
 import ChatAvatarImage2 from '../../assets/images/the_rock2.jpg';
 import ChatAvatarImage from '../../assets/images/the_rock.jpg';
 
-export const ChatListItemContext = createContext({} as ChatListItemContextProps);
+export const ChatContext = createContext({} as ChatListItemContextProps);
 
-export const ChatListItemProvider = ({ children }: ChatListItemProviderProps) => {
+export const ChatsProvider = ({ children }: ChatListItemProviderProps) => {
 	const [showChatArea, setShowChatArea] = useState(false);
 	const [user, setUser] = useState<UserProps[]>([
 		{
@@ -45,10 +45,10 @@ export const ChatListItemProvider = ({ children }: ChatListItemProviderProps) =>
 	}, []);
 
 	return (
-		<ChatListItemContext.Provider value={{ user, chatListItem, activeChat, showChatArea, handleSetActiveChat, handleShowChatArea }}>
+		<ChatContext.Provider value={{ user, chatListItem, activeChat, showChatArea, handleSetActiveChat, handleShowChatArea }}>
 			{children}
-		</ChatListItemContext.Provider>
+		</ChatContext.Provider>
 	);
 };
 
-export const useChatListContext = () => useContext(ChatListItemContext);
+export const useChatListContext = () => useContext(ChatContext);

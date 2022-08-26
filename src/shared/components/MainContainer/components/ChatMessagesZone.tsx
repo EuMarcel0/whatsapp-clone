@@ -4,7 +4,7 @@ import { Box, CardMedia, Icon, IconButton, Input, Paper, Typography, useTheme } 
 import Picker from 'emoji-picker-react';
 
 import LightChatBackground from '../../../../assets/images/bg_light.png';
-import { useChatListContext } from '../../../contexts/ChatlistContext';
+import { useChatListContext } from '../../../contexts/ChatsContext';
 import DarkChatBackground from '../../../../assets/images/bg_dark.png';
 import { MenuChatOptions } from './MenuChatOptions';
 import { AppTooltip } from '../../AppTootip';
@@ -218,7 +218,7 @@ export const ChatMessagesZone = () => {
 				<Box display='flex' alignItems='center' justifyContent='center' width={theme.spacing(7)}>
 					<AppTooltip title='Toque para falar'>
 						<IconButton onClick={handleSpeechRecognition}>
-							<Icon sx={{ fontSize: '1.4rem' }}>{inputMessageValue.length > 0 ? 'send' : 'mic'}</Icon>
+							<Icon sx={{ fontSize: '1.4rem', color: isRecording ? '#FF4E44' : '' }}>{inputMessageValue.length > 0 ? 'send' : 'mic'}</Icon>
 						</IconButton>
 					</AppTooltip>
 				</Box>

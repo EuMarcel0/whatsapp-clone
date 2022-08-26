@@ -2,9 +2,9 @@ import { useCallback, useState } from 'react';
 
 import { Avatar, Box, CardMedia, Icon, IconButton, Paper, Typography, useTheme } from '@mui/material';
 import { ChatMessagesZone } from './components/ChatMessagesZone';
-import { useChatListContext } from '../../contexts/ChatlistContext';
+import { useChatListContext } from '../../contexts/ChatsContext';
 import { SearchInputChat } from './components/SearchInputChat';
-import { ChatListProps } from '../../contexts/ChatListTypes';
+import { ChatListProps } from '../../contexts/ChatsTypes';
 import { ChatListItem } from './components/ChatListItem';
 import { MenuOptions } from './components/MenuOptions';
 import { SvgLogo } from './components/SvgLogo';
