@@ -6,8 +6,8 @@ import { useChatListContext } from '../../contexts/ChatsContext';
 import { SearchInputChat } from './components/SearchInputChat';
 import { ChatListProps } from '../../contexts/ChatsTypes';
 import { ChatListItem } from './components/ChatListItem';
-import { MenuOptions } from './components/MenuOptions';
-import { SvgLogo } from './components/SvgLogo';
+import { MenuUserOptions } from './components/MenuUserOptions';
+import { SvgIntroLogo } from './components/SvgIntroLogo';
 import { AppTooltip } from '../AppTootip';
 
 
@@ -79,7 +79,7 @@ export const MainContainer = () => {
 										<Icon sx={{ fontSize: '1.4rem' }}>chat</Icon>
 									</IconButton>
 								</AppTooltip>
-								<MenuOptions />
+								<MenuUserOptions />
 							</Box>
 						</Box>
 					))}
@@ -134,7 +134,7 @@ export const MainContainer = () => {
 						borderBottom={'5px solid #00A884'}
 						padding={theme.spacing(2)}
 					>
-						<SvgLogo />
+						<SvgIntroLogo />
 						<Box display='flex' flexDirection='column' alignItems='center' justifyContent='center' gap={2}>
 							<Typography variant='h5' component='h1' color='textPrimary' fontSize={'1.7rem'} fontWeight='200' marginTop={theme.spacing(3)}>
 								WhatsApp Web

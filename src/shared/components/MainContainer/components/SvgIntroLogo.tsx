@@ -1,6 +1,6 @@
 import { Box, useTheme } from '@mui/material';
 
-export const SvgLogo = () => {
+export const SvgIntroLogo = () => {
 	const theme = useTheme();
 
 	return (

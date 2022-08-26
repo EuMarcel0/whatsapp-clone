@@ -6,7 +6,7 @@ import Picker from 'emoji-picker-react';
 import LightChatBackground from '../../../../assets/images/bg_light.png';
 import { useChatListContext } from '../../../contexts/ChatsContext';
 import DarkChatBackground from '../../../../assets/images/bg_dark.png';
-import { MenuChatOptions } from './MenuChatOptions';
+import { MenuChatZoneOptions } from './MenuChatZoneOptions';
 import { AppTooltip } from '../../AppTootip';
 
 
@@ -91,7 +91,7 @@ export const ChatMessagesZone = () => {
 							<Icon>search</Icon>
 						</IconButton>
 					</AppTooltip>
-					<MenuChatOptions closeChat={handleShowChatArea} />
+					<MenuChatZoneOptions closeChat={handleShowChatArea} />
 				</Box>
 			</Box>
 			<Box
