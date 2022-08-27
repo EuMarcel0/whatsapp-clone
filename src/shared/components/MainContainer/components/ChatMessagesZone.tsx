@@ -124,7 +124,7 @@ export const ChatMessagesZone = () => {
 					}}
 				/>
 				{chat.map((item, index) => (
-					<Box key={index} display='flex' paddingX={theme.spacing(10)}>
+					<Box key={index} display='flex' justifyContent='flex-start' paddingX={theme.spacing(10)}>
 						<Box
 							component={Paper}
 							display='flex'
@@ -152,7 +152,7 @@ export const ChatMessagesZone = () => {
 							<Box
 								marginRight={theme.spacing(1)}
 							>
-								<Typography variant='body2' color='textPrimary' fontWeight={'200'} sx={{ fontSize: '.7rem' }}>
+								<Typography variant='body2' color='textPrimary' fontWeight={'400'} sx={{ fontSize: '.7rem' }}>
 									{item.lastMessage}
 								</Typography>
 							</Box>
@@ -162,7 +162,7 @@ export const ChatMessagesZone = () => {
 								alignItems='center'
 								justifyContent='flex-end'
 							>
-								<Typography variant='caption' color='textSecondary' fontWeight={'200'} sx={{ fontSize: '.7rem', mb: '-20px' }}>
+								<Typography variant='caption' color='textSecondary' fontWeight={'200'} sx={{ fontSize: '.6rem', mb: '-20px' }}>
 									{item.date}
 								</Typography>
 							</Box>

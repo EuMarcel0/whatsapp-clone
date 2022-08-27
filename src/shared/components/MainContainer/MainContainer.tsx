@@ -3,10 +3,11 @@ import { useCallback, useState } from 'react';
 import { Avatar, Box, CardMedia, Icon, IconButton, Paper, Typography, useTheme } from '@mui/material';
 import { ChatMessagesZone } from './components/ChatMessagesZone';
 import { useChatListContext } from '../../contexts/ChatsContext';
+import { MenuUserOptions } from './components/MenuUserOptions';
 import { SearchInputChat } from './components/SearchInputChat';
+import { NewContactList } from './components/NewContactList';
 import { ChatListProps } from '../../contexts/ChatsTypes';
 import { ChatListItem } from './components/ChatListItem';
-import { MenuUserOptions } from './components/MenuUserOptions';
 import { SvgIntroLogo } from './components/SvgIntroLogo';
 import { AppTooltip } from '../AppTootip/AppTootip';
 
@@ -16,6 +17,7 @@ export const MainContainer = () => {
 	const { user, showChatArea, chatListItem, activeChat, handleSetActiveChat } = useChatListContext();
 	const [newChatListItem, setNewChatListItem] = useState<ChatListProps[]>(chatListItem);
 	const [searchValue, setSearchValue] = useState('');
+	const [showNewContactList, setShowNewContactList] = useState(false);
 
 	const handleOrderChatByName = useCallback(() => {
 		const newChatListItem = [...chatListItem];
@@ -25,6 +27,13 @@ export const MainContainer = () => {
 	}, [newChatListItem]);
 
 	const filteredChatListItem = searchValue.length > 0 ? chatListItem.filter(item => item.name.toLocaleLowerCase().includes(searchValue)) : [];
+
+	const handleShowContactsList = () => {
+		setShowNewContactList(true);
+	};
+	const handleHideNewContactList = () => {
+		setShowNewContactList(false);
+	};
 
 	return (
 		<Box
@@ -75,7 +84,7 @@ export const MainContainer = () => {
 									</IconButton>
 								</AppTooltip>
 								<AppTooltip title='Novo chat'>
-									<IconButton>
+									<IconButton onClick={handleShowContactsList}>
 										<Icon sx={{ fontSize: '1.4rem' }}>chat</Icon>
 									</IconButton>
 								</AppTooltip>
@@ -115,6 +124,10 @@ export const MainContainer = () => {
 							<ChatListItem key={item.id} data={item} active={item.id === activeChat?.id} onClick={() => handleSetActiveChat(newChatListItem, index)} />
 						))}
 					</Box>
+					<NewContactList
+						showContactList={showNewContactList}
+						hideContactList={handleHideNewContactList}
+					/>
 				</Box>
 				{showChatArea && <ChatMessagesZone />}
 				{(!showChatArea &&
