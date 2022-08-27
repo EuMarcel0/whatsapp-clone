@@ -12,7 +12,7 @@ import { AppTooltip } from '../../AppTootip/AppTootip';
 
 export const ChatMessagesZone = () => {
 	const theme = useTheme();
-	const { activeChat, handleShowChatArea } = useChatListContext();
+	const { activeChat, chat, handleShowChatArea } = useChatListContext();
 	const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 	const [inputMessageValue, setInputMessageValue] = useState<string>('');
 	const [isRecording, setIsRecording] = useState(false);
@@ -123,16 +123,52 @@ export const ChatMessagesZone = () => {
 						zIndex: -1,
 					}}
 				/>
-				<Box paddingX={theme.spacing(11)}>
-					<Box
-						width='70%'
-						component={Paper}
-						elevation={0}
-						padding={theme.spacing(1)}
-					>
-						Messages here
+				{chat.map((item, index) => (
+					<Box key={index} display='flex' paddingX={theme.spacing(10)}>
+						<Box
+							component={Paper}
+							display='flex'
+							maxWidth='70%'
+							position='relative'
+							elevation={0}
+							padding={theme.spacing(1.5)}
+							marginBottom={theme.spacing(.5)}
+						>
+							<Box
+								sx={{
+									'&::before': {
+										content: '""',
+										position: 'absolute',
+										top: '2px',
+										left: '-.3rem',
+										width: '.4rem',
+										height: '.7rem',
+										backgroundColor: theme.palette.background.paper,
+										clipPath: 'polygon(0 0, 100% 100%, 100% 1%)',
+									}
+								}}
+							>
+							</Box>
+							<Box
+								marginRight={theme.spacing(1)}
+							>
+								<Typography variant='body2' color='textPrimary' fontWeight={'200'} sx={{ fontSize: '.7rem' }}>
+									{item.lastMessage}
+								</Typography>
+							</Box>
+							<Box
+								marginRight='-7px'
+								display='flex'
+								alignItems='center'
+								justifyContent='flex-end'
+							>
+								<Typography variant='caption' color='textSecondary' fontWeight={'200'} sx={{ fontSize: '.7rem', mb: '-20px' }}>
+									{item.date}
+								</Typography>
+							</Box>
+						</Box>
 					</Box>
-				</Box>
+				))}
 			</Box>
 			<Box
 				component={Paper}

@@ -34,6 +34,29 @@ export const ChatsProvider = ({ children }: ChatListItemProviderProps) => {
 		},
 	]);
 	const [activeChat, setActiveChat] = useState<ChatListProps>();
+	const [chat, setChat] = useState<ChatListProps[]>([
+		{
+			id: 1,
+			image: ChatAvatarImage2,
+			name: 'Marcelo Silva',
+			lastMessage: 'Olá, tudo bem?',
+			date: '22:00',
+		},
+		{
+			id: 1,
+			image: ChatAvatarImage2,
+			name: 'Marcelo Silva',
+			lastMessage: 'Olá, tudo bem? Olá, tudo bem? Olá, tudo bem? Olá, tudo bem? Olá, tudo bem? Olá, tudo bem?',
+			date: '23:00',
+		},
+		{
+			id: 1,
+			image: ChatAvatarImage2,
+			name: 'Marcelo Silva',
+			lastMessage: 'Oi',
+			date: '00:00',
+		},
+	]);
 
 	const handleSetActiveChat = useCallback((data: ChatListProps[], id: number) => {
 		setActiveChat(data[id]);
@@ -45,7 +68,7 @@ export const ChatsProvider = ({ children }: ChatListItemProviderProps) => {
 	}, []);
 
 	return (
-		<ChatContext.Provider value={{ user, chatListItem, activeChat, showChatArea, handleSetActiveChat, handleShowChatArea }}>
+		<ChatContext.Provider value={{ user, chatListItem, chat, activeChat, showChatArea, handleSetActiveChat, handleShowChatArea }}>
 			{children}
 		</ChatContext.Provider>
 	);

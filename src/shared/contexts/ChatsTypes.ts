@@ -22,6 +22,7 @@ export interface ActiveChatProps {
 export interface ChatListItemContextProps {
 	user: UserProps[];
 	chatListItem: ChatListProps[];
+	chat: ChatListProps[];
 	activeChat: ActiveChatProps | undefined;
 	showChatArea: boolean;
 	handleSetActiveChat: (data: ChatListProps[], id: number) => void;
