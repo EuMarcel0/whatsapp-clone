@@ -7,7 +7,7 @@ import { NewContactProps } from '../../../contexts/ChatsTypes';
 import { SearchInputContact } from './SearchInputContact';
 import { AppTooltip } from '../../AppTootip/AppTootip';
 
-interface NewContactListProps {
+interface NewChatListProps {
 	showContactList: boolean;
 	hideContactList: () => void;
 	value: string;
@@ -15,7 +15,7 @@ interface NewContactListProps {
 	handleClearSearch: () => void;
 }
 
-export const NewContactList = ({ showContactList, hideContactList, value, onChange, handleClearSearch }: NewContactListProps) => {
+export const NewChatList = ({ showContactList, hideContactList, value, onChange, handleClearSearch }: NewChatListProps) => {
 	const theme = useTheme();
 	const { newContact } = useChatListContext();
 	const [copyNewContactListItem, setCopyNewContactListItem] = useState<NewContactProps[]>(newContact);
@@ -85,6 +85,18 @@ export const NewContactList = ({ showContactList, hideContactList, value, onChan
 					onChange={onChange}
 					handleClearSearch={handleClearSearch}
 				/>
+				{(
+					newContact.length === 0 &&
+					<Box
+						height='90%'
+						display='flex'
+						flexDirection='column'
+						justifyContent='center'
+						alignItems='center'
+					>
+						<Typography variant='caption' color='textSecondary'>Nenhum contato</Typography>
+					</Box>
+				)}
 				{value.length > 0 ? (
 					<Box
 						className='list'

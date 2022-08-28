@@ -12,7 +12,7 @@ import { AppTooltip } from '../../AppTootip/AppTootip';
 
 export const ChatMessagesZone = () => {
 	const theme = useTheme();
-	const { activeChat, chat, handleShowChatArea } = useChatListContext();
+	const { activeChat, users, chat, handleShowChatArea } = useChatListContext();
 	const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 	const [inputMessageValue, setInputMessageValue] = useState<string>('');
 	const [isRecording, setIsRecording] = useState(false);
@@ -124,7 +124,12 @@ export const ChatMessagesZone = () => {
 					}}
 				/>
 				{chat.map((item, index) => (
-					<Box key={index} display='flex' justifyContent='flex-start' paddingX={theme.spacing(10)}>
+					<Box
+						key={index}
+						display='flex'
+						justifyContent={activeChat?.id === users[0].id ? 'flex-end' : 'flex-start'}
+						paddingX={theme.spacing(10)}
+					>
 						<Box
 							component={Paper}
 							display='flex'
@@ -157,6 +162,7 @@ export const ChatMessagesZone = () => {
 								</Typography>
 							</Box>
 							<Box
+								marginLeft={theme.spacing(1)}
 								marginRight='-7px'
 								display='flex'
 								alignItems='center'

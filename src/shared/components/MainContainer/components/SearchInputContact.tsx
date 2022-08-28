@@ -44,7 +44,7 @@ export const SearchInputContact = ({ onClick, value, onChange, handleClearSearch
 				paddingX={theme.spacing(1)}
 				paddingY={theme.spacing(1)}
 			>
-				<AppTooltip title={value.length > 0 ? 'Limpar' : 'Pesquisar conversa'}>
+				<AppTooltip title={value.length > 0 ? 'Limpar' : 'Pesquisar contato'}>
 					<IconButton sx={{ mr: '1rem', transition: 'all ease 0.3s' }} onClick={handleClearSearch}>
 						<Icon sx={{ fontSize: '1rem' }}>{value.length > 0 ? 'clear' : 'search'}</Icon>
 					</IconButton>
@@ -52,7 +52,7 @@ export const SearchInputContact = ({ onClick, value, onChange, handleClearSearch
 				<Input
 					size='small'
 					fullWidth
-					placeholder='Procure uma conversa'
+					placeholder='Procurar contato'
 					sx={{ fontSize: '.8rem' }}
 					value={value}
 					onChange={onChange}

@@ -5,19 +5,21 @@ import { ChatMessagesZone } from './components/ChatMessagesZone';
 import { useChatListContext } from '../../contexts/ChatsContext';
 import { MenuUserOptions } from './components/MenuUserOptions';
 import { SearchInputChat } from './components/SearchInputChat';
-import { NewContactList } from './components/NewContactList';
+import { NewChatList } from './components/NewChatList';
 import { ChatListProps } from '../../contexts/ChatsTypes';
 import { ChatListItem } from './components/ChatListItem';
 import { SvgIntroLogo } from './components/SvgIntroLogo';
 import { AppTooltip } from '../AppTootip/AppTootip';
+import { useAuthContext } from '../../contexts/AuthContext';
 
 
 export const MainContainer = () => {
 	const theme = useTheme();
-	const { user, showChatArea, chatListItem, activeChat, handleSetActiveChat } = useChatListContext();
+	const { showChatArea, chatListItem, activeChat, handleSetActiveChat } = useChatListContext();
 	const [newChatListItem, setNewChatListItem] = useState<ChatListProps[]>(chatListItem);
 	const [searchValue, setSearchValue] = useState('');
 	const [showNewContactList, setShowNewContactList] = useState(false);
+	const { login, users } = useAuthContext();
 
 	const handleOrderChatByName = useCallback(() => {
 		const newChatListItem = [...chatListItem];
@@ -57,41 +59,39 @@ export const MainContainer = () => {
 					maxWidth={theme.spacing(60)}
 					position='relative'
 				>
-					{user.map((item, index) => (
-						<Box
-							className='userContentArea'
-							height={theme.spacing(7)}
-							component={Paper}
-							elevation={0}
-							display='flex'
-							justifyContent='space-between'
-							alignItems='center'
-							paddingY={theme.spacing(1)}
-							paddingX={theme.spacing(2)}
-							borderRadius={theme.spacing(0)}
-							borderRight={`1px solid ${theme.palette.divider}`}
-							key={index}
-						>
-							<AppTooltip title={item.name}>
-								<Avatar sx={{ cursor: 'pointer' }}>
-									<CardMedia component='img' src={item.image} alt={item.name} />
-								</Avatar>
+					<Box
+						className='userContentArea'
+						height={theme.spacing(7)}
+						component={Paper}
+						elevation={0}
+						display='flex'
+						justifyContent='space-between'
+						alignItems='center'
+						paddingY={theme.spacing(1)}
+						paddingX={theme.spacing(2)}
+						borderRadius={theme.spacing(0)}
+						borderRight={`1px solid ${theme.palette.divider}`}
+					>
+						<AppTooltip title={users.displayName ? users.displayName : ''}>
+							<Avatar sx={{ cursor: 'pointer' }}>
+								<CardMedia component='img' src={users.photoURL ? users.photoURL : ''} />
+							</Avatar>
+						</AppTooltip>
+						<Box display='flex' alignItems='center' justifyContent='center' gap={1}>
+							<AppTooltip title='Ver status'>
+								<IconButton onClick={login}>
+									<Icon sx={{ fontSize: '1.4rem' }}>data_saver_off</Icon>
+								</IconButton>
 							</AppTooltip>
-							<Box display='flex' alignItems='center' justifyContent='center' gap={1}>
-								<AppTooltip title='Ver status'>
-									<IconButton>
-										<Icon sx={{ fontSize: '1.4rem' }}>data_saver_off</Icon>
-									</IconButton>
-								</AppTooltip>
-								<AppTooltip title='Novo chat'>
-									<IconButton onClick={handleShowContactsList}>
-										<Icon sx={{ fontSize: '1.4rem' }}>chat</Icon>
-									</IconButton>
-								</AppTooltip>
-								<MenuUserOptions />
-							</Box>
+							<AppTooltip title='Novo chat'>
+								<IconButton onClick={handleShowContactsList}>
+									<Icon sx={{ fontSize: '1.4rem' }}>chat</Icon>
+								</IconButton>
+							</AppTooltip>
+							<MenuUserOptions />
 						</Box>
-					))}
+					</Box>
+
 					<Box
 						className='chatListArea'
 						flex='1'
@@ -118,13 +118,25 @@ export const MainContainer = () => {
 							onChange={(e) => setSearchValue(e.target.value)}
 							handleClearSearch={() => setSearchValue('')}
 						/>
-						{searchValue.length > 0 ? filteredChatListItem.map((item: ChatListProps, index: number) => (
-							<ChatListItem key={item.id} data={item} active={item.id === activeChat?.id} onClick={() => handleSetActiveChat(filteredChatListItem, index)} />
-						)) : newChatListItem.map((item: ChatListProps, index: number) => (
-							<ChatListItem key={item.id} data={item} active={item.id === activeChat?.id} onClick={() => handleSetActiveChat(newChatListItem, index)} />
-						))}
+						{searchValue.length > 0 ?
+							filteredChatListItem.map((item: ChatListProps, index: number) => (
+								<ChatListItem
+									key={item.id}
+									data={item}
+									active={item.id === activeChat?.id}
+									onClick={() => handleSetActiveChat(filteredChatListItem, index)}
+								/>
+							)) :
+							newChatListItem.map((item: ChatListProps, index: number) => (
+								<ChatListItem
+									key={item.id}
+									data={item}
+									active={item.id === activeChat?.id}
+									onClick={() => handleSetActiveChat(newChatListItem, index)}
+								/>
+							))}
 					</Box>
-					<NewContactList
+					<NewChatList
 						showContactList={showNewContactList}
 						hideContactList={handleHideNewContactList}
 						value={searchValue}

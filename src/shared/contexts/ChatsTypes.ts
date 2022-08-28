@@ -11,7 +11,7 @@ export interface NewContactProps{
 	image: string;
 	name: string;
 }
-export interface UserProps {
+export interface UsersProps {
 	id: number;
 	image: string;
 	name: string;
@@ -26,7 +26,7 @@ export interface ActiveChatProps {
 	date: string;
 }
 export interface ChatListItemContextProps {
-	user: UserProps[];
+	users: UsersProps[];
 	chatListItem: ChatListProps[];
 	newContact: NewContactProps[];
 	chat: ChatListProps[];
