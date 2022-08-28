@@ -127,6 +127,9 @@ export const MainContainer = () => {
 					<NewContactList
 						showContactList={showNewContactList}
 						hideContactList={handleHideNewContactList}
+						value={searchValue}
+						onChange={(e) => setSearchValue(e.target.value)}
+						handleClearSearch={() => setSearchValue('')}
 					/>
 				</Box>
 				{showChatArea && <ChatMessagesZone />}

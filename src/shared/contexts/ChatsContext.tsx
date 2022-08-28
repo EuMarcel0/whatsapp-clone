@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useState } from 'react';
-import { ChatListItemContextProps, ChatListProps, ChatListItemProviderProps, UserProps } from './ChatsTypes';
+import { ChatListItemContextProps, ChatListProps, ChatListItemProviderProps, UserProps, NewContactProps } from './ChatsTypes';
 import ChatAvatarImage2 from '../../assets/images/the_rock2.jpg';
 import ChatAvatarImage from '../../assets/images/the_rock.jpg';
 
@@ -31,6 +31,18 @@ export const ChatsProvider = ({ children }: ChatListItemProviderProps) => {
 			name: 'José Souza',
 			lastMessage: 'X Oi, tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Com',
 			date: 'Há 1 hora',
+		},
+	]);
+	const [newChat, setNewChat] = useState<NewContactProps[]>([
+		{
+			id: 1,
+			image: ChatAvatarImage2,
+			name: 'Marcelo Silva',
+		},
+		{
+			id: 2,
+			image: ChatAvatarImage,
+			name: 'Antonio Silva',
 		},
 	]);
 	const [activeChat, setActiveChat] = useState<ChatListProps>();
@@ -68,7 +80,7 @@ export const ChatsProvider = ({ children }: ChatListItemProviderProps) => {
 	}, []);
 
 	return (
-		<ChatContext.Provider value={{ user, chatListItem, chat, activeChat, showChatArea, handleSetActiveChat, handleShowChatArea }}>
+		<ChatContext.Provider value={{ user, chatListItem, newContact: newChat, chat, activeChat, showChatArea, handleSetActiveChat, handleShowChatArea }}>
 			{children}
 		</ChatContext.Provider>
 	);
