@@ -1,16 +1,20 @@
-import firebase from 'firebase/app';
-import 'firebase/firebase-auth';
-import 'firebase/firebase-firestore';
+import { collection, addDoc } from 'firebase/firestore';
+import { dataBase } from '../Firebase/FirebaseConfig';
+import { User } from 'firebase/auth';
+import { Users } from './Types';
 
-import from '../Firebase/FirebaseConfig';
-
-const firebaseApp = firebase.initializeApp(firebaseConfig);
-const db = firebaseApp.firestore();
-
-const addUsers = async () => {
-
+const addUserInDB = async (user: User) => {
+	try{
+		const docRef = await addDoc(collection(dataBase, 'users'), {
+			name: user.displayName,
+			avatar: user.photoURL,
+		});
+		console.log('Document written with ID: ', docRef.id);
+	}catch(error){
+		alert(error);
+	}
 };
 
 export const Api = {
-	//asdsa
+	addUserInDB
 };
