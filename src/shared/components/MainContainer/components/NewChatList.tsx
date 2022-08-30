@@ -3,9 +3,9 @@ import { useCallback, useState } from 'react';
 import { Box, CardMedia, Icon, IconButton, Typography, useTheme } from '@mui/material';
 
 import { useChatListContext } from '../../../contexts/ChatsContext';
-import { NewContactProps } from '../../../contexts/ChatsTypes';
 import { SearchInputContact } from './SearchInputContact';
 import { AppTooltip } from '../../AppTootip/AppTootip';
+import { Users } from '../../../Types/Types';
 
 interface NewChatListProps {
 	showContactList: boolean;
@@ -18,7 +18,7 @@ interface NewChatListProps {
 export const NewChatList = ({ showContactList, hideContactList, value, onChange, handleClearSearch }: NewChatListProps) => {
 	const theme = useTheme();
 	const { newContact } = useChatListContext();
-	const [copyNewContactListItem, setCopyNewContactListItem] = useState<NewContactProps[]>(newContact);
+	const [copyNewContactListItem, setCopyNewContactListItem] = useState<Users[]>(newContact);
 
 	const handleOrderContacts = useCallback(() => {
 		const copyNewContactList = [...newContact];
@@ -144,7 +144,7 @@ export const NewChatList = ({ showContactList, hideContactList, value, onChange,
 								>
 									<CardMedia
 										component='img'
-										src={contact.image}
+										src={contact.avatar}
 										sx={{
 											width: theme.spacing(6.1),
 											height: theme.spacing(6.1),
@@ -207,7 +207,7 @@ export const NewChatList = ({ showContactList, hideContactList, value, onChange,
 								>
 									<CardMedia
 										component='img'
-										src={contact.image}
+										src={contact.avatar}
 										sx={{
 											width: theme.spacing(6.1),
 											height: theme.spacing(6.1),

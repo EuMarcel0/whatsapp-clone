@@ -17,7 +17,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 		signInWithPopup(Auth, provider)
 			.then((response) => {
 				if (response.user) {
-					console.log(response.user);
 					setUsers(response.user);
 					Api.addUserInDB(response.user);
 					setIsAuthenticated(true);

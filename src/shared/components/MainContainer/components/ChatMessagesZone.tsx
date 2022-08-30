@@ -8,11 +8,13 @@ import DarkChatBackground from '../../../../assets/images/bg_dark.png';
 import { useChatListContext } from '../../../contexts/ChatsContext';
 import { MenuChatZoneOptions } from './MenuChatZoneOptions';
 import { AppTooltip } from '../../AppTootip/AppTootip';
+import { useAuthContext } from '../../../contexts/AuthContext';
 
 
 export const ChatMessagesZone = () => {
 	const theme = useTheme();
-	const { activeChat, users, chat, handleShowChatArea } = useChatListContext();
+	const { activeChat, chat, handleShowChatArea } = useChatListContext();
+	const { users } = useAuthContext();
 	const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 	const [inputMessageValue, setInputMessageValue] = useState<string>('');
 	const [isRecording, setIsRecording] = useState(false);
@@ -127,7 +129,6 @@ export const ChatMessagesZone = () => {
 					<Box
 						key={index}
 						display='flex'
-						justifyContent={activeChat?.id === users[0].id ? 'flex-end' : 'flex-start'}
 						paddingX={theme.spacing(10)}
 					>
 						<Box

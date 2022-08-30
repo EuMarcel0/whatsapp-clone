@@ -1,3 +1,5 @@
+import { Users } from '../Types/Types';
+
 export interface ChatListProps {
 	id: number;
 	image: string;
@@ -5,7 +7,6 @@ export interface ChatListProps {
 	lastMessage: string;
 	date: string;
 }
-
 export interface NewContactProps{
 	id: number;
 	image: string;
@@ -26,9 +27,8 @@ export interface ActiveChatProps {
 	date: string;
 }
 export interface ChatListItemContextProps {
-	users: UsersProps[];
 	chatListItem: ChatListProps[];
-	newContact: NewContactProps[];
+	newContact: Users[];
 	chat: ChatListProps[];
 	activeChat: ActiveChatProps | undefined;
 	showChatArea: boolean;
