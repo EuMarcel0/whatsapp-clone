@@ -1,13 +1,14 @@
 import { useCallback, useState } from 'react';
 
 import { Box, CardMedia, Icon, IconButton, Typography, useTheme } from '@mui/material';
+import { shade } from 'polished';
 
 import { useChatListContext } from '../../../contexts/ChatsContext';
+import { useAuthContext } from '../../../contexts/AuthContext';
 import { SearchInputContact } from './SearchInputContact';
 import { AppTooltip } from '../../AppTootip/AppTootip';
-import { Users } from '../../../Types/Types';
 import { Api } from '../../../services/Api/Api';
-import { useAuthContext } from '../../../contexts/AuthContext';
+import { Users } from '../../../Types/Types';
 
 interface NewChatListProps {
 	showContactList: boolean;
@@ -55,10 +56,10 @@ export const NewChatList = ({ showContactList, hideContactList, value, onChange,
 		>
 			<Box
 				className='header'
-				bgcolor={theme.palette.background.paper}
+				bgcolor={theme.palette.mode === 'light' ? shade(.2, theme.palette.primary.main) : theme.palette.background.paper}
 				paddingTop={theme.spacing(7)}
 				paddingX={theme.spacing(2.8)}
-				paddingBottom={theme.spacing(1.5)}
+				paddingBottom={theme.spacing(.8)}
 				display='flex'
 				alignItems='center'
 				gap={2}
@@ -67,10 +68,10 @@ export const NewChatList = ({ showContactList, hideContactList, value, onChange,
 			>
 				<AppTooltip title='Voltar'>
 					<IconButton onClick={hideContactList}>
-						<Icon sx={{ fontSize: '1.4rem', fontWeight: 'bold' }}>arrow_back</Icon>
+						<Icon sx={{ fontSize: '1.4rem', fontWeight: 'bold', color: '#FFF' }}>arrow_back</Icon>
 					</IconButton>
 				</AppTooltip>
-				<Typography fontWeight='bold' fontSize='1rem'>Novo chat</Typography>
+				<Typography fontWeight='bold' fontSize='1rem' sx={{ color: '#FFF' }}>Novo chat</Typography>
 			</Box>
 			<Box
 				className='content'
