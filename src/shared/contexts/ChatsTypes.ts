@@ -1,11 +1,12 @@
 import { Users } from '../Types/Types';
 
 export interface ChatListProps {
-	id: number;
-	image: string;
+	chatId: string;
 	name: string;
+	image: string;
 	lastMessage: string;
-	date: string;
+	title: string;
+	width: string;
 }
 export interface NewContactProps{
 	id: number;
@@ -20,14 +21,14 @@ export interface UsersProps {
 	date: string;
 }
 export interface ActiveChatProps {
-	id: number;
+	chatId: string;
 	image: string;
-	name: string;
 	lastMessage: string;
-	date: string;
+	title: string;
+	width: string;
 }
 export interface ChatListItemContextProps {
-	chatListItem: Users[];
+	chatListItem: ChatListProps[];
 	newContact: Users[];
 	chat: ChatListProps[];
 	activeChat: ActiveChatProps | undefined;

@@ -20,7 +20,7 @@ export const LightTheme =  createTheme({
 		},
 		background: {
 			default: '#f9f9f9',
-			paper: '#EEEE',
+			paper: '#f0f2f5',
 		}
 	},
 	typography:{

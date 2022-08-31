@@ -1,6 +1,12 @@
+import firebase from 'firebase/compat/app';
 import { User } from 'firebase/auth';
-import { Users } from '../../Types/Types';
+import 'firebase/compat/firestore';
+import 'firebase/compat/auth';
+
 import { dataBase } from '../Firebase/FirebaseConfig';
+import { Users } from '../../Types/Types';
+
+
 
 
 const addUserInDB = async (user: any) => {
@@ -36,10 +42,38 @@ const addNewChat = async (user1: User, user2: Users) => {
 		messages: [],
 		users: [user1.uid, user2.uid],
 	});
+	dataBase.collection('users').doc(user1.uid).update({
+		chats: firebase.firestore.FieldValue.arrayUnion({
+			chatId: newChat.id,
+			title: user2.name,
+			image: user2.avatar,
+			with: user2.uid,
+		})
+	});
+	dataBase.collection('users').doc(user2.uid).update({
+		chats: firebase.firestore.FieldValue.arrayUnion({
+			chatId: newChat.id,
+			title: user1.displayName,
+			image: user1.photoURL,
+			with: user1.uid,
+		})
+	});
+};
+
+const onChatList = (uid: string, setChatListItem: React.Dispatch<React.SetStateAction<any[]>>) => {
+	return dataBase.collection('users').doc(uid).onSnapshot((doc) => {
+		if(doc.exists){
+			const data = doc.data();
+			if(data?.chats){
+				setChatListItem(data?.chats);
+			}
+		}
+	});
 };
 
 export const Api = {
 	addUserInDB,
 	getNewContactList,
-	addNewChat
+	addNewChat,
+	onChatList
 };

@@ -5,12 +5,12 @@ import { ChatMessagesZone } from './components/ChatMessagesZone';
 import { useChatListContext } from '../../contexts/ChatsContext';
 import { MenuUserOptions } from './components/MenuUserOptions';
 import { SearchInputChat } from './components/SearchInputChat';
-import { NewChatList } from './components/NewChatList';
+import { useAuthContext } from '../../contexts/AuthContext';
 import { ChatListProps } from '../../contexts/ChatsTypes';
 import { ChatListItem } from './components/ChatListItem';
 import { SvgIntroLogo } from './components/SvgIntroLogo';
+import { NewChatList } from './components/NewChatList';
 import { AppTooltip } from '../AppTootip/AppTootip';
-import { useAuthContext } from '../../contexts/AuthContext';
 
 
 export const MainContainer = () => {
@@ -40,10 +40,11 @@ export const MainContainer = () => {
 	return (
 		<Box
 			width='100%'
-			height='100%'
+			height='98%'
 			maxWidth={1600}
 			marginX='auto'
-			zIndex={99}
+			marginTop={theme.spacing(-13)}
+			zIndex={9}
 			sx={{
 				overflowY: 'hidden',
 			}}
@@ -121,17 +122,17 @@ export const MainContainer = () => {
 						{searchValue.length > 0 ?
 							filteredChatListItem.map((item: ChatListProps, index: number) => (
 								<ChatListItem
-									key={item.id}
+									key={item.chatId}
 									data={item}
-									active={item.id === activeChat?.id}
+									active={item.chatId === activeChat?.chatId}
 									onClick={() => handleSetActiveChat(filteredChatListItem, index)}
 								/>
 							)) :
 							newChatListItem.map((item: ChatListProps, index: number) => (
 								<ChatListItem
-									key={item.id}
+									key={item.chatId}
 									data={item}
-									active={item.id === activeChat?.id}
+									active={item.chatId === activeChat?.chatId}
 									onClick={() => handleSetActiveChat(newChatListItem, index)}
 								/>
 							))}
