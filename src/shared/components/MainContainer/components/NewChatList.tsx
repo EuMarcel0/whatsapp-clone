@@ -29,6 +29,7 @@ export const NewChatList = ({ showContactList, hideContactList, value, onChange,
 
 	const filteredContactList = value.length > 0 ? newContact.filter(item => item.name.toLocaleLowerCase().includes(value)) : [];
 
+
 	return (
 		<Box
 			className='newContactList'

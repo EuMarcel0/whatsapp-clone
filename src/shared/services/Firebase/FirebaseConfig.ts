@@ -1,6 +1,7 @@
-import { getFirestore } from 'firebase/firestore';
-import { initializeApp } from 'firebase/app';
+import firebase from 'firebase/compat/app';
 import { getAuth } from 'firebase/auth';
+import 'firebase/compat/firestore';
+import 'firebase/compat/auth';
 
 import { Environments } from '../../environment/Environment';
 
@@ -13,6 +14,6 @@ const firebaseConfig = {
 	appId: Environments.appId
 };
 
-const app = initializeApp(firebaseConfig);
-export const Auth = getAuth(app);
-export const dataBase = getFirestore(app);
+const app = firebase.initializeApp(firebaseConfig);
+export const auth = getAuth(app);
+export const dataBase = app.firestore();
