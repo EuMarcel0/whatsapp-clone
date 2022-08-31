@@ -27,7 +27,7 @@ export interface ActiveChatProps {
 	date: string;
 }
 export interface ChatListItemContextProps {
-	chatListItem: ChatListProps[];
+	chatListItem: Users[];
 	newContact: Users[];
 	chat: ChatListProps[];
 	activeChat: ActiveChatProps | undefined;

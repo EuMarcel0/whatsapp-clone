@@ -1,24 +1,25 @@
-import { createContext, useCallback, useContext, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import { ChatListItemContextProps, ChatListProps, ChatListItemProviderProps } from './ChatsTypes';
 import ChatAvatarImage2 from '../../assets/images/the_rock2.jpg';
 import ChatAvatarImage from '../../assets/images/the_rock.jpg';
 import { useAuthContext } from './AuthContext';
+import { Api } from '../services/Api/Api';
 import { Users } from '../Types/Types';
 
 export const ChatContext = createContext({} as ChatListItemContextProps);
 
 export const ChatsProvider = ({ children }: ChatListItemProviderProps) => {
 	const [showChatArea, setShowChatArea] = useState(false);
-	const [chatListItem, setChatListItem] = useState<ChatListProps[]>([
+	const [chatListItem, setChatListItem] = useState<any[]>([
 		{
-			id: 1,
+			uid: 1,
 			image: ChatAvatarImage2,
 			name: 'Marcelo Silva',
 			lastMessage: 'A s Oi, tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Com',
 			date: 'Há 1 hora',
 		},
 		{
-			id: 2,
+			uid: 2,
 			image: ChatAvatarImage,
 			name: 'José Souza',
 			lastMessage: 'X Oi, tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Como vai? Tudo bem? Com',
@@ -60,6 +61,19 @@ export const ChatsProvider = ({ children }: ChatListItemProviderProps) => {
 	const handleShowChatArea = useCallback(() => {
 		setShowChatArea(false);
 	}, []);
+
+	/**
+	 * Get all users in database and set in newChat state
+	 */
+	useEffect(() => {
+		const newChatList = async () => {
+			if (users.uid !== undefined) {
+				const result = await Api.getNewContactList(users.uid);
+				setNewChat(result);
+			}
+		};
+		newChatList();
+	}, [users, newChat]);
 
 	return (
 		<ChatContext.Provider value={{

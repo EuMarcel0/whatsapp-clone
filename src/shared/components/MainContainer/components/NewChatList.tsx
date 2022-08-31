@@ -6,6 +6,8 @@ import { useChatListContext } from '../../../contexts/ChatsContext';
 import { SearchInputContact } from './SearchInputContact';
 import { AppTooltip } from '../../AppTootip/AppTootip';
 import { Users } from '../../../Types/Types';
+import { Api } from '../../../services/Api/Api';
+import { useAuthContext } from '../../../contexts/AuthContext';
 
 interface NewChatListProps {
 	showContactList: boolean;
@@ -18,6 +20,7 @@ interface NewChatListProps {
 export const NewChatList = ({ showContactList, hideContactList, value, onChange, handleClearSearch }: NewChatListProps) => {
 	const theme = useTheme();
 	const { newContact } = useChatListContext();
+	const { users } = useAuthContext();
 	const [copyNewContactListItem, setCopyNewContactListItem] = useState<Users[]>(newContact);
 
 	const handleOrderContacts = useCallback(() => {
@@ -29,6 +32,9 @@ export const NewChatList = ({ showContactList, hideContactList, value, onChange,
 
 	const filteredContactList = value.length > 0 ? newContact.filter(item => item.name.toLocaleLowerCase().includes(value)) : [];
 
+	const handleAddNewChat = useCallback(async (user2: any) => {
+		Api.addNewChat(users, user2);
+	}, [users]);
 
 	return (
 		<Box
@@ -136,6 +142,7 @@ export const NewChatList = ({ showContactList, hideContactList, value, onChange,
 										backgroundColor: 'transparent',
 									}
 								}}
+								onClick={() => handleAddNewChat(contact)}
 							>
 								<Box
 									className='avatar'
@@ -199,6 +206,7 @@ export const NewChatList = ({ showContactList, hideContactList, value, onChange,
 										backgroundColor: 'transparent',
 									}
 								}}
+								onClick={() => handleAddNewChat(contact)}
 							>
 								<Box
 									className='avatar'

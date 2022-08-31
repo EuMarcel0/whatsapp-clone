@@ -1,9 +1,9 @@
 import { createContext, useCallback, useContext, useState } from 'react';
 import { FacebookAuthProvider, signInWithPopup, User } from 'firebase/auth';
-import { useCollection } from 'react-firebase-hooks/firestore';
 
 import { AuthContextProps, AuthProviderProps } from './AuthTypes';
 import { auth } from '../services/Firebase/FirebaseConfig';
+import { Api } from '../services/Api/Api';
 
 
 export const AuthContext = createContext({} as AuthContextProps);
@@ -19,6 +19,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 			.then((response) => {
 				if (response.user) {
 					setUsers(response.user);
+					Api.addUserInDB(response);
 					setIsAuthenticated(true);
 				}
 			}).catch((error) => {
