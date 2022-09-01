@@ -51,6 +51,7 @@ const addNewChat = async (user1: User, user2: Users) => {
 			with: user2.uid,
 		})
 	});
+
 	dataBase.collection('users').doc(user2.uid).update({
 		chats: firebase.firestore.FieldValue.arrayUnion({
 			chatId: newChat.id,

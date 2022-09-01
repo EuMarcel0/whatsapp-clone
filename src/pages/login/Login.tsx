@@ -53,20 +53,18 @@ export const Login = ({ children }: LoginProps) => {
 			<Box width='100%' height='100%' display='flex' justifyContent='center' alignItems='center' flexDirection={mdDown ? 'column' : 'row'} zIndex={9}>
 				<Box display='flex' flexDirection='column' alignItems='center' gap={2}>
 					<Typography variant='subtitle2' component='h1' fontSize={mdDown ? '1.5rem' : '1rem'} align='center' >Entre com o seu facebook para continuar</Typography>
-					<AppTooltip title='Entrar'>
-						<Button
-							onClick={login}
-							variant='contained'
-							sx={{
-								'&:hover': {
-									backgroundColor: shade(.2, theme.palette.primary.main),
-								},
-								color: '#FFF',
-							}}
-						>
-							Entrar com facebook
-						</Button>
-					</AppTooltip>
+					<Button
+						onClick={login}
+						variant='contained'
+						sx={{
+							'&:hover': {
+								backgroundColor: shade(.2, theme.palette.primary.main),
+							},
+							color: '#FFF',
+						}}
+					>
+						Entrar com facebook
+					</Button>
 				</Box>
 				<CardMedia
 					sx={{

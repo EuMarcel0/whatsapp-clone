@@ -58,13 +58,6 @@ export const SearchInputContact = ({ onClick, value, onChange, handleClearSearch
 					onChange={onChange}
 				/>
 			</Box>
-			<AppTooltip title='Ordernar contatos A-Z'>
-				<Box width={theme.spacing(4)}>
-					<IconButton size='small' onClick={onClick}>
-						<Icon sx={{ fontSize: '1.3rem' }}>reorder_icon</Icon>
-					</IconButton>
-				</Box>
-			</AppTooltip>
 		</Box>
 	);
 };

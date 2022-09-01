@@ -1,4 +1,5 @@
-import { Box, CardMedia, Icon, Typography, useTheme } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { Box, CardMedia, Typography, useTheme } from '@mui/material';
 import { useChatListContext } from '../../../contexts/ChatsContext';
 import { ChatListProps } from '../../../contexts/ChatsTypes';
 import { AppTooltip } from '../../AppTootip/AppTootip';
@@ -10,6 +11,20 @@ interface ChatListItemProps {
 export const ChatListItem = ({ data, onClick, active }: ChatListItemProps) => {
 	const theme = useTheme();
 	const { showChatArea } = useChatListContext();
+	const [date, setDate] = useState('');
+
+	useEffect(() => {
+		if (data.lastMessageDate) {
+			const date = new Date(data.lastMessageDate.seconds * 1000);
+			const hours = date.getHours();
+			const minutes = date.getMinutes();
+			hours < 10 ? '0' + hours : hours;
+			minutes < 10 ? '0' + minutes : minutes;
+			setDate(`${hours}:${minutes}`);
+		}
+
+
+	}, []);
 
 	return (
 		<Box
@@ -59,11 +74,10 @@ export const ChatListItem = ({ data, onClick, active }: ChatListItemProps) => {
 				borderBottom={'1px solid ' + theme.palette.action.hover}
 			>
 				<Box display='flex' alignItems='center' justifyContent='space-between'>
-					<Typography variant='subtitle1' color='textPrimary' fontWeight={'400'}>{data.name}</Typography>
-					<Typography variant='body2' color='textSecondary' sx={{ fontSize: '.8rem' }}>{data.date}</Typography>
+					<Typography variant='subtitle1' color='textPrimary' fontWeight={'400'}>{data.title}</Typography>
+					<Typography variant='body2' color='textSecondary' sx={{ fontSize: '.8rem' }}>{date}</Typography>
 				</Box>
 				<Box display='flex' alignItems='center' >
-					<Icon sx={{ fontSize: '.9rem' }}>done</Icon>
 					<AppTooltip title={data.lastMessage} >
 						<Typography
 							variant='body2'

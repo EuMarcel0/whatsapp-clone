@@ -9,6 +9,7 @@ import { SearchInputContact } from './SearchInputContact';
 import { AppTooltip } from '../../AppTootip/AppTootip';
 import { Api } from '../../../services/Api/Api';
 import { Users } from '../../../Types/Types';
+import { ChatListProps } from '../../../contexts/ChatsTypes';
 
 interface NewChatListProps {
 	showContactList: boolean;
@@ -16,9 +17,11 @@ interface NewChatListProps {
 	value: string;
 	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	handleClearSearch: () => void;
+	filteredData: ChatListProps[];
+	searchValue: string;
 }
 
-export const NewChatList = ({ showContactList, hideContactList, value, onChange, handleClearSearch }: NewChatListProps) => {
+export const NewChatList = ({ showContactList, hideContactList, value, onChange, handleClearSearch, filteredData, searchValue }: NewChatListProps) => {
 	const theme = useTheme();
 	const { newContact } = useChatListContext();
 	const { users } = useAuthContext();
@@ -29,12 +32,13 @@ export const NewChatList = ({ showContactList, hideContactList, value, onChange,
 		copyNewContactList.sort((a, b) => (a.name > b.name ? 1 : -1));
 		setCopyNewContactListItem(copyNewContactList);
 		return copyNewContactList;
-	}, [copyNewContactListItem, newContact]);
+	}, [users, newContact]);
 
 	const filteredContactList = value.length > 0 ? newContact.filter(item => item.name.toLocaleLowerCase().includes(value)) : [];
 
 	const handleAddNewChat = useCallback(async (user2: any) => {
-		Api.addNewChat(users, user2);
+		await Api.addNewChat(users, user2);
+		hideContactList();
 	}, [users]);
 
 	return (
@@ -187,7 +191,7 @@ export const NewChatList = ({ showContactList, hideContactList, value, onChange,
 							}
 						}}
 					>
-						{copyNewContactListItem.map((contact, index) => (
+						{newContact.map((contact, index) => (
 							<Box
 								key={index}
 								paddingX={theme.spacing(2.8)}

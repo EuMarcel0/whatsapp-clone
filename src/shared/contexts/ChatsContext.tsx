@@ -14,7 +14,7 @@ export const ChatsProvider = ({ children }: ChatListItemProviderProps) => {
 	const [newChat, setNewChat] = useState<Users[]>([]);
 	const { users } = useAuthContext();
 
-	const handleSetActiveChat = useCallback((data: ChatListProps[], id: number) => {
+	const handleSetActiveChat = useCallback((data: ChatListProps[], id: any) => {
 		setActiveChat(data[id]);
 		setShowChatArea(true);
 	}, [chatListItem]);
@@ -27,14 +27,21 @@ export const ChatsProvider = ({ children }: ChatListItemProviderProps) => {
 	 * Get all users in database and set in newChat state
 	 */
 	useEffect(() => {
-		const newChatList = async () => {
+		const newContactList = async () => {
 			if (users.uid !== undefined) {
 				const result = await Api.getNewContactList(users.uid);
 				setNewChat(result);
 			}
 		};
-		newChatList();
-	}, [users, newChat]);
+		newContactList();
+	}, [users]);
+
+	useEffect(() => {
+		if (users.uid !== null) {
+			const unsub = Api.onChatList(users.uid, setChatListItem);
+			return unsub;
+		}
+	}, [users]);
 
 	return (
 		<ChatContext.Provider value={{

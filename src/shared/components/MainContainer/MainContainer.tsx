@@ -28,7 +28,7 @@ export const MainContainer = () => {
 		return newChatListItem;
 	}, [newChatListItem]);
 
-	const filteredChatListItem = searchValue.length > 0 ? chatListItem.filter(item => item.name.toLocaleLowerCase().includes(searchValue)) : [];
+	const filteredChatListItem: ChatListProps[] = searchValue.length > 0 ? chatListItem.filter(item => item.title.toLocaleLowerCase().includes(searchValue)) : [];
 
 	const handleShowContactsList = () => {
 		setShowNewContactList(true);
@@ -36,7 +36,7 @@ export const MainContainer = () => {
 	const handleHideNewContactList = () => {
 		setShowNewContactList(false);
 	};
-
+	console.log('Chat list', chatListItem);
 	return (
 		<Box
 			width='100%'
@@ -128,12 +128,12 @@ export const MainContainer = () => {
 									onClick={() => handleSetActiveChat(filteredChatListItem, index)}
 								/>
 							)) :
-							newChatListItem.map((item: ChatListProps, index: number) => (
+							chatListItem.map((item: ChatListProps, index: number) => (
 								<ChatListItem
 									key={item.chatId}
 									data={item}
 									active={item.chatId === activeChat?.chatId}
-									onClick={() => handleSetActiveChat(newChatListItem, index)}
+									onClick={() => handleSetActiveChat(chatListItem, index)}
 								/>
 							))}
 					</Box>
@@ -143,6 +143,8 @@ export const MainContainer = () => {
 						value={searchValue}
 						onChange={(e) => setSearchValue(e.target.value)}
 						handleClearSearch={() => setSearchValue('')}
+						filteredData={filteredChatListItem}
+						searchValue={searchValue}
 					/>
 				</Box>
 				{showChatArea && <ChatMessagesZone />}
