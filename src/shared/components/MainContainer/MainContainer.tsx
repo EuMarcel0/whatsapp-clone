@@ -80,7 +80,7 @@ export const MainContainer = () => {
 						</AppTooltip>
 						<Box display='flex' alignItems='center' justifyContent='center' gap={1}>
 							<AppTooltip title='Ver status'>
-								<IconButton onClick={login}>
+								<IconButton>
 									<Icon sx={{ fontSize: '1.4rem' }}>data_saver_off</Icon>
 								</IconButton>
 							</AppTooltip>
