@@ -5,6 +5,7 @@ export interface ChatListProps {
 	name: string;
 	image: string;
 	lastMessage: string;
+	lastMessageDate: string;
 	title: string;
 	width: string;
 }

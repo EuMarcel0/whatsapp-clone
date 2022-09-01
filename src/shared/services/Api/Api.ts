@@ -5,6 +5,7 @@ import 'firebase/compat/auth';
 
 import { dataBase } from '../Firebase/FirebaseConfig';
 import { Users } from '../../Types/Types';
+import { ChatListProps } from '../../contexts/ChatsTypes';
 
 
 
@@ -60,7 +61,7 @@ const addNewChat = async (user1: User, user2: Users) => {
 	});
 };
 
-const onChatList = (uid: string, setChatListItem: React.Dispatch<React.SetStateAction<any[]>>) => {
+const onChatList = (uid: string, setChatListItem: React.Dispatch<React.SetStateAction<ChatListProps[]>>) => {
 	return dataBase.collection('users').doc(uid).onSnapshot((doc) => {
 		if(doc.exists){
 			const data = doc.data();

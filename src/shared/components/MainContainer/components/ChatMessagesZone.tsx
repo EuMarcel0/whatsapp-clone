@@ -6,9 +6,9 @@ import Picker from 'emoji-picker-react';
 import LightChatBackground from '../../../../assets/images/bg_light.png';
 import DarkChatBackground from '../../../../assets/images/bg_dark.png';
 import { useChatListContext } from '../../../contexts/ChatsContext';
+import { useAuthContext } from '../../../contexts/AuthContext';
 import { MenuChatZoneOptions } from './MenuChatZoneOptions';
 import { AppTooltip } from '../../AppTootip/AppTootip';
-import { useAuthContext } from '../../../contexts/AuthContext';
 
 
 export const ChatMessagesZone = () => {
@@ -85,7 +85,7 @@ export const ChatMessagesZone = () => {
 							}}
 						/>
 					</AppTooltip>
-					<Typography variant='body2' color='textPrimary' fontWeight={'400'}>{activeChat?.name}</Typography>
+					<Typography variant='body2' color='textPrimary' fontWeight={'400'}>{activeChat?.title}</Typography>
 				</Box>
 				<Box display='flex' alignItems='center'>
 					<AppTooltip title='Pesquisar conversa'>
@@ -170,7 +170,7 @@ export const ChatMessagesZone = () => {
 								justifyContent='flex-end'
 							>
 								<Typography variant='caption' color='textSecondary' fontWeight={'200'} sx={{ fontSize: '.6rem', mb: '-20px' }}>
-									{item.date}
+									{item.lastMessageDate}
 								</Typography>
 							</Box>
 						</Box>

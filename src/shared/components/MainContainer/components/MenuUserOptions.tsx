@@ -1,12 +1,15 @@
 import { useState } from 'react';
 import { Box, Icon, IconButton, Menu, MenuItem } from '@mui/material';
+
 import { useAppThemeContext } from '../../../contexts/ThemeContext';
+import { useAuthContext } from '../../../contexts/AuthContext';
 import { AppTooltip } from '../../AppTootip/AppTootip';
 
 export const MenuUserOptions = () => {
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 	const open = Boolean(anchorEl);
 	const { toggleTheme } = useAppThemeContext();
+	const { logout } = useAuthContext();
 
 	const handleClick = (event: React.MouseEvent<HTMLElement>) => {
 		setAnchorEl(event.currentTarget);
@@ -54,7 +57,7 @@ export const MenuUserOptions = () => {
 				<MenuItem onClick={handleClose} sx={{ fontSize: '.8rem' }}>Mensagens com estrela</MenuItem>
 				<MenuItem onClick={handleClose} sx={{ fontSize: '.8rem' }}>Configurações</MenuItem>
 				<MenuItem onClick={handleToggleTheme} sx={{ fontSize: '.8rem' }}>Mudar tema</MenuItem>
-				<MenuItem onClick={handleClose} sx={{ fontSize: '.8rem' }}>Sair</MenuItem>
+				<MenuItem onClick={logout} sx={{ fontSize: '.8rem' }}>Sair</MenuItem>
 			</Menu>
 		</Box>
 	);
