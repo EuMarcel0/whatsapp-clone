@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { Box, CardMedia, Icon, IconButton, Input, Paper, Typography, useTheme } from '@mui/material';
 import Picker from 'emoji-picker-react';
@@ -19,7 +19,7 @@ export const ChatMessagesZone = () => {
 	const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 	const [inputMessageValue, setInputMessageValue] = useState('');
 	const [isRecording, setIsRecording] = useState(false);
-
+	const chatRef = useRef<HTMLDivElement>(null);
 
 	const handleSpeechRecognition = () => {
 		const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -61,6 +61,12 @@ export const ChatMessagesZone = () => {
 			setShowEmojiPicker(false);
 		}
 	}, [inputMessageValue]);
+
+	useEffect(() => {
+		if (chatRef.current!.scrollHeight > chatRef.current!.offsetHeight) {
+			chatRef.current!.scrollTop = chatRef.current!.scrollHeight - chatRef.current!.offsetHeight;
+		}
+	}, [chat]);
 
 	return (
 		<Box
@@ -116,6 +122,7 @@ export const ChatMessagesZone = () => {
 				flex='1'
 				position='relative'
 				padding={theme.spacing(2)}
+				ref={chatRef}
 				sx={{
 					backgroundImage: `url(${theme.palette.background.default === '#0A1014' ? DarkChatBackground : LightChatBackground})`,
 					backgroundRepeat: 'repeat',
