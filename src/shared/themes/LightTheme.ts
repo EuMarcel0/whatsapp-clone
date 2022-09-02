@@ -17,6 +17,7 @@ export const LightTheme =  createTheme({
 		},
 		common: {
 			black: '#DEDFDD',
+			white: '#E0E0E0',
 		},
 		background: {
 			default: '#f9f9f9',

@@ -17,7 +17,7 @@ export const ChatMessagesZone = () => {
 	const { activeChat, chat, handleShowChatArea } = useChatListContext();
 	const { users } = useAuthContext();
 	const [showEmojiPicker, setShowEmojiPicker] = useState(false);
-	const [inputMessageValue, setInputMessageValue] = useState<string>('');
+	const [inputMessageValue, setInputMessageValue] = useState('');
 	const [isRecording, setIsRecording] = useState(false);
 
 
@@ -61,8 +61,6 @@ export const ChatMessagesZone = () => {
 			setShowEmojiPicker(false);
 		}
 	}, [inputMessageValue]);
-
-	console.log('chat', chat);
 
 	return (
 		<Box
@@ -129,7 +127,7 @@ export const ChatMessagesZone = () => {
 						height: '.4rem',
 					},
 					'&::-webkit-scrollbar-thumb': {
-						backgroundColor: theme.palette.background.paper,
+						backgroundColor: '#5757571e'
 					}
 				}}
 			>
@@ -266,20 +264,20 @@ export const ChatMessagesZone = () => {
 						/>
 						<AppTooltip title='Limpar'>
 							<IconButton size='small' onClick={() => setInputMessageValue('')}>
-								{(inputMessageValue.length > 0 && <Icon sx={{ fontSize: '1.2rem' }}>clear</Icon>)}
+								{(inputMessageValue && inputMessageValue.length > 0 && <Icon sx={{ fontSize: '1.2rem' }}>clear</Icon>)}
 							</IconButton>
 						</AppTooltip>
 					</Box>
 				</Box>
 				<Box display='flex' alignItems='center' justifyContent='center' width={theme.spacing(7)}>
-					{(inputMessageValue.length === 0 &&
+					{(inputMessageValue?.length === 0 &&
 						<AppTooltip title='Toque para falar'>
 							<IconButton onClick={handleSpeechRecognition}>
 								<Icon sx={{ fontSize: '1.4rem', color: isRecording ? '#FF4E44' : '' }}>mic</Icon>
 							</IconButton>
 						</AppTooltip>
 					)}
-					{(inputMessageValue.length > 0 &&
+					{(inputMessageValue && inputMessageValue.length > 0 &&
 						<AppTooltip title='Enviar'>
 							<IconButton onClick={handleSendMessage}>
 								<Icon sx={{ fontSize: '1.4rem' }}>send</Icon>
