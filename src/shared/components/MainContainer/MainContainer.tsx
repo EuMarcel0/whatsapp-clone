@@ -36,7 +36,6 @@ export const MainContainer = () => {
 	const handleHideNewContactList = () => {
 		setShowNewContactList(false);
 	};
-	console.log('Chat list', chatListItem);
 	return (
 		<Box
 			width='100%'

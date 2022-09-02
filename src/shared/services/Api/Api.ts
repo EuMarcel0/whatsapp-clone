@@ -7,9 +7,6 @@ import { dataBase } from '../Firebase/FirebaseConfig';
 import { Users } from '../../Types/Types';
 import { ChatListProps } from '../../contexts/ChatsTypes';
 
-
-
-
 const addUserInDB = async (user: any) => {
 	try{
 		await dataBase.collection('users').doc(user.user.uid).set({
@@ -43,23 +40,23 @@ const addNewChat = async (user1: User, user2: Users) => {
 		messages: [],
 		users: [user1.uid, user2.uid],
 	});
-	dataBase.collection('users').doc(user1.uid).update({
+	dataBase.collection('users').doc(user1.uid).set({
 		chats: firebase.firestore.FieldValue.arrayUnion({
 			chatId: newChat.id,
 			title: user2.name,
 			image: user2.avatar,
 			with: user2.uid,
 		})
-	});
+	}, { merge: true });
 
-	dataBase.collection('users').doc(user2.uid).update({
+	dataBase.collection('users').doc(user2.uid).set({
 		chats: firebase.firestore.FieldValue.arrayUnion({
 			chatId: newChat.id,
 			title: user1.displayName,
 			image: user1.photoURL,
 			with: user1.uid,
 		})
-	});
+	}, { merge: true});
 };
 
 const onChatList = (uid: string, setChatListItem: React.Dispatch<React.SetStateAction<ChatListProps[]>>) => {
@@ -73,9 +70,34 @@ const onChatList = (uid: string, setChatListItem: React.Dispatch<React.SetStateA
 	});
 };
 
+const onChatContent = (chatId: string | undefined, setChat: React.Dispatch<React.SetStateAction<any>>) => {
+	return dataBase.collection('chats').doc(chatId).onSnapshot((doc) => {
+		if(doc.exists){
+			const data = doc.data();
+			if(data?.messages){
+				setChat(data?.messages);
+			}
+		}
+	});
+};
+
+const sendMessage = (chatData: any, userId: string, type: string, body: any) => {
+	const now = new Date();
+	dataBase.collection('chats').doc(chatData.chatId).update({
+		messages: firebase.firestore.FieldValue.arrayUnion({
+			type,
+			author: userId,
+			body,
+			date: now,
+		})
+	});
+};
+
 export const Api = {
 	addUserInDB,
 	getNewContactList,
 	addNewChat,
-	onChatList
+	onChatList,
+	onChatContent,
+	sendMessage,
 };

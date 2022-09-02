@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import { Box, CardMedia, Icon, IconButton, Input, Paper, Typography, useTheme } from '@mui/material';
 import Picker from 'emoji-picker-react';
@@ -9,6 +9,7 @@ import { useChatListContext } from '../../../contexts/ChatsContext';
 import { useAuthContext } from '../../../contexts/AuthContext';
 import { MenuChatZoneOptions } from './MenuChatZoneOptions';
 import { AppTooltip } from '../../AppTootip/AppTootip';
+import { Api } from '../../../services/Api/Api';
 
 
 export const ChatMessagesZone = () => {
@@ -46,6 +47,22 @@ export const ChatMessagesZone = () => {
 			setInputMessageValue(inputMessageValue + emojiObject.emoji);
 		}
 	};
+
+	const handleKeyUp = (e: any) => {
+		if (e.key === 'Enter' || e.key === 'NumpadEnter') {
+			handleSendMessage();
+		}
+	};
+
+	const handleSendMessage = useCallback(() => {
+		if (inputMessageValue !== '') {
+			Api.sendMessage(activeChat, users.uid, 'text', inputMessageValue);
+			setInputMessageValue('');
+			setShowEmojiPicker(false);
+		}
+	}, [inputMessageValue]);
+
+	console.log('chat', chat);
 
 	return (
 		<Box
@@ -102,6 +119,9 @@ export const ChatMessagesZone = () => {
 				position='relative'
 				padding={theme.spacing(2)}
 				sx={{
+					backgroundImage: `url(${theme.palette.background.default === '#0A1014' ? DarkChatBackground : LightChatBackground})`,
+					backgroundRepeat: 'repeat',
+					backgroundSize: 'cover',
 					overflowX: 'hidden',
 					overflowY: 'auto',
 					'&::-webkit-scrollbar': {
@@ -113,22 +133,11 @@ export const ChatMessagesZone = () => {
 					}
 				}}
 			>
-				<img
-					src={theme.palette.background.default === '#0A1014' ? DarkChatBackground : LightChatBackground}
-					style={{
-						position: 'absolute',
-						top: '0',
-						left: '0',
-						right: '0',
-						height: '100%',
-						width: '100%',
-						zIndex: -1,
-					}}
-				/>
 				{chat.map((item, index) => (
 					<Box
 						key={index}
 						display='flex'
+						justifyContent={users.uid === item.author ? 'flex-end' : 'flex-start'}
 						paddingX={theme.spacing(10)}
 					>
 						<Box
@@ -141,16 +150,19 @@ export const ChatMessagesZone = () => {
 							marginBottom={theme.spacing(.5)}
 						>
 							<Box
+								display='flex'
 								sx={{
 									'&::before': {
 										content: '""',
 										position: 'absolute',
 										top: '2px',
-										left: '-.3rem',
+										left: users.uid === item.author ? '' : '-0.3rem',
+										right: users.uid === item.author ? '-0.3rem' : '',
 										width: '.4rem',
 										height: '.7rem',
 										backgroundColor: theme.palette.background.paper,
-										clipPath: 'polygon(0 0, 100% 100%, 100% 1%)',
+										clipPath: users.uid === item.author ? 'polygon(100% 0, 0 0, 0 100%)' : 'polygon(0 0, 100% 100%, 100% 1%)',
+
 									}
 								}}
 							>
@@ -159,7 +171,7 @@ export const ChatMessagesZone = () => {
 								marginRight={theme.spacing(1)}
 							>
 								<Typography variant='body2' color='textPrimary' fontWeight={'400'} sx={{ fontSize: '.7rem' }}>
-									{item.lastMessage}
+									{item.body}
 								</Typography>
 							</Box>
 							<Box
@@ -170,7 +182,7 @@ export const ChatMessagesZone = () => {
 								justifyContent='flex-end'
 							>
 								<Typography variant='caption' color='textSecondary' fontWeight={'200'} sx={{ fontSize: '.6rem', mb: '-20px' }}>
-									{item.lastMessageDate}
+									22:00
 								</Typography>
 							</Box>
 						</Box>
@@ -250,6 +262,7 @@ export const ChatMessagesZone = () => {
 							onChange={(e) => setInputMessageValue(e.target.value)}
 							value={inputMessageValue}
 							autoFocus
+							onKeyDown={handleKeyUp}
 						/>
 						<AppTooltip title='Limpar'>
 							<IconButton size='small' onClick={() => setInputMessageValue('')}>
@@ -268,7 +281,7 @@ export const ChatMessagesZone = () => {
 					)}
 					{(inputMessageValue.length > 0 &&
 						<AppTooltip title='Enviar'>
-							<IconButton onClick={() => console.log('Send message')}>
+							<IconButton onClick={handleSendMessage}>
 								<Icon sx={{ fontSize: '1.4rem' }}>send</Icon>
 							</IconButton>
 						</AppTooltip>

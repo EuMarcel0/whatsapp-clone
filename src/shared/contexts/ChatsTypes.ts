@@ -9,6 +9,13 @@ export interface ChatListProps {
 	title: string;
 	width: string;
 }
+
+export interface ChatProps {
+	author: string;
+	body: string;
+	date: any;
+	type: string;
+}
 export interface NewContactProps{
 	id: number;
 	image: string;
@@ -31,7 +38,7 @@ export interface ActiveChatProps {
 export interface ChatListItemContextProps {
 	chatListItem: ChatListProps[];
 	newContact: Users[];
-	chat: ChatListProps[];
+	chat: ChatProps[];
 	activeChat: ActiveChatProps | undefined;
 	showChatArea: boolean;
 	handleSetActiveChat: (data: ChatListProps[], id: number) => void;

@@ -5,6 +5,7 @@ import { ChatsProvider } from './shared/contexts/ChatsContext';
 import { AppThemeProvider } from './shared/contexts/ThemeContext';
 
 export const App = () => {
+	console.log('render App');
 	return (
 		<AppThemeProvider>
 			<AuthProvider>

@@ -10,7 +10,7 @@ interface ChatListItemProps {
 }
 export const ChatListItem = ({ data, onClick, active }: ChatListItemProps) => {
 	const theme = useTheme();
-	const { showChatArea } = useChatListContext();
+	const { showChatArea, chat } = useChatListContext();
 	const [date, setDate] = useState('');
 
 	useEffect(() => {
@@ -22,9 +22,7 @@ export const ChatListItem = ({ data, onClick, active }: ChatListItemProps) => {
 			minutes < 10 ? '0' + minutes : minutes;
 			setDate(`${hours}:${minutes}`);
 		}
-
-
-	}, []);
+	}, [date]);
 
 	return (
 		<Box
@@ -48,7 +46,7 @@ export const ChatListItem = ({ data, onClick, active }: ChatListItemProps) => {
 			onClick={onClick}
 		>
 			<Box height='100%' >
-				<AppTooltip title={data.name}>
+				<AppTooltip title={data.title}>
 					<CardMedia
 						component='img'
 						src={data.image}
@@ -78,18 +76,16 @@ export const ChatListItem = ({ data, onClick, active }: ChatListItemProps) => {
 					<Typography variant='body2' color='textSecondary' sx={{ fontSize: '.8rem' }}>{date}</Typography>
 				</Box>
 				<Box display='flex' alignItems='center' >
-					<AppTooltip title={data.lastMessage} >
-						<Typography
-							variant='body2'
-							color='textSecondary'
-							overflow='hidden'
-							whiteSpace='nowrap'
-							textOverflow='ellipsis'
-							sx={{ fontSize: '.7rem' }}
-						>
-							{data.lastMessage}
-						</Typography>
-					</AppTooltip>
+					<Typography
+						variant='body2'
+						color='textSecondary'
+						overflow='hidden'
+						whiteSpace='nowrap'
+						textOverflow='ellipsis'
+						sx={{ fontSize: '.7rem' }}
+					>
+						Last Message
+					</Typography>
 				</Box>
 			</Box>
 		</Box>
