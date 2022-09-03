@@ -10,3 +10,10 @@ export interface User {
 	name: string;
 	avatar: string;
 }
+
+export interface Message {
+	author: string;
+	body: string;
+	date: any;
+	type: string;
+}

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState, useMemo } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { Box, CardMedia, Icon, IconButton, Input, Paper, Typography, useTheme } from '@mui/material';
 import Picker from 'emoji-picker-react';
@@ -10,6 +10,7 @@ import { useAuthContext } from '../../../contexts/AuthContext';
 import { MenuChatZoneOptions } from './MenuChatZoneOptions';
 import { AppTooltip } from '../../AppTootip/AppTootip';
 import { Api } from '../../../services/Api/Api';
+import { ChatWindow } from './ChatWindow';
 
 
 export const ChatMessagesZone = () => {
@@ -19,8 +20,6 @@ export const ChatMessagesZone = () => {
 	const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 	const [inputMessageValue, setInputMessageValue] = useState('');
 	const [isRecording, setIsRecording] = useState(false);
-	const [date, setDate] = useState<any>('');
-	const [newDate, setNewDate] = useState('');
 	const chatRef = useRef<HTMLDivElement>(null);
 
 	const handleSpeechRecognition = () => {
@@ -144,59 +143,7 @@ export const ChatMessagesZone = () => {
 				}}
 			>
 				{chat.map((item, index) => (
-					<Box
-						key={index}
-						display='flex'
-						justifyContent={users.uid === item.author ? 'flex-end' : 'flex-start'}
-						paddingX={theme.spacing(10)}
-					>
-						<Box
-							component={Paper}
-							display='flex'
-							maxWidth='70%'
-							position='relative'
-							elevation={0}
-							padding={theme.spacing(1.5)}
-							marginBottom={theme.spacing(.5)}
-						>
-							<Box
-								display='flex'
-								sx={{
-									'&::before': {
-										content: '""',
-										position: 'absolute',
-										top: '2px',
-										left: users.uid === item.author ? '' : '-0.3rem',
-										right: users.uid === item.author ? '-0.3rem' : '',
-										width: '.4rem',
-										height: '.7rem',
-										backgroundColor: theme.palette.background.paper,
-										clipPath: users.uid === item.author ? 'polygon(100% 0, 0 0, 0 100%)' : 'polygon(0 0, 100% 100%, 100% 1%)',
-
-									}
-								}}
-							>
-							</Box>
-							<Box
-								marginRight={theme.spacing(1)}
-							>
-								<Typography variant='body2' color='textPrimary' fontWeight={'400'} sx={{ fontSize: '.7rem' }}>
-									{item.body}
-								</Typography>
-							</Box>
-							<Box
-								marginLeft={theme.spacing(1)}
-								marginRight='-7px'
-								display='flex'
-								alignItems='center'
-								justifyContent='flex-end'
-							>
-								<Typography variant='caption' color='textSecondary' fontWeight={'200'} sx={{ fontSize: '.6rem', mb: '-20px' }}>
-
-								</Typography>
-							</Box>
-						</Box>
-					</Box>
+					<ChatWindow message={item} key={index} />
 				))}
 			</Box>
 			<Box
