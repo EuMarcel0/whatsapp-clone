@@ -2,7 +2,7 @@ import { Box, Icon, IconButton, Input, Paper, useTheme } from '@mui/material';
 import { AppTooltip } from '../../AppTootip/AppTootip';
 
 interface SearchInputContactProps {
-	onClick: () => void;
+	onClick?: () => void;
 	value: string;
 	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	handleClearSearch: () => void;

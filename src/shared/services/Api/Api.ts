@@ -35,10 +35,12 @@ const getNewContactList = async (userId: string) => {
 };
 
 const addNewChat = async (user1: User, user2: Users) => {
+
 	const newChat = await dataBase.collection('chats').add({
 		messages: [],
 		users: [user1.uid, user2.uid],
 	});
+
 	dataBase.collection('users').doc(user1.uid).set({
 		chats: firebase.firestore.FieldValue.arrayUnion({
 			chatId: newChat.id,

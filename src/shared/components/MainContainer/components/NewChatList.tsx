@@ -1,15 +1,15 @@
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 
-import { Box, CardMedia, Icon, IconButton, Typography, useTheme } from '@mui/material';
+import { Box, Icon, IconButton, Typography, useTheme } from '@mui/material';
 import { shade } from 'polished';
 
 import { useChatListContext } from '../../../contexts/ChatsContext';
 import { useAuthContext } from '../../../contexts/AuthContext';
+import { ChatListProps } from '../../../contexts/ChatsTypes';
 import { SearchInputContact } from './SearchInputContact';
 import { AppTooltip } from '../../AppTootip/AppTootip';
+import { NewChatListItem } from './NewChatListItem';
 import { Api } from '../../../services/Api/Api';
-import { Users } from '../../../Types/Types';
-import { ChatListProps } from '../../../contexts/ChatsTypes';
 
 interface NewChatListProps {
 	showContactList: boolean;
@@ -23,16 +23,8 @@ interface NewChatListProps {
 
 export const NewChatList = ({ showContactList, hideContactList, value, onChange, handleClearSearch, filteredData, searchValue }: NewChatListProps) => {
 	const theme = useTheme();
-	const { newContact } = useChatListContext();
+	const { newContact, activeChat } = useChatListContext();
 	const { users } = useAuthContext();
-	const [copyNewContactListItem, setCopyNewContactListItem] = useState<Users[]>(newContact);
-
-	const handleOrderContacts = useCallback(() => {
-		const copyNewContactList = [...newContact];
-		copyNewContactList.sort((a, b) => (a.name > b.name ? 1 : -1));
-		setCopyNewContactListItem(copyNewContactList);
-		return copyNewContactList;
-	}, [users, newContact]);
 
 	const filteredContactList = value.length > 0 ? newContact.filter(item => item.name.toLocaleLowerCase().includes(value)) : [];
 
@@ -92,7 +84,6 @@ export const NewChatList = ({ showContactList, hideContactList, value, onChange,
 				}}
 			>
 				<SearchInputContact
-					onClick={handleOrderContacts}
 					value={value}
 					onChange={onChange}
 					handleClearSearch={handleClearSearch}
@@ -128,49 +119,11 @@ export const NewChatList = ({ showContactList, hideContactList, value, onChange,
 						}}
 					>
 						{filteredContactList.map((contact, index) => (
-							<Box
+							<NewChatListItem
 								key={index}
-								paddingX={theme.spacing(2.8)}
-								display='flex'
-								alignItems='center'
-								height={theme.spacing(9)}
-								gap={2}
-								sx={{
-									cursor: 'pointer',
-									':hover': {
-										backgroundColor: theme.palette.action.hover,
-									},
-									'&.active': {
-										backgroundColor: theme.palette.info.main,
-									},
-									'&.inactive': {
-										backgroundColor: 'transparent',
-									}
-								}}
+								contact={contact}
 								onClick={() => handleAddNewChat(contact)}
-							>
-								<Box
-									className='avatar'
-									height='100%'
-									display='flex'
-									alignItems='center'
-								>
-									<CardMedia
-										component='img'
-										src={contact.avatar}
-										sx={{
-											width: theme.spacing(6.1),
-											height: theme.spacing(6.1),
-											borderRadius: '50%',
-										}}
-									/>
-								</Box>
-								<Box width='100%' height='100%' borderBottom={'1px solid ' + theme.palette.action.hover} >
-									<Box height='100%' display='flex' alignItems='center' justifyContent='space-between'>
-										<Typography variant='subtitle1' color='textPrimary' fontWeight={'400'}>{contact.name}</Typography>
-									</Box>
-								</Box>
-							</Box>
+							/>
 						))}
 					</Box>
 				) : (
@@ -179,7 +132,7 @@ export const NewChatList = ({ showContactList, hideContactList, value, onChange,
 						display='flex'
 						flexDirection='column'
 						justifyContent='flex-start'
-						paddingTop={theme.spacing(5.5)}
+						paddingTop={theme.spacing(6.8)}
 						sx={{
 							overflowY: 'auto',
 							'&::-webkit-scrollbar': {
@@ -192,49 +145,11 @@ export const NewChatList = ({ showContactList, hideContactList, value, onChange,
 						}}
 					>
 						{newContact.map((contact, index) => (
-							<Box
+							<NewChatListItem
 								key={index}
-								paddingX={theme.spacing(2.8)}
-								display='flex'
-								alignItems='center'
-								height={theme.spacing(9)}
-								gap={2}
-								sx={{
-									cursor: 'pointer',
-									':hover': {
-										backgroundColor: theme.palette.action.hover,
-									},
-									'&.active': {
-										backgroundColor: theme.palette.info.main,
-									},
-									'&.inactive': {
-										backgroundColor: 'transparent',
-									}
-								}}
+								contact={contact}
 								onClick={() => handleAddNewChat(contact)}
-							>
-								<Box
-									className='avatar'
-									height='100%'
-									display='flex'
-									alignItems='center'
-								>
-									<CardMedia
-										component='img'
-										src={contact.avatar}
-										sx={{
-											width: theme.spacing(6.1),
-											height: theme.spacing(6.1),
-											borderRadius: '50%',
-										}}
-									/>
-								</Box>
-								<Box width='100%' height='100%' borderBottom={'1px solid ' + theme.palette.action.hover} >
-									<Box height='100%' display='flex' alignItems='center' justifyContent='space-between'>
-										<Typography variant='subtitle1' color='textPrimary' fontWeight={'400'}>{contact.name}</Typography>
-									</Box>
-								</Box>
-							</Box>
+							/>
 						))}
 					</Box>
 				)}
