@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Box, Typography, useTheme, Paper } from '@mui/material';
 import { useAuthContext } from '../../../contexts/AuthContext';
 import { Message } from '../../../Types/Types';
@@ -12,7 +12,7 @@ export const ChatWindow = ({ message }: ChatWindowProps) => {
 	const { users } = useAuthContext();
 	const [date, setDate] = useState('');
 
-	useEffect(() => {
+	const messageDate = useMemo(() => {
 		if (message.date) {
 			const newDate = new Date(message.date.seconds * 1000);
 			const hours = newDate.getHours();

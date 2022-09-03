@@ -31,7 +31,6 @@ const getNewContactList = async (userId: string) => {
 			});
 		}
 	});
-	console.log(list);
 	return list;
 };
 

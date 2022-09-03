@@ -1,28 +1,26 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { Box, CardMedia, Icon, IconButton, Input, Paper, Typography, useTheme } from '@mui/material';
+import { Box, CardMedia, Icon, IconButton, Paper, Typography, useTheme, CircularProgress } from '@mui/material';
 import Picker from 'emoji-picker-react';
 
 import LightChatBackground from '../../../../assets/images/bg_light.png';
 import DarkChatBackground from '../../../../assets/images/bg_dark.png';
 import { useChatListContext } from '../../../contexts/ChatsContext';
-import { useAuthContext } from '../../../contexts/AuthContext';
 import { MenuChatZoneOptions } from './MenuChatZoneOptions';
 import { AppTooltip } from '../../AppTootip/AppTootip';
-import { Api } from '../../../services/Api/Api';
+import { ChatWindowInput } from './ChatWindowInput';
 import { ChatWindow } from './ChatWindow';
 
 
 export const ChatMessagesZone = () => {
 	const theme = useTheme();
-	const { activeChat, chat, handleShowChatArea, usersInChat } = useChatListContext();
-	const { users } = useAuthContext();
+	const { activeChat, chat, handleShowChatArea } = useChatListContext();
 	const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 	const [inputMessageValue, setInputMessageValue] = useState('');
 	const [isRecording, setIsRecording] = useState(false);
 	const chatRef = useRef<HTMLDivElement>(null);
 
-	const handleSpeechRecognition = () => {
+	const handleSpeechRecognition = useCallback(() => {
 		const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 		const recognition = SpeechRecognition ? new SpeechRecognition() : null;
 
@@ -41,34 +39,21 @@ export const ChatMessagesZone = () => {
 			setInputMessageValue(transcript);
 		};
 		recognition.start();
-	};
+	}, []);
 
 	const handleEmojiClick = (_: any, emojiObject: any) => {
 		if (emojiObject.emoji) {
 			setInputMessageValue(inputMessageValue + emojiObject.emoji);
 		}
 	};
-
-	const handleKeyUp = (e: any) => {
-		if (e.key === 'Enter' || e.key === 'NumpadEnter') {
-			handleSendMessage();
-		}
-	};
-
-	const handleSendMessage = useCallback(() => {
-		if (inputMessageValue !== '') {
-			Api.sendMessage(activeChat, users.uid, 'text', inputMessageValue, usersInChat);
-			setInputMessageValue('');
-			setShowEmojiPicker(false);
-		}
-	}, [inputMessageValue]);
-
 	/**
 	 * Scroll to bottom when new message is sent
 	 */
 	useEffect(() => {
-		if (chatRef.current!.scrollHeight > chatRef.current!.offsetHeight) {
-			chatRef.current!.scrollTop = chatRef.current!.scrollHeight - chatRef.current!.offsetHeight;
+		if (chatRef.current?.scrollHeight ?
+			chatRef.current?.scrollHeight > chatRef.current!.offsetHeight : undefined) {
+			chatRef.current?.scrollHeight ?
+				chatRef.current.scrollTop = chatRef.current!.scrollHeight - chatRef.current!.offsetHeight : undefined;
 		}
 	}, [chat]);
 
@@ -193,56 +178,14 @@ export const ChatMessagesZone = () => {
 						</IconButton>
 					</AppTooltip>
 				</Box>
-				<Box flex='1'>
-					<Box
-						flex='1'
-						display='flex'
-						alignItems='center'
-						justifyContent='start'
-						bgcolor={theme.palette.info.light}
-						height={theme.spacing(4)}
-						borderRadius={theme.spacing(1)}
-						paddingX={theme.spacing(1)}
-						paddingY={theme.spacing(2.6)}
-					>
-						<Input
-							size='small'
-							fullWidth
-							placeholder='Digite uma mensagem'
-							sx={{
-								fontSize: '.9rem',
-								paddingTop: theme.spacing(1),
-								paddingBottom: theme.spacing(1),
-								paddingLeft: theme.spacing(1.5),
-								paddingRight: theme.spacing(1.5),
-							}}
-							onChange={(e) => setInputMessageValue(e.target.value)}
-							value={inputMessageValue}
-							onKeyDown={handleKeyUp}
-						/>
-						<AppTooltip title='Limpar'>
-							<IconButton size='small' onClick={() => setInputMessageValue('')}>
-								{(inputMessageValue && inputMessageValue.length > 0 && <Icon sx={{ fontSize: '1.2rem' }}>clear</Icon>)}
-							</IconButton>
-						</AppTooltip>
-					</Box>
-				</Box>
-				<Box display='flex' alignItems='center' justifyContent='center' width={theme.spacing(7)}>
-					{(inputMessageValue?.length === 0 &&
-						<AppTooltip title='Toque para falar'>
-							<IconButton onClick={handleSpeechRecognition}>
-								<Icon sx={{ fontSize: '1.4rem', color: isRecording ? '#FF4E44' : '' }}>mic</Icon>
-							</IconButton>
-						</AppTooltip>
-					)}
-					{(inputMessageValue && inputMessageValue.length > 0 &&
-						<AppTooltip title='Enviar'>
-							<IconButton onClick={handleSendMessage}>
-								<Icon sx={{ fontSize: '1.4rem' }}>send</Icon>
-							</IconButton>
-						</AppTooltip>
-					)}
-				</Box>
+				<ChatWindowInput
+					value={inputMessageValue}
+					onChange={(e) => setInputMessageValue(e.target.value)}
+					speechRecognition={handleSpeechRecognition}
+					isRecording={isRecording}
+					setInputMessageValue={setInputMessageValue}
+					setShowEmojiPicker={setShowEmojiPicker}
+				/>
 			</Box>
 		</Box >
 	);
