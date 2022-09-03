@@ -9,7 +9,6 @@ export interface ChatListProps {
 	title: string;
 	width: string;
 }
-
 export interface ChatProps {
 	author: string;
 	body: string;
@@ -28,6 +27,10 @@ export interface UsersProps {
 	lastMessage: string;
 	date: string;
 }
+
+export interface UsersInChat {
+	uid: string;
+}
 export interface ActiveChatProps {
 	chatId: string;
 	image: string;
@@ -38,6 +41,7 @@ export interface ActiveChatProps {
 export interface ChatListItemContextProps {
 	chatListItem: ChatListProps[];
 	newContact: Users[];
+	usersInChat: UsersInChat[];
 	chat: ChatProps[];
 	activeChat: ActiveChatProps | undefined;
 	showChatArea: boolean;

@@ -10,7 +10,7 @@ interface ChatListItemProps {
 }
 export const ChatListItem = ({ data, onClick, active }: ChatListItemProps) => {
 	const theme = useTheme();
-	const { showChatArea, chat } = useChatListContext();
+	const { showChatArea } = useChatListContext();
 	const [date, setDate] = useState('');
 
 	useEffect(() => {
@@ -22,7 +22,7 @@ export const ChatListItem = ({ data, onClick, active }: ChatListItemProps) => {
 			minutes < 10 ? '0' + minutes : minutes;
 			setDate(`${hours}:${minutes}`);
 		}
-	}, [date]);
+	}, [date, data.lastMessageDate]);
 
 	return (
 		<Box
@@ -84,7 +84,7 @@ export const ChatListItem = ({ data, onClick, active }: ChatListItemProps) => {
 						textOverflow='ellipsis'
 						sx={{ fontSize: '.7rem' }}
 					>
-						Last Message
+						{data.lastMessage}
 					</Typography>
 				</Box>
 			</Box>

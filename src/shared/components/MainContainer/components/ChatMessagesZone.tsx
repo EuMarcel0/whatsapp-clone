@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState, useMemo } from 'react';
 
 import { Box, CardMedia, Icon, IconButton, Input, Paper, Typography, useTheme } from '@mui/material';
 import Picker from 'emoji-picker-react';
@@ -14,11 +14,13 @@ import { Api } from '../../../services/Api/Api';
 
 export const ChatMessagesZone = () => {
 	const theme = useTheme();
-	const { activeChat, chat, handleShowChatArea } = useChatListContext();
+	const { activeChat, chat, handleShowChatArea, usersInChat } = useChatListContext();
 	const { users } = useAuthContext();
 	const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 	const [inputMessageValue, setInputMessageValue] = useState('');
 	const [isRecording, setIsRecording] = useState(false);
+	const [date, setDate] = useState<any>('');
+	const [newDate, setNewDate] = useState('');
 	const chatRef = useRef<HTMLDivElement>(null);
 
 	const handleSpeechRecognition = () => {
@@ -56,12 +58,15 @@ export const ChatMessagesZone = () => {
 
 	const handleSendMessage = useCallback(() => {
 		if (inputMessageValue !== '') {
-			Api.sendMessage(activeChat, users.uid, 'text', inputMessageValue);
+			Api.sendMessage(activeChat, users.uid, 'text', inputMessageValue, usersInChat);
 			setInputMessageValue('');
 			setShowEmojiPicker(false);
 		}
 	}, [inputMessageValue]);
 
+	/**
+	 * Scroll to bottom when new message is sent
+	 */
 	useEffect(() => {
 		if (chatRef.current!.scrollHeight > chatRef.current!.offsetHeight) {
 			chatRef.current!.scrollTop = chatRef.current!.scrollHeight - chatRef.current!.offsetHeight;
@@ -187,7 +192,7 @@ export const ChatMessagesZone = () => {
 								justifyContent='flex-end'
 							>
 								<Typography variant='caption' color='textSecondary' fontWeight={'200'} sx={{ fontSize: '.6rem', mb: '-20px' }}>
-									22:00
+
 								</Typography>
 							</Box>
 						</Box>
@@ -266,7 +271,6 @@ export const ChatMessagesZone = () => {
 							}}
 							onChange={(e) => setInputMessageValue(e.target.value)}
 							value={inputMessageValue}
-							autoFocus
 							onKeyDown={handleKeyUp}
 						/>
 						<AppTooltip title='Limpar'>

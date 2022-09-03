@@ -3,9 +3,9 @@ import { User } from 'firebase/auth';
 import 'firebase/compat/firestore';
 import 'firebase/compat/auth';
 
+import { ActiveChatProps, ChatListProps, ChatProps, UsersInChat } from '../../contexts/ChatsTypes';
 import { dataBase } from '../Firebase/FirebaseConfig';
 import { Users } from '../../Types/Types';
-import { ChatListProps } from '../../contexts/ChatsTypes';
 
 const addUserInDB = async (user: any) => {
 	try{
@@ -64,26 +64,41 @@ const onChatList = (uid: string, setChatListItem: React.Dispatch<React.SetStateA
 		if(doc.exists){
 			const data = doc.data();
 			if(data?.chats){
+				const chats = [...data.chats];
+				chats.sort((a, b) => {
+					if(a.lastMessageDate === undefined){
+						return -1;
+					}
+					if(b.lastMessageDate === undefined){
+						return -1;
+					}
+					if(a.lastMessageDate.seconds < b.lastMessageDate.seconds){
+						return 1;
+					}else{
+						return -1;
+					}
+				});
 				setChatListItem(data?.chats);
 			}
 		}
 	});
 };
 
-const onChatContent = (chatId: string | undefined, setChat: React.Dispatch<React.SetStateAction<any>>) => {
+const onChatContent = (chatId: string | undefined, setChat: React.Dispatch<React.SetStateAction<ChatProps[]>>, setUsersInChat: React.Dispatch<React.SetStateAction<UsersInChat[]>>) => {
 	return dataBase.collection('chats').doc(chatId).onSnapshot((doc) => {
 		if(doc.exists){
 			const data = doc.data();
 			if(data?.messages){
 				setChat(data?.messages);
+				setUsersInChat(data?.users);
 			}
 		}
 	});
 };
 
-const sendMessage = (chatData: any, userId: string, type: string, body: any) => {
+const sendMessage = async (chatData: ActiveChatProps | undefined, userId: string, type: string, body: string, usersInChat: any) => {
 	const now = new Date();
-	dataBase.collection('chats').doc(chatData.chatId).update({
+	dataBase.collection('chats').doc(chatData?.chatId).update({
 		messages: firebase.firestore.FieldValue.arrayUnion({
 			type,
 			author: userId,
@@ -91,6 +106,21 @@ const sendMessage = (chatData: any, userId: string, type: string, body: any) => 
 			date: now,
 		})
 	});
+	for( const users in usersInChat){
+		const user = await dataBase.collection('users').doc(usersInChat[users]).get();
+		const userData = user.data();
+		if(userData?.chats){
+
+			const chats = [...userData.chats];
+			for(const i in chats){
+				if(chats[i].chatId === chatData?.chatId){
+					chats[i].lastMessage = body;
+					chats[i].lastMessageDate = now;
+				}
+			}
+			await dataBase.collection('users').doc(usersInChat[users]).update({ chats });
+		}
+	}
 };
 
 export const Api = {

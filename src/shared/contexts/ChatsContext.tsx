@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useState } from 'react';
-import { ChatListItemContextProps, ChatListProps, ChatListItemProviderProps, ChatProps } from './ChatsTypes';
+import { ChatListItemContextProps, ChatListProps, ChatListItemProviderProps, ChatProps, UsersInChat } from './ChatsTypes';
 import { useAuthContext } from './AuthContext';
 import { Api } from '../services/Api/Api';
 import { Users } from '../Types/Types';
@@ -7,11 +7,12 @@ import { Users } from '../Types/Types';
 export const ChatContext = createContext({} as ChatListItemContextProps);
 
 export const ChatsProvider = ({ children }: ChatListItemProviderProps) => {
-	const [showChatArea, setShowChatArea] = useState(false);
 	const [chatListItem, setChatListItem] = useState<ChatListProps[]>([]);
+	const [usersInChat, setUsersInChat] = useState<UsersInChat[]>([]);
 	const [activeChat, setActiveChat] = useState<ChatListProps>();
-	const [chat, setChat] = useState<ChatProps[]>([]);
+	const [showChatArea, setShowChatArea] = useState(false);
 	const [newChat, setNewChat] = useState<Users[]>([]);
+	const [chat, setChat] = useState<ChatProps[]>([]);
 	const { users } = useAuthContext();
 
 	const handleSetActiveChat = useCallback((data: ChatListProps[], id: any) => {
@@ -24,7 +25,7 @@ export const ChatsProvider = ({ children }: ChatListItemProviderProps) => {
 	}, []);
 
 	/**
-	 * Get all users in database and set in newChat state
+	 * Get all users in database and set in newContact state
 	 */
 	useEffect(() => {
 		const newContactList = async () => {
@@ -37,7 +38,7 @@ export const ChatsProvider = ({ children }: ChatListItemProviderProps) => {
 	}, [users]);
 
 	/**
-	 * Get all chats in database and set in chat state
+	 * Get all chats in database and set in chatList state
 	 */
 	useEffect(() => {
 		if (users.uid !== null) {
@@ -51,7 +52,7 @@ export const ChatsProvider = ({ children }: ChatListItemProviderProps) => {
 	 */
 	useEffect(() => {
 		setChat([]);
-		const unsub = Api.onChatContent(activeChat?.chatId, setChat);
+		const unsub = Api.onChatContent(activeChat?.chatId, setChat, setUsersInChat);
 		return unsub;
 	}, [activeChat?.chatId]);
 
@@ -60,6 +61,7 @@ export const ChatsProvider = ({ children }: ChatListItemProviderProps) => {
 			chatListItem,
 			newContact: newChat,
 			chat,
+			usersInChat,
 			activeChat,
 			showChatArea,
 			handleSetActiveChat,
