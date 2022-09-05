@@ -15,11 +15,11 @@ const ChatWindow = ({ message }: ChatWindowProps) => {
 	useEffect(() => {
 		if (message.date) {
 			const newDate = new Date(message.date.seconds * 1000);
-			let hours = newDate.getHours();
-			let minutes = newDate.getMinutes();
-			hours = hours < 10 ? Number('0') + hours : hours;
-			minutes = minutes < 10 ? Number('0') + minutes : minutes;
-			setDate(`${hours}:${minutes}`);
+			const hours = newDate.getHours();
+			const minutes = newDate.getMinutes();
+			hours < 10 ? '0' + hours : hours;
+			minutes < 10 ? '0' + minutes : minutes;
+			setDate(hours < 10 ? '0' + hours : hours + ':' + (minutes < 10 ? '0' + minutes : minutes));
 		}
 	}, [message.date]);
 

@@ -20,7 +20,7 @@ export const ChatListItem = ({ data, onClick, active }: ChatListItemProps) => {
 			const minutes = date.getMinutes();
 			hours < 10 ? '0' + hours : hours;
 			minutes < 10 ? '0' + minutes : minutes;
-			setDate(`${hours}:${minutes}`);
+			setDate(hours < 10 ? '0' + hours : hours + ':' + (minutes < 10 ? '0' + minutes : minutes));
 		}
 	}, [data.lastMessageDate]);
 
