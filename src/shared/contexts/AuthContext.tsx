@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useState } from 'react';
-import { FacebookAuthProvider, signInWithPopup, User } from 'firebase/auth';
+import { FacebookAuthProvider, GoogleAuthProvider, signInWithPopup, User } from 'firebase/auth';
 
 import { AuthContextProps, AuthProviderProps } from './AuthTypes';
 import { auth } from '../services/Firebase/FirebaseConfig';
@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
 
 	const handleLoginWithGoogle = useCallback(() => {
-		const provider = new FacebookAuthProvider();
+		const provider = new GoogleAuthProvider();
 		signInWithPopup(auth, provider)
 			.then((response) => {
 				if (response.user) {

@@ -31,6 +31,7 @@ const ChatWindow = ({ message }: ChatWindowProps) => {
 		>
 			<Box
 				component={Paper}
+				bgcolor={users.uid === message.author ? theme.palette.info.dark : 'secondary.main'}
 				display='flex'
 				maxWidth='70%'
 				position='relative'
@@ -49,7 +50,7 @@ const ChatWindow = ({ message }: ChatWindowProps) => {
 							right: users.uid === message.author ? '-0.3rem' : '',
 							width: '.4rem',
 							height: '.7rem',
-							backgroundColor: theme.palette.background.paper,
+							backgroundColor: users.uid === message.author ? theme.palette.info.dark : theme.palette.background.paper,
 							clipPath: users.uid === message.author ? 'polygon(100% 0, 0 0, 0 100%)' : 'polygon(0 0, 100% 100%, 100% 1%)',
 
 						}
