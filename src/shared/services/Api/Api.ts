@@ -79,7 +79,7 @@ const onChatList = (uid: string, setChatListItem: React.Dispatch<React.SetStateA
 						return -1;
 					}
 				});
-				setChatListItem(data?.chats);
+				setChatListItem(chats);
 			}
 		}
 	});

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { memo, useCallback, useEffect, useRef, useState } from 'react';
 
 import { Box, CardMedia, Icon, IconButton, Paper, Typography, useTheme, CircularProgress } from '@mui/material';
 import Picker from 'emoji-picker-react';
@@ -9,10 +9,10 @@ import { useChatListContext } from '../../../contexts/ChatsContext';
 import { MenuChatZoneOptions } from './MenuChatZoneOptions';
 import { AppTooltip } from '../../AppTootip/AppTootip';
 import { ChatWindowInput } from './ChatWindowInput';
-import { ChatWindow } from './ChatWindow';
+import ChatWindow from './ChatWindow';
 
 
-export const ChatMessagesZone = () => {
+const ChatMessagesZone = () => {
 	const theme = useTheme();
 	const { activeChat, chat, handleShowChatArea } = useChatListContext();
 	const [showEmojiPicker, setShowEmojiPicker] = useState(false);
@@ -190,3 +190,5 @@ export const ChatMessagesZone = () => {
 		</Box >
 	);
 };
+
+export default memo(ChatMessagesZone);

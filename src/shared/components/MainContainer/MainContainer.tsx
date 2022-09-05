@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 
 import { Avatar, Box, CardMedia, Icon, IconButton, Paper, Typography, useTheme } from '@mui/material';
-import { ChatMessagesZone } from './components/ChatMessagesZone';
+import ChatMessagesZone from './components/ChatMessagesZone';
 import { useChatListContext } from '../../contexts/ChatsContext';
 import { MenuUserOptions } from './components/MenuUserOptions';
 import { SearchInputChat } from './components/SearchInputChat';
@@ -19,16 +19,18 @@ export const MainContainer = () => {
 	const [newChatListItem, setNewChatListItem] = useState<ChatListProps[]>(chatListItem);
 	const [searchValue, setSearchValue] = useState('');
 	const [showNewContactList, setShowNewContactList] = useState(false);
-	const { login, users } = useAuthContext();
+	const { users } = useAuthContext();
 
-	const handleOrderChatByName = useCallback(() => {
-		const newChatListItem = [...chatListItem];
-		newChatListItem.sort((a, b) => (a.name > b.name ? 1 : -1));
-		setNewChatListItem(newChatListItem);
-		return newChatListItem;
-	}, [newChatListItem]);
+	const handleOrderChatByName = () => {
+		if (chatListItem.length > 0) {
+			const newChatListItem = chatListItem.sort((a, b) => {
+				return a.title.localeCompare(b.title);
+			});
+			setNewChatListItem(newChatListItem);
+		}
+	};
 
-	const filteredChatListItem: ChatListProps[] = searchValue.length > 0 ? chatListItem.filter(item => item.title.toLocaleLowerCase().includes(searchValue)) : [];
+	const filteredChatListItem: ChatListProps[] = searchValue.length > 0 ? chatListItem.filter(item => item.title.toLocaleLowerCase().includes(searchValue)) : chatListItem;
 
 	const handleShowContactsList = () => {
 		setShowNewContactList(true);
@@ -36,6 +38,7 @@ export const MainContainer = () => {
 	const handleHideNewContactList = () => {
 		setShowNewContactList(false);
 	};
+
 	return (
 		<Box
 			width='100%'

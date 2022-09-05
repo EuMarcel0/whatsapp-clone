@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { Box, Typography, useTheme, Paper } from '@mui/material';
 import { useAuthContext } from '../../../contexts/AuthContext';
 import { Message } from '../../../Types/Types';
@@ -7,18 +7,18 @@ interface ChatWindowProps {
 	message: Message;
 }
 
-export const ChatWindow = ({ message }: ChatWindowProps) => {
+const ChatWindow = ({ message }: ChatWindowProps) => {
 	const theme = useTheme();
 	const { users } = useAuthContext();
 	const [date, setDate] = useState('');
 
-	const messageDate = useMemo(() => {
+	useEffect(() => {
 		if (message.date) {
 			const newDate = new Date(message.date.seconds * 1000);
-			const hours = newDate.getHours();
-			const minutes = newDate.getMinutes();
-			hours < 10 ? '0' + hours : hours;
-			minutes < 10 ? '0' + minutes : minutes;
+			let hours = newDate.getHours();
+			let minutes = newDate.getMinutes();
+			hours = hours < 10 ? Number('0') + hours : hours;
+			minutes = minutes < 10 ? Number('0') + minutes : minutes;
 			setDate(`${hours}:${minutes}`);
 		}
 	}, [message.date]);
@@ -78,3 +78,5 @@ export const ChatWindow = ({ message }: ChatWindowProps) => {
 		</Box>
 	);
 };
+
+export default memo(ChatWindow);

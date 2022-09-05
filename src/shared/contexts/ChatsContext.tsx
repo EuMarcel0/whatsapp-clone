@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useEffect, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { ChatListItemContextProps, ChatListProps, ChatListItemProviderProps, ChatProps, UsersInChat } from './ChatsTypes';
 import { useAuthContext } from './AuthContext';
 import { Api } from '../services/Api/Api';
@@ -50,7 +50,7 @@ export const ChatsProvider = ({ children }: ChatListItemProviderProps) => {
 	/**
 	 * Get all chats messages in database and set in chat state
 	 */
-	useEffect(() => {
+	const chatList = useMemo(() => {
 		setChat([]);
 		const unsub = Api.onChatContent(activeChat?.chatId, setChat, setUsersInChat);
 		return unsub;
