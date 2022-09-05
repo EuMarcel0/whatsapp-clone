@@ -14,7 +14,7 @@ interface LoginProps {
 
 export const Login = ({ children }: LoginProps) => {
 	const theme = useTheme();
-	const { isAuthenticated, login } = useAuthContext();
+	const { isAuthenticated, login, loginFacebook } = useAuthContext();
 	const { toggleTheme } = useAppThemeContext();
 	const mdDown = useMediaQuery(theme.breakpoints.down('md'));
 
@@ -55,6 +55,18 @@ export const Login = ({ children }: LoginProps) => {
 					<Typography variant='subtitle2' component='h1' fontSize={mdDown ? '1.5rem' : '1rem'} align='center' >Entre com o seu facebook para continuar</Typography>
 					<Button
 						onClick={login}
+						variant='contained'
+						sx={{
+							'&:hover': {
+								backgroundColor: shade(.2, theme.palette.primary.main),
+							},
+							color: '#FFF',
+						}}
+					>
+						Entrar com Google
+					</Button>
+					<Button
+						onClick={loginFacebook}
 						variant='contained'
 						sx={{
 							'&:hover': {

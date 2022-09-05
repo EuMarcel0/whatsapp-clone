@@ -27,12 +27,26 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 			});
 	}, [isAuthenticated, users]);
 
+	const handleLoginWithFacebook = useCallback(() => {
+		const provider = new FacebookAuthProvider();
+		signInWithPopup(auth, provider)
+			.then((response) => {
+				if (response.user) {
+					setUsers(response.user);
+					Api.addUserInDB(response);
+					setIsAuthenticated(true);
+				}
+			}).catch((error) => {
+				alert(error.message);
+			});
+	}, [isAuthenticated, users]);
+
 	const handleLogout = useCallback(() => {
 		setIsAuthenticated(false);
 	}, [isAuthenticated]);
 
 	return (
-		<AuthContext.Provider value={{ users, isAuthenticated, login: handleLoginWithGoogle, logout: handleLogout }}>
+		<AuthContext.Provider value={{ users, isAuthenticated, login: handleLoginWithGoogle, loginFacebook: handleLoginWithFacebook, logout: handleLogout }}>
 			{children}
 		</AuthContext.Provider>
 	);
