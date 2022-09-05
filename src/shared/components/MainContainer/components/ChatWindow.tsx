@@ -31,13 +31,14 @@ const ChatWindow = ({ message }: ChatWindowProps) => {
 		>
 			<Box
 				component={Paper}
-				bgcolor={users.uid === message.author ? theme.palette.info.dark : 'secondary.main'}
+				elevation={0}
+				bgcolor={users.uid === message.author ? theme.palette.info.dark : theme.palette.background.paper}
 				display='flex'
 				maxWidth='70%'
 				position='relative'
-				elevation={0}
 				padding={theme.spacing(1.5)}
 				marginBottom={theme.spacing(.5)}
+				boxShadow={theme.shadows[1]}
 			>
 				<Box
 					display='flex'

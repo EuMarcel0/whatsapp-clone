@@ -7,6 +7,8 @@ import { useAuthContext } from '../../shared/contexts/AuthContext';
 import LoginBgImage from '../../assets/images/login.svg';
 import Wave2 from '../../assets/images/wave2.svg';
 import { AppTooltip } from '../../shared';
+import FacebookIcon from '../../assets/images/facebook_icon.png';
+import GoogleIcon from '../../assets/images/google_icon.png';
 
 interface LoginProps {
 	children: React.ReactNode;
@@ -52,31 +54,43 @@ export const Login = ({ children }: LoginProps) => {
 			</Box>
 			<Box width='100%' height='100%' display='flex' justifyContent='center' alignItems='center' flexDirection={mdDown ? 'column' : 'row'} zIndex={9}>
 				<Box display='flex' flexDirection='column' alignItems='center' gap={2}>
-					<Typography variant='subtitle2' component='h1' fontSize={mdDown ? '1.5rem' : '1rem'} align='center' >Entre com o seu facebook para continuar</Typography>
-					<Button
-						onClick={login}
-						variant='contained'
-						sx={{
-							'&:hover': {
-								backgroundColor: shade(.2, theme.palette.primary.main),
-							},
-							color: '#FFF',
-						}}
-					>
-						Entrar com Google
-					</Button>
-					<Button
-						onClick={loginFacebook}
-						variant='contained'
-						sx={{
-							'&:hover': {
-								backgroundColor: shade(.2, theme.palette.primary.main),
-							},
-							color: '#FFF',
-						}}
-					>
-						Entrar com facebook
-					</Button>
+					<Typography variant='subtitle2' component='h1' fontSize={mdDown ? '1.5rem' : '1rem'} align='center'>Entrar com:</Typography>
+					<Box display='flex' gap={2}>
+						<AppTooltip title='Entrar com Google'>
+
+							<IconButton
+								onClick={login}
+								sx={{
+									color: '#FFF',
+									width: '3rem',
+									height: '3rem',
+								}}
+							>
+								<CardMedia
+									component='img'
+									image={GoogleIcon}
+									sx={{ width: '100%', height: '100%' }}
+								/>
+							</IconButton>
+						</AppTooltip>
+						<AppTooltip title='Entrar com Facebook'>
+
+							<IconButton
+								onClick={loginFacebook}
+								sx={{
+									color: '#FFF',
+									width: '3rem',
+									height: '3rem',
+								}}
+							>
+								<CardMedia
+									component='img'
+									image={FacebookIcon}
+									sx={{ width: '100%', height: '100%' }}
+								/>
+							</IconButton>
+						</AppTooltip>
+					</Box>
 				</Box>
 				<CardMedia
 					sx={{
