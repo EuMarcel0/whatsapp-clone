@@ -7,6 +7,7 @@ import { MenuUserOptions } from './components/MenuUserOptions';
 import { SearchInputChat } from './components/SearchInputChat';
 import { useAuthContext } from '../../contexts/AuthContext';
 import { ChatListProps } from '../../contexts/ChatsTypes';
+import { ContactInfos } from './components/ContactInfos';
 import { ChatListItem } from './components/ChatListItem';
 import { NewChatList } from './components/NewChatList';
 import { AppTooltip } from '../AppTootip/AppTootip';
@@ -19,6 +20,7 @@ export const MainContainer = () => {
 	const [newChatListItem, setNewChatListItem] = useState<ChatListProps[]>(chatListItem);
 	const [searchValue, setSearchValue] = useState('');
 	const [showNewContactList, setShowNewContactList] = useState(false);
+	const [showNewContactInfo, setShowNewContactInfo] = useState(false);
 	const { users } = useAuthContext();
 
 	const handleOrderChatByName = () => {
@@ -32,11 +34,8 @@ export const MainContainer = () => {
 
 	const filteredChatListItem: ChatListProps[] = searchValue.length > 0 ? chatListItem.filter(item => item.title.toLocaleLowerCase().includes(searchValue)) : chatListItem;
 
-	const handleShowContactsList = () => {
-		setShowNewContactList(true);
-	};
-	const handleHideNewContactList = () => {
-		setShowNewContactList(false);
+	const toggleShowNewContactList = () => {
+		setShowNewContactList(!showNewContactList);
 	};
 
 	return (
@@ -52,7 +51,7 @@ export const MainContainer = () => {
 			}}
 			position='relative'
 		>
-			<Box className='mainContentArea' width='100%' height='100%' display='flex'>
+			<Box className='mainContentArea' width='100%' height='100%' display='flex' position='relative' overflow='hidden'>
 				<Box
 					className='sideLeft'
 					display='flex'
@@ -87,7 +86,7 @@ export const MainContainer = () => {
 								</IconButton>
 							</AppTooltip>
 							<AppTooltip title='Novo chat'>
-								<IconButton onClick={handleShowContactsList}>
+								<IconButton onClick={toggleShowNewContactList}>
 									<Icon sx={{ fontSize: '1.4rem' }}>chat</Icon>
 								</IconButton>
 							</AppTooltip>
@@ -141,7 +140,7 @@ export const MainContainer = () => {
 					</Box>
 					<NewChatList
 						showContactList={showNewContactList}
-						hideContactList={handleHideNewContactList}
+						hideContactList={toggleShowNewContactList}
 						value={searchValue}
 						onChange={(e) => setSearchValue(e.target.value)}
 						handleClearSearch={() => setSearchValue('')}
@@ -151,6 +150,7 @@ export const MainContainer = () => {
 				</Box>
 				{showChatArea && <ChatMessagesZone />}
 				{!showChatArea && <Intro />}
+				<ContactInfos />
 			</Box>
 		</Box>
 	);

@@ -1,6 +1,6 @@
 import { memo, useCallback, useEffect, useRef, useState } from 'react';
 
-import { Box, CardMedia, Icon, IconButton, Paper, Typography, useTheme, CircularProgress } from '@mui/material';
+import { Box, CardMedia, Icon, IconButton, Paper, Typography, useTheme } from '@mui/material';
 import Picker from 'emoji-picker-react';
 
 import LightChatBackground from '../../../../assets/images/bg_light.png';
@@ -14,7 +14,7 @@ import ChatWindow from './ChatWindow';
 
 const ChatMessagesZone = () => {
 	const theme = useTheme();
-	const { activeChat, chat, handleShowChatArea } = useChatListContext();
+	const { activeChat, chat, handleShowChatArea, toggleShowContactInfos } = useChatListContext();
 	const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 	const [inputMessageValue, setInputMessageValue] = useState('');
 	const [isRecording, setIsRecording] = useState(false);
@@ -83,8 +83,9 @@ const ChatMessagesZone = () => {
 					justifyContent='flex-start'
 					gap={theme.spacing(2)}
 				>
-					<AppTooltip title='Ver foto'>
+					<AppTooltip title='Infos'>
 						<CardMedia
+							onClick={toggleShowContactInfos}
 							component='img'
 							src={activeChat?.image}
 							sx={{

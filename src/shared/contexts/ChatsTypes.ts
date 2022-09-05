@@ -45,8 +45,10 @@ export interface ChatListItemContextProps {
 	chat: ChatProps[];
 	activeChat: ActiveChatProps | undefined;
 	showChatArea: boolean;
+	showContactInfos: boolean;
 	handleSetActiveChat: (data: ChatListProps[], id: number) => void;
 	handleShowChatArea: () => void;
+	toggleShowContactInfos: () => void;
 }
 export interface ChatListItemProviderProps{
 	children: React.ReactNode;

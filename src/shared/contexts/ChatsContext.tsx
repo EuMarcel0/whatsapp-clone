@@ -9,12 +9,12 @@ export const ChatContext = createContext({} as ChatListItemContextProps);
 export const ChatsProvider = ({ children }: ChatListItemProviderProps) => {
 	const [chatListItem, setChatListItem] = useState<ChatListProps[]>([]);
 	const [usersInChat, setUsersInChat] = useState<UsersInChat[]>([]);
+	const [showContactInfos, setShowContactInfos] = useState(false);
 	const [activeChat, setActiveChat] = useState<ChatListProps>();
 	const [showChatArea, setShowChatArea] = useState(false);
 	const [newChat, setNewChat] = useState<Users[]>([]);
 	const [chat, setChat] = useState<ChatProps[]>([]);
 	const { users } = useAuthContext();
-
 	const handleSetActiveChat = useCallback((data: ChatListProps[], id: any) => {
 		setActiveChat(data[id]);
 		setShowChatArea(true);
@@ -51,10 +51,13 @@ export const ChatsProvider = ({ children }: ChatListItemProviderProps) => {
 	 * Get all chats messages in database and set in chat state
 	 */
 	const chatList = useMemo(() => {
-		setChat([]);
 		const unsub = Api.onChatContent(activeChat?.chatId, setChat, setUsersInChat);
 		return unsub;
 	}, [activeChat?.chatId]);
+
+	const toggleShowContactInfos = useCallback(() => {
+		setShowContactInfos(!showContactInfos);
+	}, [showContactInfos]);
 
 	return (
 		<ChatContext.Provider value={{
@@ -64,8 +67,10 @@ export const ChatsProvider = ({ children }: ChatListItemProviderProps) => {
 			usersInChat,
 			activeChat,
 			showChatArea,
+			showContactInfos,
 			handleSetActiveChat,
-			handleShowChatArea
+			handleShowChatArea,
+			toggleShowContactInfos,
 		}}
 		>
 			{children}
