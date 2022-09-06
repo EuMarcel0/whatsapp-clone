@@ -3,9 +3,9 @@ import { memo, useCallback, useEffect, useRef, useState } from 'react';
 import { Box, CardMedia, Icon, IconButton, Paper, Typography, useTheme } from '@mui/material';
 import Picker from 'emoji-picker-react';
 
+import { useChatListContext } from '../../../contexts/Chats-Context/ChatsContext';
 import LightChatBackground from '../../../../assets/images/bg_light.png';
 import DarkChatBackground from '../../../../assets/images/bg_dark.png';
-import { useChatListContext } from '../../../contexts/Chats-Context/ChatsContext';
 import { MenuChatZoneOptions } from './MenuChatZoneOptions';
 import { AppTooltip } from '../../AppTootip/AppTootip';
 import { ChatWindowInput } from './ChatWindowInput';

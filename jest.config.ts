@@ -6,5 +6,6 @@ export default {
 		'\\.(gif|ttf|eot|svg|png|jpg)$': '<rootDir>/test/__mocks__/fileMock.js',
 		'\\.(css|less|sass|scss)$': 'identity-obj-proxy',
 	},
+	testEnvironment: 'jsdom',
 };
 

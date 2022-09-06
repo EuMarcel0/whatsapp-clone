@@ -1,6 +1,5 @@
-import { Box, Button, CardMedia, Icon, IconButton, Paper, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { Box, CardMedia, Icon, IconButton, Paper, Typography, useMediaQuery, useTheme } from '@mui/material';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
-import { shade } from 'polished';
 
 import { useAppThemeContext } from '../../shared/contexts/Theme-Context/ThemeContext';
 import { useAuthContext } from '../../shared/contexts/Auth-Context/AuthContext';
@@ -11,7 +10,7 @@ import FacebookIcon from '../../assets/images/facebook_icon.png';
 import GoogleIcon from '../../assets/images/google_icon.png';
 
 interface LoginProps {
-	children: React.ReactNode;
+	children?: React.ReactNode;
 }
 
 export const Login = ({ children }: LoginProps) => {
@@ -65,6 +64,7 @@ export const Login = ({ children }: LoginProps) => {
 									width: '3rem',
 									height: '3rem',
 								}}
+								data-testid='google-button'
 							>
 								<CardMedia
 									component='img'

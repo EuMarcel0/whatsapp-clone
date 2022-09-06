@@ -1,4 +1,4 @@
-import { Users } from '../Types/Types';
+import { Users } from '../../Types/Types';
 
 export interface ChatListProps {
 	chatId: string;

@@ -1,6 +1,7 @@
 import { Box, Paper, useTheme, IconButton, Icon, Typography, CardMedia } from '@mui/material';
 import { useChatListContext } from '../../../contexts/Chats-Context/ChatsContext';
 import { AppTooltip } from '../../AppTootip/AppTootip';
+import { ImageModal } from '../../Modal-Image/ImageModal';
 
 export const ContactInfos = () => {
 	const theme = useTheme();
@@ -48,15 +49,7 @@ export const ContactInfos = () => {
 				</Box>
 			</Box>
 			<Box display='flex' flexDirection='column' justifyContent='center' alignItems='center' flex='1'>
-				<CardMedia
-					component='img'
-					src={activeChat?.image}
-					sx={{
-						width: theme.spacing(25),
-						height: theme.spacing(25),
-						borderRadius: '50%',
-					}}
-				/>
+				<ImageModal src={activeChat?.image ? activeChat?.image : ''} title={activeChat?.title ? activeChat.title : ''} />
 				<Typography variant='h6' color='text.primary' sx={{ mt: 2, borderBottom: '1px solid ' + theme.palette.action.hover }}>{activeChat?.title}</Typography>
 			</Box>
 		</Box>

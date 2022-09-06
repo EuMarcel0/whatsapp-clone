@@ -3,7 +3,7 @@ import { User } from 'firebase/auth';
 import 'firebase/compat/firestore';
 import 'firebase/compat/auth';
 
-import { ActiveChatProps, ChatListProps, ChatProps, UsersInChat } from '../../contexts/ChatsTypes';
+import { ActiveChatProps, ChatListProps, ChatProps, UsersInChat } from '../../contexts/Chats-Context/ChatsTypes';
 import { dataBase } from '../Firebase/FirebaseConfig';
 import { Users } from '../../Types/Types';
 
@@ -91,6 +91,8 @@ const onChatContent = (chatId: string | undefined, setChat: React.Dispatch<React
 			const data = doc.data();
 			if(data?.messages){
 				setChat(data?.messages);
+			}
+			if(data?.users){
 				setUsersInChat(data?.users);
 			}
 		}

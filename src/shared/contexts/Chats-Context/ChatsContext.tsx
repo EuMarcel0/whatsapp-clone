@@ -15,6 +15,7 @@ export const ChatsProvider = ({ children }: ChatListItemProviderProps) => {
 	const [newChat, setNewChat] = useState<Users[]>([]);
 	const [chat, setChat] = useState<ChatProps[]>([]);
 	const { users } = useAuthContext();
+
 	const handleSetActiveChat = useCallback((data: ChatListProps[], id: any) => {
 		setActiveChat(data[id]);
 		setShowChatArea(true);

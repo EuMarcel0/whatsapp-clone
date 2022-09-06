@@ -1,18 +1,16 @@
 import { useState } from 'react';
 
-import { Avatar, Box, CardMedia, Icon, IconButton, Paper, useTheme } from '@mui/material';
+import { Box, Paper, useTheme } from '@mui/material';
 
 import { useChatListContext } from '../../contexts/Chats-Context/ChatsContext';
-import { useAuthContext } from '../../contexts/Auth-Context/AuthContext';
 import { ChatListProps } from '../../contexts/Chats-Context/ChatsTypes';
 import { SearchInputChat } from './components/SearchInputChat';
-import { MenuUserOptions } from './components/MenuUserOptions';
 import { UserProfileInfo } from './components/UserProfileInfo';
+import { UserContentArea } from './components/UserContentArea';
 import ChatMessagesZone from './components/ChatMessagesZone';
 import { ContactInfos } from './components/ContactInfos';
 import { ChatListItem } from './components/ChatListItem';
 import { NewChatList } from './components/NewChatList';
-import { AppTooltip } from '../AppTootip/AppTootip';
 import { Intro } from './components/Intro';
 
 
@@ -20,9 +18,8 @@ export const MainContainer = () => {
 	const theme = useTheme();
 	const { showChatArea, chatListItem, activeChat, handleSetActiveChat } = useChatListContext();
 	const [newChatListItem, setNewChatListItem] = useState<ChatListProps[]>(chatListItem);
-	const [searchValue, setSearchValue] = useState('');
 	const [showNewContactList, setShowNewContactList] = useState(false);
-	const { users, toggleShowUserInfos } = useAuthContext();
+	const [searchValue, setSearchValue] = useState('');
 
 	const handleOrderChatByName = () => {
 		if (chatListItem.length > 0) {
@@ -72,39 +69,7 @@ export const MainContainer = () => {
 					maxWidth={theme.spacing(60)}
 					position='relative'
 				>
-					<Box
-						className='userContentArea'
-						height={theme.spacing(7)}
-						component={Paper}
-						elevation={0}
-						display='flex'
-						justifyContent='space-between'
-						alignItems='center'
-						paddingY={theme.spacing(1)}
-						paddingX={theme.spacing(2)}
-						borderRadius={theme.spacing(0)}
-						borderRight={`1px solid ${theme.palette.divider}`}
-					>
-						<AppTooltip title={users.displayName ? users.displayName : ''}>
-							<Avatar sx={{ cursor: 'pointer' }}>
-								<CardMedia component='img' src={users.photoURL ? users.photoURL : ''} onClick={toggleShowUserInfos} />
-							</Avatar>
-						</AppTooltip>
-						<Box display='flex' alignItems='center' justifyContent='center' gap={1}>
-							<AppTooltip title='Ver status'>
-								<IconButton>
-									<Icon sx={{ fontSize: '1.4rem' }}>data_saver_off</Icon>
-								</IconButton>
-							</AppTooltip>
-							<AppTooltip title='Novo chat'>
-								<IconButton onClick={toggleShowNewContactList}>
-									<Icon sx={{ fontSize: '1.4rem' }}>chat</Icon>
-								</IconButton>
-							</AppTooltip>
-							<MenuUserOptions />
-						</Box>
-					</Box>
-
+					<UserContentArea toggleShowNewContactList={toggleShowNewContactList} />
 					<Box
 						className='chatListArea'
 						flex='1'
