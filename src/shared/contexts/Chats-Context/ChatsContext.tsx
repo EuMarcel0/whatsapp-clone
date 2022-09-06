@@ -1,8 +1,8 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { ChatListItemContextProps, ChatListProps, ChatListItemProviderProps, ChatProps, UsersInChat } from './ChatsTypes';
-import { useAuthContext } from './AuthContext';
-import { Api } from '../services/Api/Api';
-import { Users } from '../Types/Types';
+import { useAuthContext } from '../Auth-Context/AuthContext';
+import { Api } from '../../services/Api/Api';
+import { Users } from '../../Types/Types';
 
 export const ChatContext = createContext({} as ChatListItemContextProps);
 

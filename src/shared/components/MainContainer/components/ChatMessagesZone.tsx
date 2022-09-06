@@ -5,7 +5,7 @@ import Picker from 'emoji-picker-react';
 
 import LightChatBackground from '../../../../assets/images/bg_light.png';
 import DarkChatBackground from '../../../../assets/images/bg_dark.png';
-import { useChatListContext } from '../../../contexts/ChatsContext';
+import { useChatListContext } from '../../../contexts/Chats-Context/ChatsContext';
 import { MenuChatZoneOptions } from './MenuChatZoneOptions';
 import { AppTooltip } from '../../AppTootip/AppTootip';
 import { ChatWindowInput } from './ChatWindowInput';
@@ -14,7 +14,7 @@ import ChatWindow from './ChatWindow';
 
 const ChatMessagesZone = () => {
 	const theme = useTheme();
-	const { activeChat, chat, handleShowChatArea, toggleShowContactInfos } = useChatListContext();
+	const { activeChat, chat, showContactInfos, handleShowChatArea, toggleShowContactInfos } = useChatListContext();
 	const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 	const [inputMessageValue, setInputMessageValue] = useState('');
 	const [isRecording, setIsRecording] = useState(false);
@@ -60,10 +60,14 @@ const ChatMessagesZone = () => {
 	return (
 		<Box
 			className='sideRight'
-			flex='1'
+			flex={showContactInfos ? '' : '1'}
 			display='flex'
 			flexDirection='column'
 			height='100%'
+			width={theme.spacing(80)}
+			sx={{
+				transition: 'linear .5s',
+			}}
 		>
 			<Box
 				className='chatMessagesZone--headerZone'

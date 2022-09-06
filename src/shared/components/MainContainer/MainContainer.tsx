@@ -2,11 +2,11 @@ import { useState } from 'react';
 
 import { Avatar, Box, CardMedia, Icon, IconButton, Paper, useTheme } from '@mui/material';
 import ChatMessagesZone from './components/ChatMessagesZone';
-import { useChatListContext } from '../../contexts/ChatsContext';
-import { MenuUserOptions } from './components/MenuUserOptions';
+import { useChatListContext } from '../../contexts/Chats-Context/ChatsContext';
+import { useAuthContext } from '../../contexts/Auth-Context/AuthContext';
+import { ChatListProps } from '../../contexts/Chats-Context/ChatsTypes';
 import { SearchInputChat } from './components/SearchInputChat';
-import { useAuthContext } from '../../contexts/AuthContext';
-import { ChatListProps } from '../../contexts/ChatsTypes';
+import { MenuUserOptions } from './components/MenuUserOptions';
 import { ContactInfos } from './components/ContactInfos';
 import { ChatListItem } from './components/ChatListItem';
 import { NewChatList } from './components/NewChatList';
@@ -51,7 +51,17 @@ export const MainContainer = () => {
 			}}
 			position='relative'
 		>
-			<Box className='mainContentArea' width='100%' height='100%' display='flex' position='relative' overflow='hidden'>
+			<Box
+				className='mainContentArea'
+				width='100%'
+				height='100%'
+				display='flex'
+				position='relative'
+				overflow='hidden'
+				sx={{
+					transition: 'linear .3s',
+				}}
+			>
 				<Box
 					className='sideLeft'
 					display='flex'

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, memo } from 'react';
 import { Box, Typography, useTheme, Paper } from '@mui/material';
-import { useAuthContext } from '../../../contexts/AuthContext';
+import { useAuthContext } from '../../../contexts/Auth-Context/AuthContext';
 import { Message } from '../../../Types/Types';
 
 interface ChatWindowProps {

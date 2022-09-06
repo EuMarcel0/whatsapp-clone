@@ -2,8 +2,8 @@ import { Box, Button, CardMedia, Icon, IconButton, Paper, Typography, useMediaQu
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import { shade } from 'polished';
 
-import { useAppThemeContext } from '../../shared/contexts/ThemeContext';
-import { useAuthContext } from '../../shared/contexts/AuthContext';
+import { useAppThemeContext } from '../../shared/contexts/Theme-Context/ThemeContext';
+import { useAuthContext } from '../../shared/contexts/Auth-Context/AuthContext';
 import LoginBgImage from '../../assets/images/login.svg';
 import Wave2 from '../../assets/images/wave2.svg';
 import { AppTooltip } from '../../shared';

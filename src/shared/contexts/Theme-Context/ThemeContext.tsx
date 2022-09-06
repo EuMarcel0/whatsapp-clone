@@ -1,7 +1,7 @@
 import React, { createContext, ReactNode, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { Box, ThemeProvider } from '@mui/material';
-import { DarkTheme, LightTheme } from '../themes';
-import { usePersistedState } from '../hooks/usePersistedState';
+import { DarkTheme, LightTheme } from '../../themes';
+import { usePersistedState } from '../../hooks/usePersistedState';
 
 interface ThemeContextProps {
 	themeName: 'light' | 'dark';

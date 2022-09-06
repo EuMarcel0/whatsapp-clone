@@ -2,8 +2,8 @@ import { createContext, useCallback, useContext, useState } from 'react';
 import { FacebookAuthProvider, GoogleAuthProvider, signInWithPopup, User } from 'firebase/auth';
 
 import { AuthContextProps, AuthProviderProps } from './AuthTypes';
-import { auth } from '../services/Firebase/FirebaseConfig';
-import { Api } from '../services/Api/Api';
+import { auth } from '../../services/Firebase/FirebaseConfig';
+import { Api } from '../../services/Api/Api';
 
 
 export const AuthContext = createContext({} as AuthContextProps);

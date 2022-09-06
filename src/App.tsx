@@ -1,8 +1,8 @@
 import { Home } from './pages';
 import { Login } from './pages/login/Login';
-import { AuthProvider } from './shared/contexts/AuthContext';
-import { ChatsProvider } from './shared/contexts/ChatsContext';
-import { AppThemeProvider } from './shared/contexts/ThemeContext';
+import { AuthProvider } from './shared/contexts/Auth-Context/AuthContext';
+import { ChatsProvider } from './shared/contexts/Chats-Context/ChatsContext';
+import { AppThemeProvider } from './shared/contexts/Theme-Context/ThemeContext';
 
 export const App = () => {
 	console.log('render App');

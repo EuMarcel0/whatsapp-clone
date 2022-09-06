@@ -3,9 +3,9 @@ import { useCallback } from 'react';
 import { Box, Icon, IconButton, Typography, useTheme } from '@mui/material';
 import { shade } from 'polished';
 
-import { useChatListContext } from '../../../contexts/ChatsContext';
-import { useAuthContext } from '../../../contexts/AuthContext';
-import { ChatListProps } from '../../../contexts/ChatsTypes';
+import { useChatListContext } from '../../../contexts/Chats-Context/ChatsContext';
+import { useAuthContext } from '../../../contexts/Auth-Context/AuthContext';
+import { ChatListProps } from '../../../contexts/Chats-Context/ChatsTypes';
 import { SearchInputContact } from './SearchInputContact';
 import { AppTooltip } from '../../AppTootip/AppTootip';
 import { NewChatListItem } from './NewChatListItem';

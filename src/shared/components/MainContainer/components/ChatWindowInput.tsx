@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
 
 import { Box, Icon, IconButton, Input, useTheme } from '@mui/material';
-import { useChatListContext } from '../../../contexts/ChatsContext';
-import { useAuthContext } from '../../../contexts/AuthContext';
+import { useChatListContext } from '../../../contexts/Chats-Context/ChatsContext';
+import { useAuthContext } from '../../../contexts/Auth-Context/AuthContext';
 import { AppTooltip } from '../../AppTootip/AppTootip';
 import { Api } from '../../../services/Api/Api';
 

@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Box, Icon, IconButton, Menu, MenuItem } from '@mui/material';
 
-import { useAppThemeContext } from '../../../contexts/ThemeContext';
-import { useAuthContext } from '../../../contexts/AuthContext';
+import { useAppThemeContext } from '../../../contexts/Theme-Context/ThemeContext';
+import { useAuthContext } from '../../../contexts/Auth-Context/AuthContext';
 import { AppTooltip } from '../../AppTootip/AppTootip';
 
 export const MenuUserOptions = () => {
