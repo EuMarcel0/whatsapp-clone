@@ -35,7 +35,6 @@ export const ContactInfos = () => {
 				paddingY={theme.spacing(1)}
 				paddingX={theme.spacing(2)}
 				borderRadius={theme.spacing(0)}
-				borderRight={`1px solid ${theme.palette.divider}`}
 			>
 				<Box display='flex' alignItems='center' gap={theme.spacing(3)}>
 					<AppTooltip title='Fechar infos'>

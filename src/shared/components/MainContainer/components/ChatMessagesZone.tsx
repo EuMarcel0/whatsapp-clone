@@ -77,9 +77,10 @@ const ChatMessagesZone = () => {
 				display='flex'
 				justifyContent='space-between'
 				alignItems='center'
-				paddingY={theme.spacing(1.3)}
+				paddingY={theme.spacing(1)}
 				paddingX={theme.spacing(2)}
 				borderRadius={theme.spacing(0)}
+				borderRight={`1px solid ${theme.palette.divider}`}
 			>
 				<Box
 					display='flex'

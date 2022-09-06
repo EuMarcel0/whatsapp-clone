@@ -14,7 +14,7 @@ export const UserContentArea = ({ toggleShowNewContactList }: UserContentAreaPro
 	return (
 		<Box
 			className='userContentArea'
-			height={theme.spacing(7)}
+			height={theme.spacing(theme.palette.background.default === '#0A1014' ? 7.1 : 7)}
 			component={Paper}
 			elevation={0}
 			display='flex'
