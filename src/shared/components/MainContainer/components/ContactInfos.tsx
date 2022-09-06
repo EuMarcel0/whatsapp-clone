@@ -1,4 +1,4 @@
-import { Box, Paper, useTheme, IconButton, Icon, Typography, CardMedia, Divider } from '@mui/material';
+import { Box, Paper, useTheme, IconButton, Icon, Typography, CardMedia } from '@mui/material';
 import { useChatListContext } from '../../../contexts/Chats-Context/ChatsContext';
 import { AppTooltip } from '../../AppTootip/AppTootip';
 

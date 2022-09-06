@@ -1,12 +1,14 @@
 import { useState } from 'react';
 
 import { Avatar, Box, CardMedia, Icon, IconButton, Paper, useTheme } from '@mui/material';
-import ChatMessagesZone from './components/ChatMessagesZone';
+
 import { useChatListContext } from '../../contexts/Chats-Context/ChatsContext';
 import { useAuthContext } from '../../contexts/Auth-Context/AuthContext';
 import { ChatListProps } from '../../contexts/Chats-Context/ChatsTypes';
 import { SearchInputChat } from './components/SearchInputChat';
 import { MenuUserOptions } from './components/MenuUserOptions';
+import { UserProfileInfo } from './components/UserProfileInfo';
+import ChatMessagesZone from './components/ChatMessagesZone';
 import { ContactInfos } from './components/ContactInfos';
 import { ChatListItem } from './components/ChatListItem';
 import { NewChatList } from './components/NewChatList';
@@ -20,8 +22,7 @@ export const MainContainer = () => {
 	const [newChatListItem, setNewChatListItem] = useState<ChatListProps[]>(chatListItem);
 	const [searchValue, setSearchValue] = useState('');
 	const [showNewContactList, setShowNewContactList] = useState(false);
-	const [showNewContactInfo, setShowNewContactInfo] = useState(false);
-	const { users } = useAuthContext();
+	const { users, toggleShowUserInfos } = useAuthContext();
 
 	const handleOrderChatByName = () => {
 		if (chatListItem.length > 0) {
@@ -86,7 +87,7 @@ export const MainContainer = () => {
 					>
 						<AppTooltip title={users.displayName ? users.displayName : ''}>
 							<Avatar sx={{ cursor: 'pointer' }}>
-								<CardMedia component='img' src={users.photoURL ? users.photoURL : ''} />
+								<CardMedia component='img' src={users.photoURL ? users.photoURL : ''} onClick={toggleShowUserInfos} />
 							</Avatar>
 						</AppTooltip>
 						<Box display='flex' alignItems='center' justifyContent='center' gap={1}>
@@ -148,6 +149,7 @@ export const MainContainer = () => {
 								/>
 							))}
 					</Box>
+					<UserProfileInfo />
 					<NewChatList
 						showContactList={showNewContactList}
 						hideContactList={toggleShowNewContactList}
