@@ -1,10 +1,7 @@
 import { useState, useCallback } from 'react';
-import { Box, CardMedia, useTheme, IconButton, Icon } from '@mui/material';
+import { Box, CardMedia, useTheme, IconButton, Icon, Typography, Modal, Button } from '@mui/material';
 
 import { AppTooltip } from '../AppTootip/AppTootip';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import Modal from '@mui/material/Modal';
 
 const style = {
 	position: 'relative' as const,
@@ -55,7 +52,7 @@ export const ImageModal = ({ src, title }: ImageModalProps) => {
 					aria-describedby="modal-modal-description"
 				>
 					<Box sx={style}>
-						<Typography id="modal-modal-title" variant='caption' align='center' sx={{ mb: theme.spacing(4) }}>
+						<Typography color={theme.palette.mode === 'light' ? '#333' : '#fff'} variant='caption' align='center' sx={{ mb: theme.spacing(4) }}>
 							{title}
 						</Typography>
 						<CardMedia
