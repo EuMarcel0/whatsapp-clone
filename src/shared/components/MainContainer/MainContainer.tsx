@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Box, Paper, useTheme } from '@mui/material';
+import { Box, Paper, useMediaQuery, useTheme } from '@mui/material';
 
 import { useChatListContext } from '../../contexts/Chats-Context/ChatsContext';
 import { ChatListProps } from '../../contexts/Chats-Context/ChatsTypes';
@@ -16,10 +16,11 @@ import { Intro } from './components/Intro';
 
 export const MainContainer = () => {
 	const theme = useTheme();
-	const { showChatArea, chatListItem, activeChat, handleSetActiveChat } = useChatListContext();
+	const { showChatArea, chatListItem, activeChat, newContact, handleSetActiveChat } = useChatListContext();
 	const [newChatListItem, setNewChatListItem] = useState<ChatListProps[]>(chatListItem);
 	const [showNewContactList, setShowNewContactList] = useState(false);
 	const [searchValue, setSearchValue] = useState('');
+	const xlDown = useMediaQuery(theme.breakpoints.down('xl'));
 
 	const handleOrderChatByName = () => {
 		if (chatListItem.length > 0) {
@@ -27,27 +28,32 @@ export const MainContainer = () => {
 				return a.title.localeCompare(b.title);
 			});
 			setNewChatListItem(newChatListItem);
+			setSearchValue('');
 		}
 	};
 
-	const filteredChatListItem: ChatListProps[] = searchValue.length > 0 ? chatListItem.filter(item => item.title.toLocaleLowerCase().includes(searchValue)) : chatListItem;
-
-	const toggleShowNewContactList = () => {
+	const handleShowNewContactList = () => {
 		setShowNewContactList(!showNewContactList);
 	};
+
+	const filteredChatListItem: ChatListProps[] = searchValue.length > 0 ? chatListItem.filter(item => item.title.toLocaleLowerCase().includes(searchValue)) : chatListItem;
 
 	return (
 		<Box
 			width='100%'
 			height='98%'
-			maxWidth={1600}
+			maxWidth={xlDown ? '100%' : 1600}
+			maxHeight={'100%'}
 			marginX='auto'
 			marginTop={theme.spacing(-13)}
 			zIndex={9}
 			sx={{
 				overflowY: 'hidden',
+				overflowX: 'hidden',
 			}}
 			position='relative'
+			boxShadow={theme.shadows[10]}
+
 		>
 			<Box
 				className='mainContentArea'
@@ -57,7 +63,7 @@ export const MainContainer = () => {
 				position='relative'
 				overflow='hidden'
 				sx={{
-					transition: 'linear .3s',
+					transition: 'all 0.3s ease-in-out',
 				}}
 			>
 				<Box
@@ -69,7 +75,7 @@ export const MainContainer = () => {
 					maxWidth={theme.spacing(60)}
 					position='relative'
 				>
-					<UserContentArea toggleShowNewContactList={toggleShowNewContactList} />
+					<UserContentArea toggleShowNewContactList={() => setShowNewContactList(!showNewContactList)} />
 					<Box
 						className='chatListArea'
 						flex='1'
@@ -117,13 +123,13 @@ export const MainContainer = () => {
 					<UserProfileInfo />
 					<NewChatList
 						showContactList={showNewContactList}
-						hideContactList={toggleShowNewContactList}
+						hideContactList={handleShowNewContactList}
 						value={searchValue}
 						onChange={(e) => setSearchValue(e.target.value)}
 						handleClearSearch={() => setSearchValue('')}
 						filteredData={filteredChatListItem}
-						searchValue={searchValue}
 					/>
+
 				</Box>
 				{showChatArea && <ChatMessagesZone />}
 				{!showChatArea && <Intro />}

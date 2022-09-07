@@ -7,12 +7,11 @@ import { Api } from '../../services/Api/Api';
 
 export const AuthContext = createContext({} as AuthContextProps);
 
-const ACCESS_TOKEN = 'access_token';
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
 	const [users, setUsers] = useState<User>({} as User);
 	const [showUserInfos, setShowUserInfos] = useState(false);
-	const [accessToken, setAccessToken] = useState<string | undefined>(undefined);
+	const [isAuthenticated, setIsAuthenticated] = useState(false);
 
 	const handleLoginWithGoogle = useCallback(() => {
 		const provider = new GoogleAuthProvider();
@@ -21,7 +20,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 				if (response.user) {
 					setUsers(response.user);
 					Api.addUserInDB(response);
-					setAccessToken(response.user.uid);
+					setIsAuthenticated(true);
+
 				}
 			}).catch((error) => {
 				alert(error.message);
@@ -35,6 +35,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 				if (response.user) {
 					setUsers(response.user);
 					Api.addUserInDB(response);
+					setIsAuthenticated(true);
 				}
 			}).catch((error) => {
 				alert(error.message);
@@ -48,17 +49,12 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
 	const handleLogout = useCallback(() => {
 		auth.signOut();
-		setAccessToken(undefined);
-	}, [accessToken]);
-
-	const isAuthenticated = useMemo(() => accessToken !== undefined, [accessToken]);
-
-	console.log(isAuthenticated);
+		setIsAuthenticated(false);
+	}, [isAuthenticated]);
 
 	return (
 		<AuthContext.Provider
 			value={{
-				accessToken,
 				users,
 				isAuthenticated,
 				showUserInfos,

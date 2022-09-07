@@ -3,6 +3,7 @@ import { ChatListItemContextProps, ChatListProps, ChatListItemProviderProps, Cha
 import { useAuthContext } from '../Auth-Context/AuthContext';
 import { Api } from '../../services/Api/Api';
 import { Users } from '../../Types/Types';
+import { User } from 'firebase/auth';
 
 export const ChatContext = createContext({} as ChatListItemContextProps);
 
@@ -17,8 +18,10 @@ export const ChatsProvider = ({ children }: ChatListItemProviderProps) => {
 	const { users } = useAuthContext();
 
 	const handleSetActiveChat = useCallback((data: ChatListProps[], id: any) => {
-		setActiveChat(data[id]);
-		setShowChatArea(true);
+		if (data) {
+			setActiveChat(data[id]);
+			setShowChatArea(true);
+		}
 	}, [chatListItem]);
 
 	const handleShowChatArea = useCallback(() => {

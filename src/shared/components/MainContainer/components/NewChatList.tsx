@@ -18,20 +18,20 @@ interface NewChatListProps {
 	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	handleClearSearch: () => void;
 	filteredData: ChatListProps[];
-	searchValue: string;
 }
 
-export const NewChatList = ({ showContactList, hideContactList, value, onChange, handleClearSearch, filteredData, searchValue }: NewChatListProps) => {
+export const NewChatList = ({ showContactList, hideContactList, value, onChange, handleClearSearch, filteredData }: NewChatListProps) => {
 	const theme = useTheme();
-	const { newContact, activeChat } = useChatListContext();
+	const { newContact } = useChatListContext();
 	const { users } = useAuthContext();
 
 	const filteredContactList = value.length > 0 ? newContact.filter(item => item.name.toLocaleLowerCase().includes(value)) : [];
 
-	const handleAddNewChat = useCallback(async (user2: any) => {
+	const handleAddNewChat = async (user2: any) => {
 		await Api.addNewChat(users, user2);
 		hideContactList();
-	}, [users]);
+	};
+
 
 	return (
 		<Box

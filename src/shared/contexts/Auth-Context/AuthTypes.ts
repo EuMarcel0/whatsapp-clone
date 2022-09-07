@@ -2,7 +2,6 @@
 import { User } from 'firebase/auth';
 
 export interface AuthContextProps{
-	accessToken: string | undefined;
 	users: User;
 	isAuthenticated: boolean;
 	showUserInfos: boolean;
