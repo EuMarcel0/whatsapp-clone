@@ -34,6 +34,7 @@ export const MainContainer = () => {
 
 	const handleShowNewContactList = () => {
 		setShowNewContactList(!showNewContactList);
+		setSearchValue('');
 	};
 
 	const filteredChatListItem: ChatListProps[] = searchValue.length > 0 ? chatListItem.filter(item => item.title.toLocaleLowerCase().includes(searchValue)) : chatListItem;
@@ -75,7 +76,7 @@ export const MainContainer = () => {
 					maxWidth={theme.spacing(60)}
 					position='relative'
 				>
-					<UserContentArea toggleShowNewContactList={() => setShowNewContactList(!showNewContactList)} />
+					<UserContentArea toggleShowNewContactList={handleShowNewContactList} />
 					<Box
 						className='chatListArea'
 						flex='1'

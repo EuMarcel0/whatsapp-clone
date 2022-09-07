@@ -9,8 +9,6 @@ interface NewChatListItemProps {
 
 export const NewChatListItem = ({ contact, onClick }: NewChatListItemProps) => {
 	const theme = useTheme();
-	const { handleSetActiveNewChat } = useChatListContext();
-
 
 	return (
 		<Box
