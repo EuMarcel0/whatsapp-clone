@@ -3,11 +3,11 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 
 import { useAppThemeContext } from '../../shared/contexts/Theme-Context/ThemeContext';
 import { useAuthContext } from '../../shared/contexts/Auth-Context/AuthContext';
+import FacebookIcon from '../../assets/images/facebook_icon.png';
+import GoogleIcon from '../../assets/images/google_icon.png';
 import LoginBgImage from '../../assets/images/login.svg';
 import Wave2 from '../../assets/images/wave2.svg';
 import { AppTooltip } from '../../shared';
-import FacebookIcon from '../../assets/images/facebook_icon.png';
-import GoogleIcon from '../../assets/images/google_icon.png';
 
 interface LoginProps {
 	children?: React.ReactNode;

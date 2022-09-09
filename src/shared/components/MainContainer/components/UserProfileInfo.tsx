@@ -1,9 +1,9 @@
-import { Box, useTheme, IconButton, Typography, Icon, CardMedia, Divider } from '@mui/material';
+import { Box, useTheme, IconButton, Typography, Icon, Divider } from '@mui/material';
 import { shade } from 'polished';
 
 import { useAuthContext } from '../../../contexts/Auth-Context/AuthContext';
-import { AppTooltip } from '../../AppTootip/AppTootip';
 import { ImageModal } from '../../Modal-Image/ImageModal';
+import { AppTooltip } from '../../AppTootip/AppTootip';
 
 export const UserProfileInfo = () => {
 	const { users, showUserInfos, toggleShowUserInfos } = useAuthContext();

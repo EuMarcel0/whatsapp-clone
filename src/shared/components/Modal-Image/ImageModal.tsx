@@ -26,13 +26,13 @@ export const ImageModal = ({ src, title }: ImageModalProps) => {
 	const [open, setOpen] = useState(false);
 	const theme = useTheme();
 
-	const toogleShowModal = useCallback(() => {
+	const toggleShowModal = useCallback(() => {
 		setOpen(!open);
 	}, [open]);
 
 	return (
 		<Box>
-			<Button onClick={toogleShowModal} sx={{ '&:hover': { backgroundColor: 'transparent' } }}>
+			<Button onClick={toggleShowModal} sx={{ '&:hover': { backgroundColor: 'transparent' } }}>
 				<AppTooltip title='Ver foto'>
 					<CardMedia
 						component='img'
@@ -47,7 +47,7 @@ export const ImageModal = ({ src, title }: ImageModalProps) => {
 				</AppTooltip>
 				<Modal
 					open={open}
-					onClose={toogleShowModal}
+					onClose={toggleShowModal}
 					aria-labelledby="modal-modal-title"
 					aria-describedby="modal-modal-description"
 				>

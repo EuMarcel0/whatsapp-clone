@@ -16,7 +16,7 @@ import { Intro } from './components/Intro';
 
 export const MainContainer = () => {
 	const theme = useTheme();
-	const { showChatArea, chatListItem, activeChat, newContact, handleSetActiveChat } = useChatListContext();
+	const { showChatArea, chatListItem, activeChat, handleSetActiveChat } = useChatListContext();
 	const [newChatListItem, setNewChatListItem] = useState<ChatListProps[]>(chatListItem);
 	const [showNewContactList, setShowNewContactList] = useState(false);
 	const [searchValue, setSearchValue] = useState('');

@@ -1,5 +1,4 @@
 import { Box, CardMedia, Typography, useTheme } from '@mui/material';
-import { useChatListContext } from '../../../contexts/Chats-Context/ChatsContext';
 import { Users } from '../../../Types/Types';
 
 interface NewChatListItemProps {

@@ -1,7 +1,8 @@
-import { Box, Paper, useTheme, IconButton, Icon, Typography, CardMedia } from '@mui/material';
+import { Box, Paper, useTheme, IconButton, Icon, Typography } from '@mui/material';
+
 import { useChatListContext } from '../../../contexts/Chats-Context/ChatsContext';
-import { AppTooltip } from '../../AppTootip/AppTootip';
 import { ImageModal } from '../../Modal-Image/ImageModal';
+import { AppTooltip } from '../../AppTootip/AppTootip';
 
 export const ContactInfos = () => {
 	const theme = useTheme();

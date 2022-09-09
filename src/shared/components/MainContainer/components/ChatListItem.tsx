@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Box, CardMedia, Typography, useTheme } from '@mui/material';
+
 import { useChatListContext } from '../../../contexts/Chats-Context/ChatsContext';
 import { ChatListProps } from '../../../contexts/Chats-Context/ChatsTypes';
 import { AppTooltip } from '../../AppTootip/AppTootip';
